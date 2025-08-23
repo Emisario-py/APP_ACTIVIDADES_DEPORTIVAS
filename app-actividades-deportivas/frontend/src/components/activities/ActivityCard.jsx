@@ -1,31 +1,31 @@
 import { Pencil, Trash2 } from 'lucide-react'
 
-const METRICAS_OPCIONALES = {
-  calorias: { label: 'Calorías', icon: '🔥', unit: 'kcal' },
-  metros: { label: 'Metros', icon: '📏', unit: 'm' },
-  repeticiones: { label: 'Repeticiones', icon: '🔁' },
-  peso: { label: 'Peso', icon: '🏋️', unit: 'kg' },
-  ritmo: { label: 'Ritmo', icon: '🫀' },
+const OPTIONAL_METRICS = {
+  calories: { label: 'Calorías', icon: '🔥', unit: 'kcal' },
+  distance: { label: 'Metros', icon: '📏', unit: 'm' },
+  repetitions: { label: 'Repeticiones', icon: '🔁' },
+  weight: { label: 'Peso', icon: '🏋️', unit: 'kg' },
+  rhythm: { label: 'Ritmo', icon: '🫀' },
 }
 
-export default function ActividadCard ({
+export default function ActivityCard ({
   id,
-  deporte,
-  duracionMin,
-  fechaISO,
-  hora,
-  nota,
+  sport,
+  durationMin,
+  dateISO,
+  time,
+  note,
   onEdit,
   onDelete,
-  ...opcionales
+  ...optionals
 }) {
-  const fecha = new Date(fechaISO).toLocaleDateString()
+  const date = new Date(dateISO).toLocaleDateString()
 
-  const chips = Object.entries(METRICAS_OPCIONALES)
+  const chips = Object.entries(OPTIONAL_METRICS)
     .map(([key, def]) => {
-      const valor = opcionales[key]
-      if (valor == null || valor === '') return null
-      return { key, icon: def.icon, label: def.label, text: `${valor}${def.unit ? ` ${def.unit}` : ''}` }
+      const value = optionals[key]
+      if (value == null || value === '') return null
+      return { key, icon: def.icon, label: def.label, text: `${value}${def.unit ? ` ${def.unit}` : ''}` }
     })
     .filter(Boolean)
 
@@ -56,11 +56,11 @@ export default function ActividadCard ({
       </div>
 
       {/* Actividad deportiva */}
-      <div className='text-lg font-semibold text-blue-300'>{deporte}</div>
+      <div className='text-lg font-semibold text-blue-300'>{sport}</div>
 
       {/* Datos base */}
       <div className='mt-1 text-sm opacity-80'>
-        {duracionMin} min • {fecha} {hora ? `• ${hora}` : ''}
+        {durationMin} min • {date} {time ? `• ${time}` : ''}
       </div>
 
       {/* Chips opcionales */}
@@ -81,7 +81,7 @@ export default function ActividadCard ({
         </div>
       )}
 
-      {nota && <p className='mt-3 text-sm leading-6 opacity-90'>Nota: {nota}.</p>}
+      {note && <p className='mt-3 text-sm leading-6 opacity-90'>Nota: {note}.</p>}
     </div>
   )
 }

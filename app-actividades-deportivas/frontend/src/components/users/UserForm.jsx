@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { UsuarioFormSchema } from '../../schemas/UsuarioFormSchema'
+import { UserFormSchema } from '../../schemas/UserFormSchema'
 import { Pencil } from 'lucide-react'
 
 export default function UsuarioForm () {
@@ -9,7 +9,7 @@ export default function UsuarioForm () {
     handleSubmit,
     formState: { errors, isValid }
   } = useForm({
-    resolver: yupResolver(UsuarioFormSchema)
+    resolver: yupResolver(UserFormSchema)
   })
 
   const onSubmit = (data) => {
@@ -40,7 +40,7 @@ export default function UsuarioForm () {
         <input
           className='bg-gray-900 p-2 px-4 rounded-2xl shadow mt-1'
           name='nombre'
-          {...register('nombre')}
+          {...register('name')}
           type='text'
           placeholder='Ingresa tu nombre'
         />
@@ -56,7 +56,7 @@ export default function UsuarioForm () {
         <input
           className='bg-gray-900 p-2 px-4  rounded-2xl shadow mt-1'
           name='cumpleaños'
-          {...register('cumpleaños')}
+          {...register('birthday')}
           type='date'
         />
         {errors.cumpleaños &&
@@ -72,7 +72,7 @@ export default function UsuarioForm () {
           <input
             className='bg-gray-900 py-2 px-4 rounded-2xl shadow mt-1 w-8/10 font-normal text-base'
             name='peso'
-            {...register('peso')}
+            {...register('userWeight')}
             type='number'
             placeholder='Ingresa tu peso'
           />
@@ -91,7 +91,7 @@ export default function UsuarioForm () {
           <input
             className='bg-gray-900 p-2 px-4  rounded-2xl shadow mt-1 w-8/10 font-normal text-base'
             name='altura'
-            {...register('altura')}
+            {...register('userHeight')}
             type='number'
             placeholder='Ingresa tu altura'
           />
@@ -110,7 +110,7 @@ export default function UsuarioForm () {
           className='bg-gray-900 py-2 px-6 rounded-2xl shadow mt-1'
           name='deportefav'
           id='deportefav'
-          {...register('deportefav')}
+          {...register('favSport')}
           defaultValue=''
         > {/* hay que editar la dropdownarrow */}
           <option value=''> Selecciona un deporte </option>
@@ -129,7 +129,7 @@ export default function UsuarioForm () {
           ${isValid
             ? 'bg-gray-800 hover:bg-orange-500 text-white border-white/10 cursor-pointer'
             : 'bg-gray-800/40 text-gray-500 border-gray-700 cursor-not-allowed'
-          }`} */
+          }`}  */ // Opción para que eté bloqueado el botón
             className='p-4 rounded transition font-bold bg-gray-800 hover:bg-orange-500 text-white border-white/10 cursor-pointer'
           >
             Guardar

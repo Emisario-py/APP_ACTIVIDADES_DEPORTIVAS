@@ -1,14 +1,14 @@
 import * as yup from 'yup'
 
-export const UsuarioFormSchema = yup.object({
-  nombre: yup
+export const UserFormSchema = yup.object({
+  name: yup
     .string()
     .required('El nombre es obligatorio'),
-  cumpleaños: yup
+  birthday: yup
     .date()
     .typeError('Selecciona tu fecha de nacimiento')
     .required(),
-  peso: yup
+  userWeight: yup
     .number()
     .transform((value, originalValue) =>
       originalValue === '' ? undefined : value
@@ -17,7 +17,7 @@ export const UsuarioFormSchema = yup.object({
     .max(500, 'Valor fuera de rango')
     .typeError('El peso debe ser un número')
     .required('Ingresa tu peso'),
-  altura: yup
+  userHeight: yup
     .number()
     .transform((value, originalValue) =>
       originalValue === '' ? undefined : value
@@ -26,7 +26,7 @@ export const UsuarioFormSchema = yup.object({
     .max(2.50, 'Valor fuera de rango')
     .typeError('La altura debe ser un número')
     .required('Ingresa tu altura'),
-  deportefav: yup
+  favSport: yup
     .string()
     .required('Selecciona tu deporte o actividad favorita'),
 })

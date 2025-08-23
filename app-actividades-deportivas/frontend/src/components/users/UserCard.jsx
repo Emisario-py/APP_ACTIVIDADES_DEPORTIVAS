@@ -1,13 +1,13 @@
 import { Pencil } from 'lucide-react'
 
-export default function UsuarioCard ({
-  nombre,
+export default function UserCard ({
+  name,
   user,
-  edad,
-  peso,
-  altura,
-  correo,
-  foto,         // URL opcional de la foto
+  age,
+  userWeight,
+  userHeight,
+  email,
+  profilePicture,         // URL opcional de la foto
   onEdit,
 }) {
   return (
@@ -34,17 +34,17 @@ export default function UsuarioCard ({
 
           {/* Foto / avatar */}
           <div className='h-28 w-28 rounded-full overflow-hidden ring-2 ring-white/20 shadow-md bg-slate-700/60'>
-            {foto
+            {profilePicture
               ? (
                 <img
-                  src={foto}
-                  alt={`Foto de ${nombre || user || 'usuario'}`}
+                  src={profilePicture}
+                  alt={`Foto de ${name || user || 'usuario'}`}
                   className='h-full w-full object-cover'
                 />
                 )
               : (
                 <div className='h-full w-full flex items-center justify-center text-3xl font-bold text-white/70'>
-                  {(nombre?.[0] || user?.[0] || 'U').toUpperCase()}
+                  {(name?.[0] || user?.[0] || 'U').toUpperCase()}
                 </div>
                 )}
           </div>
@@ -54,34 +54,34 @@ export default function UsuarioCard ({
         <div className='md:col-span-2'>
           <h2 className='text-lg font-semibold mb-3'>Datos Personales</h2>
           <div className='space-y-1 leading-7'>
-            {nombre && (
+            {name && (
               <p>
                 <span className='font-bold'>Nombre: </span>
-                {nombre}
+                {name}
               </p>
             )}
-            {correo && (
+            {email && (
               <p>
                 <span className='font-bold'>Correo: </span>
-                {correo}
+                {email}
               </p>
             )}
-            {edad && (
+            {age && (
               <p>
                 <span className='font-bold'>Edad: </span>
-                {edad} años
+                {age} años
               </p>
             )}
-            {peso && (
+            {userWeight && (
               <p>
                 <span className='font-bold'>Peso: </span>
-                {peso} kg
+                {userWeight} kg
               </p>
             )}
-            {altura && (
+            {userHeight && (
               <p>
                 <span className='font-bold'>Altura: </span>
-                {altura} m
+                {userHeight} m
               </p>
             )}
           </div>

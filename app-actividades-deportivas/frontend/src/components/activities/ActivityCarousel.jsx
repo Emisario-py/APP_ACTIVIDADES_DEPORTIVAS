@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from 'react'
-import ActividadCard from './ActividadCard'
+import ActivityCard from './ActivityCard'
 
-export default function ActividadCarousel ({ actividades = [] }) {
+export default function ActivityCarousel ({ actividades = [] }) {
   const trackRef = useRef(null)
   const [canPrev, setCanPrev] = useState(false)
   const [canNext, setCanNext] = useState(false)
@@ -78,7 +78,7 @@ export default function ActividadCarousel ({ actividades = [] }) {
                    [scrollbar-width:none] [&::-webkit-scrollbar]:hidden'
       >
         {items.map((a) => (
-          <ActividadCard key={a.id} {...a} />
+          <ActivityCard key={a.id} {...a} />
         ))}
       </div>
       <div className='mt-2 text-xs text-center opacity-60'>Desliza para ver más</div>
