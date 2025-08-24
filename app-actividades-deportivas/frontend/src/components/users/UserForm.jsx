@@ -38,7 +38,7 @@ export default function UsuarioForm () {
           Nombre:
         </label>
         <input
-          className='bg-gray-900 p-2 px-4 rounded-2xl shadow mt-1'
+          className="peer w-full rounded-lg px-3 py-2 bg-orange-500/50 text-white focus:outline-none focus:ring-2 focus:bg-gray-900 focus:ring-orange-500"
           name='nombre'
           {...register('name')}
           type='text'
@@ -49,37 +49,37 @@ export default function UsuarioForm () {
 
         <label
           className='text-xl font-semibold mr-1 mt-4 mb-1'
-          htmlFor='cumpleaños'
+          htmlFor='birthday'
         >
           Fecha de nacimiento:
         </label>
         <input
           className='bg-gray-900 p-2 px-4  rounded-2xl shadow mt-1'
-          name='cumpleaños'
+          name='birthday'
           {...register('birthday')}
           type='date'
         />
-        {errors.cumpleaños &&
-          <p className='text-red-400'>{errors.cumpleaños.message}</p>}
+        {errors.birthday &&
+          <p className='text-red-400'>{errors.birthday.message}</p>}
 
         <div className='flex justify-around items-center mt-4'>
           <label
             className='text-xl font-semibold mr-2 mb-1 w-1/10'
-            htmlFor='peso'
+            htmlFor='userWeight'
           >
             Peso:
           </label>
           <input
             className='bg-gray-900 py-2 px-4 rounded-2xl shadow mt-1 w-8/10 font-normal text-base'
-            name='peso'
+            name='userWeight'
             {...register('userWeight')}
             type='number'
             placeholder='Ingresa tu peso'
           />
           <span className='w-1/10 font-semibold text-xl ml-1'>m</span>
         </div>
-        {errors.peso &&
-          <p className='text-red-400'>{errors.peso.message}</p>}
+        {errors.userWeight &&
+          <p className='text-red-400'>{errors.userWeight.message}</p>}
 
         <div className='flex justify-around items-center mt-4'>
           <label
@@ -107,7 +107,7 @@ export default function UsuarioForm () {
           Deporte Favorito:
         </label>
         <select
-          className='bg-gray-900 py-2 px-6 rounded-2xl shadow mt-1'
+          className="peer w-full rounded-lg px-3 py-2 bg-orange-500/50 text-white focus:outline-none focus:ring-2 focus:bg-gray-900 focus:ring-orange-500"
           name='deportefav'
           id='deportefav'
           {...register('favSport')}
@@ -135,7 +135,7 @@ export default function UsuarioForm () {
             Guardar
           </button>
           <button
-            className='p-4 rounded transition cursor-pointer bg-gray-500 hover:bg-red-400 text-white font-bold'
+            className='p-4 rounded transition cursor-pointer bg-gray-500 hover:bg-red-500 text-white font-bold'
           >
             Cancelar
           </button>
