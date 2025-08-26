@@ -3,16 +3,22 @@ import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
 
 export const register = async (req, res) => {
-  const { email, password, username } = req.body
+  const { name, username, email, password, age, birthday, weight, height, favSport } = req.body
   
   try {
 
     const passwordHash = await bcrypt.hash(password, 10)
 
     const newUser = new User({
+      name,
       username,
       email,
-      password: passwordHash
+      password: passwordHash,
+      age,
+      birthday,
+      weight,
+      height,
+      favSport
     })
     const userSaved = await newUser.save()
 
@@ -29,6 +35,7 @@ export const register = async (req, res) => {
 
         res.json({
         id: userSaved._id,
+        name: userSaved.name,
         username: userSaved.username,
         email: userSaved.email,
         createdAt: userSaved.createdAt,
