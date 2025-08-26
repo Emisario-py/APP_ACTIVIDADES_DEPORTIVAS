@@ -9,7 +9,8 @@ const userSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
-    trim: true
+    trim: true,
+    unique: true
   },
   email: {
     type: String,
@@ -19,27 +20,33 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: true
+    required: true,
+    trim: true
   },
   age: {
     type: Number,
-    required: true
+    required: true,
+    trim: true
   },
   birthday: {
     type: String,
-    required: true
+    required: true,
+    trim: true
   },
   weight: {
     type: Number,
-    required: false
+    required: false,
+    trim: true
   },
   height: {
     type: Number,
-    required: false
+    required: false,
+    trim: true
   },
   favSport: {
     type: String,
-    required: false
+    required: false,
+    trim: true
   }
 },{
   timestamps: true

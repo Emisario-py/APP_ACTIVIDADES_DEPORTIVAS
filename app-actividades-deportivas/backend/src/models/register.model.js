@@ -1,5 +1,10 @@
 import mongoose from "mongoose";
 const RegistroSchema = new mongoose.Schema({
+  user: {
+    type: String,
+    required: true,
+    trim: true
+  },
   sport: {
     type: String,
     required: true,
