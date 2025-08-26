@@ -1,9 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { TarjetaDeporte } from './Components/TarjetaDeporte'
-import { FormularioBasquetbol } from './Components/FormularioBasquetbol'
-import { FormularioAtletismo } from './Components/FormularioAtletismo'
-import { FormularioGymnasio } from './Components/FormularioGymnasio'
-import { FormularioFutbol } from './Components/FormularioFutbol'
+import { FormularioGeneral } from './Components/FormularioGeneral'
+
 
 const App = () => {
   return (
@@ -13,10 +11,10 @@ const App = () => {
       <Routes>
         <Route path="/" element={<TarjetaDeporte/>} />
 
-          <Route path="/FormularioBasquetbol" element={<FormularioBasquetbol />} />
-          <Route path="/FormularioFutbol" element={<FormularioFutbol />} />
-          <Route path="/FormularioGymnasio" element={<FormularioGymnasio />} />
-          <Route path="/FormularioAtletismo" element={<FormularioAtletismo />} />
+          <Route path="/FormularioGeneral" element={<FormularioGeneral />} />
+          <Route path="/FormularioGeneral" element={<FormularioGeneral />} />
+          <Route path="/FormularioGeneral" element={<FormularioGeneral />} />
+          <Route path="/FormularioGeneral" element={<FormularioGeneral />} />
    
       </Routes>
     </Router>

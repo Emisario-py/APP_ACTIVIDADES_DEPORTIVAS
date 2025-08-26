@@ -11,25 +11,25 @@ export const TarjetaDeporte = () => {
         id: 1,
         name: "Basquetbol",
         img:  userImg,
-        path: "./FormularioBasquetbol"
+        path: "./FormularioGeneral"
     },
     {
         id: 2,
         name: "Futbol", 
          img:  userImg1,
-        path: "./FormularioFutbol"
+        path: "./FormularioGeneral"
     },
     {
         id: 3,
         name: "Gymnasio",
         img:  userImg2,
-        path: "./FormularioGymnasio"
+        path: "./FormularioGeneral"
     },
     {
         id: 4,
         name: "Atletismo",
         img:  userImg3,
-        path: "./FormularioAtletismo"
+        path: "./FormularioGeneral"
     }
 ]
 return (
