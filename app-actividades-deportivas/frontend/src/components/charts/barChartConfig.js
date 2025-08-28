@@ -12,3 +12,60 @@ export const barChartData = [
   { year: 2025, month: 'septiembre', day: 9, time: 38 },
   { year: 2025, month: 'octubre', day: 10, time: 45 },
 ]
+
+export const monthsWithDays = [
+  {
+    month: 'enero',
+    days: Array.from({ length: 31 }, (_, i) => i + 1),
+  },
+  {
+    month: 'febrero',
+    days: Array.from({ length: 29 }, (_, i) => i + 1),
+    bis: true,
+  },
+  {
+    month: 'febrero',
+    days: Array.from({ length: 28 }, (_, i) => i + 1),
+    bis: false,
+  },
+  {
+    month: 'marzo',
+    days: Array.from({ length: 31 }, (_, i) => i + 1),
+  },
+  {
+    month: 'abril',
+    days: Array.from({ length: 30 }, (_, i) => i + 1),
+  },
+  {
+    month: 'mayo',
+    days: Array.from({ length: 31 }, (_, i) => i + 1),
+  },
+  {
+    month: 'junio',
+    days: Array.from({ length: 30 }, (_, i) => i + 1),
+  },
+  {
+    month: 'julio',
+    days: Array.from({ length: 31 }, (_, i) => i + 1),
+  },
+  {
+    month: 'agosto',
+    days: Array.from({ length: 31 }, (_, i) => i + 1),
+  },
+  {
+    month: 'septiembre',
+    days: Array.from({ length: 30 }, (_, i) => i + 1),
+  },
+  {
+    month: 'octubre',
+    days: Array.from({ length: 31 }, (_, i) => i + 1),
+  },
+  {
+    month: 'noviembre',
+    days: Array.from({ length: 30 }, (_, i) => i + 1),
+  },
+  {
+    month: 'diciembre',
+    days: Array.from({ length: 31 }, (_, i) => i + 1),
+  },
+]

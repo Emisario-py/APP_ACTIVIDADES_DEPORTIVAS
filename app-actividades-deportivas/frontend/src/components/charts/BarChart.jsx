@@ -9,7 +9,8 @@ import {
   Legend
 } from 'chart.js'
 import { Bar } from 'react-chartjs-2'
-import { barChartData } from './barChartConfig.js'
+import { barChartData, monthsWithDays } from './barChartConfig.js'
+import { useEffect, useState } from 'react'
 
 console.log(barChartData)
 
@@ -23,36 +24,67 @@ ChartJS.register(
 )
 
 export default function BarChart (props) {
-  const filteredData = barChartData.filter(row => row.month === props.month.toLowerCase())
-  console.log(filteredData, props.month.toLowerCase())
+  const [filteredDataArray, setFilteredDataArray] = useState([])
+  const [labels, setLabels] = useState([])
+
+  useEffect(() => {
+    const selectedMonthLabel = monthsWithDays.find(row => row.month === props.month.toLowerCase())
+    const labels = selectedMonthLabel ? selectedMonthLabel.days : []
+    const filteredData = barChartData.filter(row => row.month === props.month.toLowerCase())
+
+    const arr = labels.map(day => {
+      const found = filteredData.find(row => row.day === day)
+      return found ? found.time : 0
+    })
+    setFilteredDataArray(arr)
+    setLabels(labels)
+  }, [props.month])
+
+  console.log(filteredDataArray)
 
   const barChartConfig = {
     type: 'bar',
     options: {
       scales: {
         y: {
-          beginAtZero: true
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: 'Duración'
+          }
+        },
+        x: {
+          title: {
+            display: true,
+            text: 'Días'
+          }
+        }
+      },
+      responsive: true,
+      maintainAspectRatio: false,
+      aspectRatio: 1.5,
+      plugins: {
+        legend: {
+          display: false,
         }
       }
     },
     data: {
-
-      labels: filteredData.map(row => row.day),
+      labels,
       datasets: [{
-        label: 'Tiempo de entrenamiento',
-        data: filteredData.map(row => row.time),
+        data: filteredDataArray,
         barPercentage: 0.5,
-        barThickness: 6,
+        barThickness: 4,
         maxBarThickness: 8,
-        minBarLength: 2,
+        minBarLength: 0,
         backgroundColor: '#f97316',
       }]
     }
   }
 
   return (
-    <div>
-      <Bar data={barChartConfig.data} />
+    <div className='w-full h-full pb-6 pt-4 px-10 flex justify-center'>
+      <Bar data={barChartConfig.data} options={barChartConfig.options} />
     </div>
   )
 }
