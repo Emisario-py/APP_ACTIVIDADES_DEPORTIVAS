@@ -2,6 +2,7 @@ import userImg from "../assets/P1.jpg"
 import userImg1 from "../assets/P2.jpg"
 import userImg2 from "../assets/P3.jpg"
 import userImg3 from "../assets/P4.jpg"
+import userImg4 from "../assets/P5.jpg"
 import { Link } from 'react-router-dom'
 
 
@@ -10,26 +11,27 @@ export const TarjetaDeporte = () => {
     {
         id: 1,
         name: "Basquetbol",
-        img:  userImg,
-        path: "./FormularioGeneral"
+        img:  userImg
     },
     {
         id: 2,
         name: "Futbol", 
-         img:  userImg1,
-        path: "./FormularioGeneral"
+         img:  userImg1
     },
     {
         id: 3,
         name: "Gymnasio",
-        img:  userImg2,
-        path: "./FormularioGeneral"
+        img:  userImg2
     },
     {
         id: 4,
         name: "Atletismo",
-        img:  userImg3,
-        path: "./FormularioGeneral"
+        img:  userImg3
+    },
+    {
+        id: 5,
+        name: "Natación",
+        img:  userImg4
     }
 ]
 return (
@@ -42,8 +44,8 @@ return (
               <h2>{deporte.name}</h2>
               <img src={deporte.img} alt={deporte.name} />
               <br />
-              <Link to={deporte.path}>
-                <button>Seleccionar</button>
+              <Link to={`/FormularioGeneral/${deporte.name}`}>
+              <button>Seleccionar</button>
               </Link>
             </section>
           );
