@@ -44,3 +44,23 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.contenedor-deportes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.contenedor-deportes section {
+  max-width: 300px; ;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px; 
+}
+
+.contenedor-deportes section img {
+  height: 400px; 
+  width: 250px; 
+  object-fit: cover; 
+}
