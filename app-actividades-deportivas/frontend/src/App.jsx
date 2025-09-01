@@ -47,11 +47,11 @@ export const App = () => {
       <Navbar />
       <main className='ml-64 min-h-screen bg-gray-800 text-gray-100 p-6'>
         <Routes>
-          <Route path='/' element={<Dashboard />} />
-          <Route path='/perfil' element={<Profile />} />
-          <Route path='/deportes' element={<TarjetaDeporte />} />
+          <Route path='/Home' element={<TarjetaDeporte />} />
+          <Route path='/Perfil' element={<Profile />} />
+          {/* <Route path='/Deportes' element={<TarjetaDeporte />} /> */}
           <Route path='/FormularioGeneral/:deporte' element={<FormularioGeneral />} />
-          <Route path='/metricas' element={<h1>Métricas</h1>} />
+          <Route path='/Metricas' element={<Metrics />} />
         </Routes>
       </main>
     </BrowserRouter>
