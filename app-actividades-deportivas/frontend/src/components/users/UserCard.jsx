@@ -1,4 +1,7 @@
 import { Pencil } from 'lucide-react'
+import { useState } from 'react'
+import UserForm from './UserForm'
+import UserPicture from './UserPicture'
 
 export default function UserCard ({
   name,
@@ -7,9 +10,28 @@ export default function UserCard ({
   userWeight,
   userHeight,
   email,
-  profilePicture,         // URL opcional de la foto
-  onEdit,
+  profilePicture, // URL opcional de la foto
+  onPhotoChange,
 }) {
+  const [openForm, setOpenForm] = useState(false)
+
+  if (openForm) { // Si openForm = true, mostrar form
+    return (
+      <div className='relative w-full max-w-4xl rounded-2xl p-6 bg-gray-800 text-white shadow-lg'>
+        <button
+          onClick={() => setOpenForm(false)}
+          className='absolute right-3 top-3 z-10 h-10 w-10 rounded-full flex items-center justify-center border bg-gray-700 hover:bg-orange-500 text-white border-white/10 transition'
+          aria-label='Cerrar'
+          title='Cerrar'
+        >
+          X
+        </button>
+        <UserForm />
+      </div>
+    )
+  }
+
+  // Si openForm = false, mostrar user card
   return (
     <div className='relative w-full max-w-4xl rounded-2xl
                 bg-gradient-to-r from-orange-500/50 to-yellow-600/50
@@ -17,7 +39,7 @@ export default function UserCard ({
     >
       {/* Editar */}
       <button
-        onClick={onEdit}
+        onClick={() => setOpenForm(true)}
         className='hidden md:flex absolute right-3 top-3 z-10 h-10 w-10 rounded-full items-center justify-center border bg-gray-700/80 hover:bg-orange-500 text-white border-white/10 transition'
         aria-label='Editar'
         title='Editar'
@@ -33,21 +55,14 @@ export default function UserCard ({
           )}
 
           {/* Foto / avatar */}
-          <div className='h-28 w-28 rounded-full overflow-hidden ring-2 ring-white/20 shadow-md bg-slate-700/60'>
-            {profilePicture
-              ? (
-                <img
-                  src={profilePicture}
-                  alt={`Foto de ${name || user || 'usuario'}`}
-                  className='h-full w-full object-cover'
-                />
-                )
-              : (
-                <div className='h-full w-full flex items-center justify-center text-3xl font-bold text-white/70'>
-                  {(name?.[0] || user?.[0] || 'U').toUpperCase()}
-                </div>
-                )}
-          </div>
+          <UserPicture
+            name={name}
+            user={user}
+            src={profilePicture}     // URL inicial
+            onChange={onPhotoChange} // Pasar el File para subirlo
+            size={112}               // Equivale a h-28 w-28
+            alwaysShowOverlayOnMobile={true} // Overlay visible en móvil
+          />
         </div>
 
         {/* Columna derecha: datos personales */}

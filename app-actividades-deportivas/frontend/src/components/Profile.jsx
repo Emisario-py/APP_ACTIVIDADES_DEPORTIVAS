@@ -1,11 +1,7 @@
-import { useState } from 'react'
 import ActivityCarousel from './activities/ActivityCarousel'
 import UserCard from './users/UserCard'
-import UserForm from './users/UserForm'
 
 export default function Profile () {
-  const [openForm, setOpenForm] = useState(false)
-
   const userMock = {
     name: 'Alexa Coss',
     user: 'coss99',
@@ -23,33 +19,18 @@ export default function Profile () {
 
   return (
     <div className='w-full h-full'>
-      {!openForm
-        ? (
-          <>
-            <h1 className='text-3xl font-bold text-orange-500 mb-6'>
-              {userMock.name}
-            </h1>
-            {/* Datos de usuario */}
-            <div className='flex justify-center'>
-              <UserCard {...userMock} />
-            </div>
-            {/* Actividades */}
-            <div className='bg-gray-700 p-6 rounded-2xl shadow mt-6'>
-              <h2 className='text-xl font-semibold mb-4'>Actividades realizadas</h2>
-              <ActivityCarousel actividades={activitiesMock} />
-            </div>
-          </>
-          )
-        : (
-          <UserForm />
-          )}
-
-      <button
-        onClick={() => setOpenForm(!openForm)}
-        className='p-4 rounded transition cursor-pointer bg-gray-500 hover:bg-red-400 text-white font-bold'
-      >
-        {!openForm ? (<p>Form</p>) : <p>Perfil</p>}
-      </button>
+      <h1 className='text-3xl font-bold text-orange-500 mb-6'>
+        {userMock.name}
+      </h1>
+      {/* Datos de usuario */}
+      <div className='flex justify-center'>
+        <UserCard {...userMock} />
+      </div>
+      {/* Actividades */}
+      <div className='bg-gray-700 p-6 rounded-2xl shadow mt-6'>
+        <h2 className='text-xl font-semibold mb-4'>Actividades realizadas</h2>
+        <ActivityCarousel actividades={activitiesMock} />
+      </div>
     </div>
   )
 }
