@@ -44,7 +44,13 @@ export const TarjetaDeporte = () => {
               <img src={deporte.img} alt={deporte.name} />
               <br />
               <Link to={`/FormularioGeneral/${deporte.name}`}>
-                <button>Seleccionar</button>
+                <button
+                  className='w-full mt-4 bg-orange-500 text-white font-bold py-2 rounded-lg
+                           hover:bg-orange-600 transition-colors duration-200
+                           shadow-md hover:shadow-lg'
+                >
+                  Seleccionar
+                </button>
               </Link>
             </section>
           )

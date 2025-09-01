@@ -90,7 +90,7 @@ export const FormularioGeneral = () => {
     event.preventDefault()
 
     const requiredFields = ['user', 'sport', 'duration', 'date', 'startTime']
-    if (requiredFields.some(field => !estadisticas[field])) {
+    if (requiredFields.some((field) => !estadisticas[field])) {
       alert('Por favor, completa todos los campos requeridos.')
       return
     }
@@ -101,7 +101,7 @@ export const FormularioGeneral = () => {
     console.log('Nuevo entrenamiento guardado:', estadisticas)
     console.log('Todos los entrenamientos guardados:', entrenamientosGuardados)
 
-    setEstadisticas(prevStats => ({
+    setEstadisticas((prevStats) => ({
       user: '',
       sport: prevStats.sport,
       duration: '',
@@ -121,7 +121,7 @@ export const FormularioGeneral = () => {
   const showSeries = deporte === 'Gymnasio'
   const showRepetitions = deporte === 'Gymnasio'
   const showDistance = deporte === 'Atletismo' || deporte === 'Natación'
-  const showWeight = false
+  // const showWeight = false
   const showScores = deporte === 'Basquetbol' || deporte === 'Futbol'
 
   const getScoresLabel = () => {
@@ -137,152 +137,187 @@ export const FormularioGeneral = () => {
   }
 
   return (
-    <div style={{ padding: '20px', maxWidth: '600px', margin: 'auto' }}>
-      <form onSubmit={handleSubmit}>
-        <h2>Bienvenido</h2>
-        <fieldset>
-          <legend>Ingresa los datos de tu entrenamiento de {deporte}</legend>
-          <div>
-            <label>Usuario</label>
-            <input
-              type='text'
-              name='user'
-              value={estadisticas.user}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div>
-            <label>Deporte</label>
-            <input
-              type='text'
-              name='sport'
-              value={estadisticas.sport}
-              onChange={handleInputChange}
-              readOnly
-            />
-          </div>
-          <div>
-            <label>Duración del entrenamiento (minutos)</label>
-            <input
-              type='number'
-              name='duration'
-              value={estadisticas.duration}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div>
-            <label>Fecha</label>
-            <input
-              type='date'
-              name='date'
-              value={estadisticas.date}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div>
-            <label>Hora de inicio</label>
-            <input
-              type='time'
-              name='startTime'
-              value={estadisticas.startTime}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div>
-            <label>Calorías</label>
-            <input
-              type='number'
-              name='calories'
-              value={estadisticas.calories}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div>
-            <label>Ritmo (BPM)</label>
-            <input
-              type='number'
-              name='rhythm'
-              value={estadisticas.rhythm}
-              onChange={handleInputChange}
-            />
-          </div>
+    <div className='flex justify-center w-full min-h-full py-12'>
+      <div className='bg-gray-700 p-8 rounded-2xl shadow-2xl w-full max-w-lg'>
+        <h2 className='text-3xl font-bold text-orange-500 mb-6'>
+          Bienvenido
+        </h2>
+        <form onSubmit={handleSubmit}>
+          <fieldset className='border border-gray-600 rounded-xl p-6'>
+            <legend className='text-xl font-semibold text-gray-200 px-2'>
+              Ingresa los datos de tu entrenamiento de {deporte}
+            </legend>
 
-          {showSeries && (
-            <div>
-              <label>Series</label>
-              <input
-                type='number'
-                name='series'
-                value={estadisticas.series}
+            {/* Campos del formulario */}
+            <div className='grid grid-cols-1 gap-y-4 mt-4'>
+              {/* Usuario */}
+              <div>
+                <label className='block text-sm font-medium text-gray-400 mb-1'>Usuario</label>
+                <input
+                  type='text'
+                  name='user'
+                  value={estadisticas.user}
+                  onChange={handleInputChange}
+                  className='w-full px-4 py-2 rounded-lg bg-gray-800 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500'
+                  required
+                />
+              </div>
+
+              {/* Deporte (campo de solo lectura) */}
+              <div>
+                <label className='block text-sm font-medium text-gray-400 mb-1'>Deporte</label>
+                <input
+                  type='text'
+                  name='sport'
+                  value={estadisticas.sport}
+                  onChange={handleInputChange}
+                  className='w-full px-4 py-2 rounded-lg bg-gray-800 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500'
+                  readOnly
+                />
+              </div>
+
+              {/* Duración */}
+              <div>
+                <label className='block text-sm font-medium text-gray-400 mb-1'>Duración del entrenamiento (minutos)</label>
+                <input
+                  type='number'
+                  name='duration'
+                  value={estadisticas.duration}
+                  onChange={handleInputChange}
+                  className='w-full px-4 py-2 rounded-lg bg-gray-800 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500'
+                  required
+                />
+              </div>
+
+              {/* Fecha */}
+              <div>
+                <label className='block text-sm font-medium text-gray-400 mb-1'>Fecha</label>
+                <input
+                  type='date'
+                  name='date'
+                  value={estadisticas.date}
+                  onChange={handleInputChange}
+                  className='w-full px-4 py-2 rounded-lg bg-gray-800 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500'
+                  required
+                />
+              </div>
+
+              {/* Hora de inicio */}
+              <div>
+                <label className='block text-sm font-medium text-gray-400 mb-1'>Hora de inicio</label>
+                <input
+                  type='time'
+                  name='startTime'
+                  value={estadisticas.startTime}
+                  onChange={handleInputChange}
+                  className='w-full px-4 py-2 rounded-lg bg-gray-800 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500'
+                  required
+                />
+              </div>
+
+              {/* Calorías */}
+              <div>
+                <label className='block text-sm font-medium text-gray-400 mb-1'>Calorías</label>
+                <input
+                  type='number'
+                  name='calories'
+                  value={estadisticas.calories}
+                  onChange={handleInputChange}
+                  className='w-full px-4 py-2 rounded-lg bg-gray-800 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500'
+                />
+              </div>
+
+              {/* Ritmo */}
+              <div>
+                <label className='block text-sm font-medium text-gray-400 mb-1'>Ritmo (BPM)</label>
+                <input
+                  type='number'
+                  name='rhythm'
+                  value={estadisticas.rhythm}
+                  onChange={handleInputChange}
+                  className='w-full px-4 py-2 rounded-lg bg-gray-800 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500'
+                />
+              </div>
+            </div>
+
+            {/* Campos condicionales */}
+            <div className='grid grid-cols-1 gap-y-4 mt-4'>
+              {showSeries && (
+                <div>
+                  <label className='block text-sm font-medium text-gray-400 mb-1'>Series</label>
+                  <input
+                    type='number'
+                    name='series'
+                    value={estadisticas.series}
+                    onChange={handleInputChange}
+                    className='w-full px-4 py-2 rounded-lg bg-gray-800 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500'
+                  />
+                </div>
+              )}
+              {showRepetitions && (
+                <div>
+                  <label className='block text-sm font-medium text-gray-400 mb-1'>Repeticiones</label>
+                  <input
+                    type='number'
+                    name='repetitions'
+                    value={estadisticas.repetitions}
+                    onChange={handleInputChange}
+                    className='w-full px-4 py-2 rounded-lg bg-gray-800 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500'
+                  />
+                </div>
+              )}
+              {showDistance && (
+                <div>
+                  <label className='block text-sm font-medium text-gray-400 mb-1'>{getDistanceLabel()}</label>
+                  <input
+                    type='number'
+                    name='distance'
+                    value={estadisticas.distance}
+                    onChange={handleInputChange}
+                    className='w-full px-4 py-2 rounded-lg bg-gray-800 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500'
+                  />
+                </div>
+              )}
+              {showScores && (
+                <div>
+                  <label className='block text-sm font-medium text-gray-400 mb-1'>{getScoresLabel()}</label>
+                  <input
+                    type='number'
+                    name='scores'
+                    value={estadisticas.scores}
+                    onChange={handleInputChange}
+                    className='w-full px-4 py-2 rounded-lg bg-gray-800 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500'
+                  />
+                </div>
+              )}
+            </div>
+
+            {/* Notas y botón */}
+            <div className='mt-6'>
+              <label className='block text-sm font-medium text-gray-400 mb-1'>Notas</label>
+              <textarea
+                name='note'
+                value={estadisticas.note}
                 onChange={handleInputChange}
+                rows='3'
+                className='w-full px-4 py-2 rounded-lg bg-gray-800 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500'
               />
             </div>
-          )}
+          </fieldset>
 
-          {showRepetitions && (
-            <div>
-              <label>Repeticiones</label>
-              <input
-                type='number'
-                name='repetitions'
-                value={estadisticas.repetitions}
-                onChange={handleInputChange}
-              />
-            </div>
-          )}
-
-          {showDistance && (
-            <div>
-              <label>{getDistanceLabel()}</label>
-              <input
-                type='number'
-                name='distance'
-                value={estadisticas.distance}
-                onChange={handleInputChange}
-              />
-            </div>
-          )}
-
-          {showWeight && (
-            <div>
-              <label>Peso (kg)</label>
-              <input
-                type='number'
-                name='weight'
-                value={estadisticas.weight}
-                onChange={handleInputChange}
-              />
-            </div>
-          )}
-
-          {showScores && (
-            <div>
-              <label>{getScoresLabel()}</label>
-              <input
-                type='number'
-                name='scores'
-                value={estadisticas.scores}
-                onChange={handleInputChange}
-              />
-            </div>
-          )}
-
-          <div>
-            <label>Notas</label>
-            <textarea
-              name='note'
-              value={estadisticas.note}
-              onChange={handleInputChange}
-            />
-          </div>
-        </fieldset>
-        <button type='submit'>Guardar Datos</button>
-      </form>
-      {mensajeExito && (
-        <p style={{ color: 'green', fontWeight: 'bold', textAlign: 'center' }}>
-          ¡Información del entrenamiento guardada correctamente!
-        </p>
-      )}
+          <button
+            type='submit'
+            className='w-full mt-6 bg-orange-500 text-white font-bold py-2 rounded-lg hover:bg-orange-600 transition-colors duration-200'
+          >
+            Guardar Datos
+          </button>
+        </form>
+        {mensajeExito && (
+          <p className='mt-4 text-green-400 text-center font-bold'>
+            ¡Información del entrenamiento guardada correctamente!
+          </p>
+        )}
+      </div>
     </div>
   )
 }

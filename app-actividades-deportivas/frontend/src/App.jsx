@@ -22,7 +22,7 @@ const Dashboard = () => {
 }
 
 export const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [isAuthenticated, setIsAuthenticated] = useState(true)
 
   // Función para manejar el login exitoso
   const handleLoginSuccess = () => {
