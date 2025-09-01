@@ -1,15 +1,14 @@
-import { useEffect, useState } from "react"
-import { api } from "./services/api"
-import { Navigate } from "react-router-dom"
+import { useEffect, useState } from 'react'
+import { api } from './services/api'
+import { Navigate } from 'react-router-dom'
 
-export const PrivateRoute = ({children}) => {
-
+export const PrivateRoute = ({ children }) => {
   const [auth, setAuth] = useState(false)
 
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        await api.get("/profile")
+        await api.get('/profile')
         setAuth(true)
       } catch (error) {
         console.log(error)
@@ -18,7 +17,6 @@ export const PrivateRoute = ({children}) => {
     }
     checkAuth()
   }, [])
-  
 
-  return auth ? children : <Navigate to="/login"/>
+  return auth ? children : <Navigate to='/login' />
 }

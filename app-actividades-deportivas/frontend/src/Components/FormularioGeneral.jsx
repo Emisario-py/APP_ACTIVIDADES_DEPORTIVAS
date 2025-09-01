@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 
 export const FormularioGeneral = () => {
-  const { deporte } = useParams();
+  const { deporte } = useParams()
 
   const [estadisticas, setEstadisticas] = useState({
     user: '',
@@ -18,10 +18,10 @@ export const FormularioGeneral = () => {
     weight: '',
     scores: '',
     note: '',
-  });
+  })
 
-  const [entrenamientosGuardados, setEntrenamientosGuardados] = useState([]);
-  const [mensajeExito, setMensajeExito] = useState(false);
+  const [entrenamientosGuardados, setEntrenamientosGuardados] = useState([])
+  const [mensajeExito, setMensajeExito] = useState(false)
 
   useEffect(() => {
     const baseState = {
@@ -38,8 +38,7 @@ export const FormularioGeneral = () => {
       weight: '',
       scores: '',
       note: '',
-    };
-
+    }
 
     switch (deporte) {
       case 'Basquetbol':
@@ -50,16 +49,16 @@ export const FormularioGeneral = () => {
           repetitions: '',
           distance: '',
           weight: '',
-        });
-        break;
+        })
+        break
       case 'Gymnasio':
         setEstadisticas({
           ...baseState,
           distance: '',
           weight: '',
           scores: '',
-        });
-        break;
+        })
+        break
       case 'Atletismo':
       case 'Natación':
         setEstadisticas({
@@ -68,41 +67,40 @@ export const FormularioGeneral = () => {
           repetitions: '',
           weight: '',
           scores: '',
-        });
-        break;
+        })
+        break
       default:
-        setEstadisticas(baseState);
+        setEstadisticas(baseState)
     }
-  }, [deporte]); 
+  }, [deporte])
 
   const handleInputChange = (event) => {
-    const { name, value } = event.target;
+    const { name, value } = event.target
     setEstadisticas({
       ...estadisticas,
       [name]: value,
-    });
-
+    })
 
     if (mensajeExito) {
-      setMensajeExito(false);
+      setMensajeExito(false)
     }
-  };
+  }
 
   const handleSubmit = (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
-    const requiredFields = ['user', 'sport', 'duration', 'date', 'startTime'];
+    const requiredFields = ['user', 'sport', 'duration', 'date', 'startTime']
     if (requiredFields.some(field => !estadisticas[field])) {
-        alert('Por favor, completa todos los campos requeridos.');
-        return;
+      alert('Por favor, completa todos los campos requeridos.')
+      return
     }
 
-    setEntrenamientosGuardados([...entrenamientosGuardados, estadisticas]);
-    setMensajeExito(true);
+    setEntrenamientosGuardados([...entrenamientosGuardados, estadisticas])
+    setMensajeExito(true)
 
-    console.log("Nuevo entrenamiento guardado:", estadisticas);
-    console.log("Todos los entrenamientos guardados:", entrenamientosGuardados);
-    
+    console.log('Nuevo entrenamiento guardado:', estadisticas)
+    console.log('Todos los entrenamientos guardados:', entrenamientosGuardados)
+
     setEstadisticas(prevStats => ({
       user: '',
       sport: prevStats.sport,
@@ -117,27 +115,26 @@ export const FormularioGeneral = () => {
       weight: '',
       scores: '',
       note: '',
-    }));
-  };
+    }))
+  }
 
-
-  const showSeries = deporte === 'Gymnasio';
-  const showRepetitions = deporte === 'Gymnasio';
-  const showDistance = deporte === 'Atletismo' || deporte === 'Natación';
-  const showWeight = false; 
-  const showScores = deporte === 'Basquetbol' || deporte === 'Futbol';
+  const showSeries = deporte === 'Gymnasio'
+  const showRepetitions = deporte === 'Gymnasio'
+  const showDistance = deporte === 'Atletismo' || deporte === 'Natación'
+  const showWeight = false
+  const showScores = deporte === 'Basquetbol' || deporte === 'Futbol'
 
   const getScoresLabel = () => {
-    if (deporte === 'Basquetbol') return 'Canastas';
-    if (deporte === 'Futbol') return 'Goles';
-    return 'Puntuación';
-  };
+    if (deporte === 'Basquetbol') return 'Canastas'
+    if (deporte === 'Futbol') return 'Goles'
+    return 'Puntuación'
+  }
 
   const getDistanceLabel = () => {
-    if (deporte === 'Natación') return 'Distancia (mts)';
-    if (deporte === 'Atletismo') return 'Distancia (km)';
-    return 'Distancia';
-  };
+    if (deporte === 'Natación') return 'Distancia (mts)'
+    if (deporte === 'Atletismo') return 'Distancia (km)'
+    return 'Distancia'
+  }
 
   return (
     <div style={{ padding: '20px', maxWidth: '600px', margin: 'auto' }}>
@@ -148,8 +145,8 @@ export const FormularioGeneral = () => {
           <div>
             <label>Usuario</label>
             <input
-              type="text"
-              name="user"
+              type='text'
+              name='user'
               value={estadisticas.user}
               onChange={handleInputChange}
             />
@@ -157,8 +154,8 @@ export const FormularioGeneral = () => {
           <div>
             <label>Deporte</label>
             <input
-              type="text"
-              name="sport"
+              type='text'
+              name='sport'
               value={estadisticas.sport}
               onChange={handleInputChange}
               readOnly
@@ -167,8 +164,8 @@ export const FormularioGeneral = () => {
           <div>
             <label>Duración del entrenamiento (minutos)</label>
             <input
-              type="number"
-              name="duration"
+              type='number'
+              name='duration'
               value={estadisticas.duration}
               onChange={handleInputChange}
             />
@@ -176,8 +173,8 @@ export const FormularioGeneral = () => {
           <div>
             <label>Fecha</label>
             <input
-              type="date"
-              name="date"
+              type='date'
+              name='date'
               value={estadisticas.date}
               onChange={handleInputChange}
             />
@@ -185,8 +182,8 @@ export const FormularioGeneral = () => {
           <div>
             <label>Hora de inicio</label>
             <input
-              type="time"
-              name="startTime"
+              type='time'
+              name='startTime'
               value={estadisticas.startTime}
               onChange={handleInputChange}
             />
@@ -194,8 +191,8 @@ export const FormularioGeneral = () => {
           <div>
             <label>Calorías</label>
             <input
-              type="number"
-              name="calories"
+              type='number'
+              name='calories'
               value={estadisticas.calories}
               onChange={handleInputChange}
             />
@@ -203,8 +200,8 @@ export const FormularioGeneral = () => {
           <div>
             <label>Ritmo (BPM)</label>
             <input
-              type="number"
-              name="rhythm"
+              type='number'
+              name='rhythm'
               value={estadisticas.rhythm}
               onChange={handleInputChange}
             />
@@ -214,8 +211,8 @@ export const FormularioGeneral = () => {
             <div>
               <label>Series</label>
               <input
-                type="number"
-                name="series"
+                type='number'
+                name='series'
                 value={estadisticas.series}
                 onChange={handleInputChange}
               />
@@ -226,8 +223,8 @@ export const FormularioGeneral = () => {
             <div>
               <label>Repeticiones</label>
               <input
-                type="number"
-                name="repetitions"
+                type='number'
+                name='repetitions'
                 value={estadisticas.repetitions}
                 onChange={handleInputChange}
               />
@@ -238,8 +235,8 @@ export const FormularioGeneral = () => {
             <div>
               <label>{getDistanceLabel()}</label>
               <input
-                type="number"
-                name="distance"
+                type='number'
+                name='distance'
                 value={estadisticas.distance}
                 onChange={handleInputChange}
               />
@@ -250,8 +247,8 @@ export const FormularioGeneral = () => {
             <div>
               <label>Peso (kg)</label>
               <input
-                type="number"
-                name="weight"
+                type='number'
+                name='weight'
                 value={estadisticas.weight}
                 onChange={handleInputChange}
               />
@@ -262,24 +259,24 @@ export const FormularioGeneral = () => {
             <div>
               <label>{getScoresLabel()}</label>
               <input
-                type="number"
-                name="scores"
+                type='number'
+                name='scores'
                 value={estadisticas.scores}
                 onChange={handleInputChange}
               />
             </div>
           )}
-          
+
           <div>
             <label>Notas</label>
             <textarea
-              name="note"
+              name='note'
               value={estadisticas.note}
               onChange={handleInputChange}
             />
           </div>
         </fieldset>
-        <button type="submit">Guardar Datos</button>
+        <button type='submit'>Guardar Datos</button>
       </form>
       {mensajeExito && (
         <p style={{ color: 'green', fontWeight: 'bold', textAlign: 'center' }}>
@@ -287,5 +284,5 @@ export const FormularioGeneral = () => {
         </p>
       )}
     </div>
-  );
-};
+  )
+}
