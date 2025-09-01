@@ -1,38 +1,35 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Navbar from './components/Navbar'
-import Profile from './components/Profile'
-import { TarjetaDeporte } from './components/TarjetaDeporte'
-import { FormularioGeneral } from './components/FormularioGeneral'
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
 
-const Dashboard = () => {
+function App() {
+  const [count, setCount] = useState(0)
+
   return (
-    <div className='w-full h-full'>
-      <h1 className='text-3xl font-bold text-orange-500 mb-6'>
-        Bienvenido a la App Deportiva
-      </h1>
-      <p className='text-gray-300'>
-        Explora las secciones en la barra lateral para ver tu perfil, métricas y registrar actividades.
+    <>
+      <div>
+        <a href="https://vite.dev" target="_blank">
+          <img src={viteLogo} className="logo" alt="Vite logo" />
+        </a>
+        <a href="https://react.dev" target="_blank">
+          <img src={reactLogo} className="logo react" alt="React logo" />
+        </a>
+      </div>
+      <h1>Vite + React</h1>
+      <div className="card">
+        <button onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </button>
+        <p>
+          Edit <code>src/App.jsx</code> and save to test HMR
+        </p>
+      </div>
+      <p className="read-the-docs">
+        Click on the Vite and React logos to learn more
       </p>
-    </div>
+    </>
   )
 }
 
-export const App = () => {
-  return (
-    <BrowserRouter>
-      {/* El Navbar se renderiza en todas las páginas */}
-      <Navbar />
-
-      {/* El main container envuelve el contenido de las rutas */}
-      <main className='ml-64 min-h-screen bg-gray-800 text-gray-100 p-6'>
-        <Routes>
-          <Route path='/' element={<Dashboard />} />
-          <Route path='/perfil' element={<Profile />} />
-          <Route path='/deportes' element={<TarjetaDeporte />} />
-          <Route path='/FormularioGeneral/:deporte' element={<FormularioGeneral />} />
-          <Route path='/metricas' element={<h1>Métricas</h1>} />
-        </Routes>
-      </main>
-    </BrowserRouter>
-  )
-}
+export default App
