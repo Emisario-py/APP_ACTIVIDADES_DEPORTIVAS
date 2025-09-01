@@ -12,8 +12,6 @@ import { Bar } from 'react-chartjs-2'
 import { barChartData, monthsWithDays } from './barChartConfig.js'
 import { useEffect, useState } from 'react'
 
-console.log(barChartData)
-
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -26,19 +24,30 @@ ChartJS.register(
 export default function BarChart (props) {
   const [filteredDataArray, setFilteredDataArray] = useState([])
   const [labels, setLabels] = useState([])
+  const [currentDataCategory, setCurrentDataCategory] = useState('')
 
   useEffect(() => {
     const selectedMonthLabel = monthsWithDays.find(row => row.month === props.month.toLowerCase())
     const labels = selectedMonthLabel ? selectedMonthLabel.days : []
-    const filteredData = barChartData.filter(row => row.month === props.month.toLowerCase())
+    const filteredDataByMonth = barChartData.filter(row => row.month === props.month.toLowerCase())
+
+    const categoryMap = {
+      duration: { key: 'duration', label: 'Duración' },
+      calories: { key: 'calories', label: 'Calorías' },
+      distance: { key: 'distance', label: 'Distancia' }
+    }
+
+    const { key, label } = categoryMap[props.dataCategory] || categoryMap.duration
 
     const arr = labels.map(day => {
-      const found = filteredData.find(row => row.day === day)
-      return found ? found.time : 0
+      const found = filteredDataByMonth.find(row => row.day === day)
+      return found ? found[key] : 0
     })
+
+    setCurrentDataCategory(label)
     setFilteredDataArray(arr)
     setLabels(labels)
-  }, [props.month])
+  }, [props.month, props.dataCategory])
 
   console.log(filteredDataArray)
 
@@ -50,7 +59,7 @@ export default function BarChart (props) {
           beginAtZero: true,
           title: {
             display: true,
-            text: 'Duración'
+            text: currentDataCategory
           }
         },
         x: {
