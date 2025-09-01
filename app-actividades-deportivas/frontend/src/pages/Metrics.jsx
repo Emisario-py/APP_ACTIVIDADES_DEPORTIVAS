@@ -1,4 +1,4 @@
-import ChartContainer from './charts/ChartContainer.jsx'
+import ChartContainer from '../components/charts/ChartContainer'
 
 export default function Metrics () {
   return (

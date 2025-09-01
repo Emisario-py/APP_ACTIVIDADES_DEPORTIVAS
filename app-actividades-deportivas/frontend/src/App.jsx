@@ -2,9 +2,9 @@
 import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
-import Profile from './components/Profile'
-import Metrics from './components/Metrics'
-import { TarjetaDeporte } from './components/TarjetaDeporte'
+import Profile from './pages/Profile'
+import Metrics from './pages/Metrics'
+import { TarjetaDeporte } from './pages/TarjetaDeporte'
 import { FormularioGeneral } from './components/FormularioGeneral'
 import Auth from './pages/Auth'
 

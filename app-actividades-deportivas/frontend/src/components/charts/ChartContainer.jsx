@@ -58,7 +58,6 @@ export default function ChartContainer () {
         </div>
         <BarChart month={currentMonth} year='2025' />
       </div>
-
     </div>
   )
 }
