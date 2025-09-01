@@ -9,6 +9,7 @@ const months = [
 export default function ChartContainer () {
   const [currentMonth, setCurrentMonth] = useState('')
   const [monthPosition, setMonthPosition] = useState(null)
+  const [currentDataCategory, setCurrentDataCategory] = useState('duration')
 
   // Cargar currentMonth y currentYear
   useEffect(() => {
@@ -35,28 +36,60 @@ export default function ChartContainer () {
     setCurrentMonth(months[newIndex])
   }
 
+  // Cambio de tipo de dato
+  const handleChangeDataCategory = (type) => {
+    setCurrentDataCategory(type)
+  }
+
   return (
-    <div className='bg-gray-700 p-4 rounded-2xl shadow mt-6 flex flex-col justify-around h-1/2 '>
-      <div className='bg-gray-900 rounded-2xl shadow flex justify-around p-4'>
-        <button onClick={() => handleChangeMonth('left')}> <ArrowLeft /> </button>
-        <div>
-          <p>{currentMonth}</p>
-        </div>
-        <button onClick={() => handleChangeMonth('right')}> <ArrowRight /> </button>
+    <div className='bg-gray-700 p-4 rounded-2xl shadow mt-6 flex flex-col justify-around h-1/2'>
+      <div className='bg-gray-900 rounded-2xl flex shadow p-4'>
+        <button
+          className='w-1/5 flex justify-center'
+          onClick={() => handleChangeMonth('left')}
+        > <ArrowLeft />
+        </button>
+        <h2
+          className='w-3/5 text-center font-semibold'
+        >{currentMonth}
+        </h2>
+        <button
+          className='w-1/5 flex justify-center'
+          onClick={() => handleChangeMonth('right')}
+        > <ArrowRight />
+        </button>
       </div>
       <div className='bg-gray-900 rounded-2xl shadow flex flex-col mt-4 h-full'>
         <div className='pt-2 flex justify-around'>
-          <button className='bg-gray-700 rounded-2xl p-2 m-2 text-sm hover:bg-orange-500'>
+          <button
+            onClick={() => handleChangeDataCategory('duration')}
+            className={`rounded-2xl p-2 m-2 text-sm font-medium ${currentDataCategory === 'duration'
+              ? 'bg-orange-500'
+              : 'bg-gray-700 hover:bg-orange-500'
+            }`}
+          >
             Duración
           </button>
-          <button className='bg-gray-700 rounded-2xl p-2 m-2 text-sm hover:bg-orange-500'>
+          <button
+            onClick={() => handleChangeDataCategory('calories')}
+            className={`rounded-2xl p-2 m-2 text-sm font-medium ${currentDataCategory === 'calories'
+              ? 'bg-orange-500'
+              : 'bg-gray-700 hover:bg-orange-500'
+            }`}
+          >
             Calorías
           </button>
-          <button className='bg-gray-700 rounded-2xl p-2 m-2 text-sm hover:bg-orange-500'>
+          <button
+            onClick={() => handleChangeDataCategory('distance')}
+            className={`rounded-2xl p-2 m-2 text-sm font-medium ${currentDataCategory === 'distance'
+              ? 'bg-orange-500'
+              : 'bg-gray-700 hover:bg-orange-500'
+            }`}
+          >
             Distancia
           </button>
         </div>
-        <BarChart month={currentMonth} year='2025' />
+        <BarChart month={currentMonth} year='2025' dataCategory={currentDataCategory} />
       </div>
     </div>
   )
