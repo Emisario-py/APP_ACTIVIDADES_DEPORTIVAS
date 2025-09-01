@@ -1,7 +1,7 @@
 import { useEffect, useId, useState } from 'react'
 import { Pencil } from 'lucide-react'
 
-export default function UserPicture({
+export default function UserPicture ({
   name,
   user,
   src,        // URL inicial
@@ -37,21 +37,23 @@ export default function UserPicture({
 
   return (
     <div
-      className={`relative group rounded-full overflow-hidden ring-2 ring-white/20 shadow-md bg-slate-700/60`}
+      className='relative group rounded-full overflow-hidden ring-2 ring-white/20 shadow-md bg-slate-700/60'
       style={{ width: size, height: size }}
     >
-      {preview ? (
-        <img
-          src={preview}
-          alt={`Foto de ${name || user || 'usuario'}`}
-          className='h-full w-full object-cover'
-          draggable={false}
-        />
-      ) : (
-        <div className='h-full w-full flex items-center justify-center text-3xl font-bold text-white/70 select-none'>
-          {(name?.[0] || user?.[0] || 'U').toUpperCase()}
-        </div>
-      )}
+      {preview
+        ? (
+          <img
+            src={preview}
+            alt={`Foto de ${name || user || 'usuario'}`}
+            className='h-full w-full object-cover'
+            draggable={false}
+          />
+          )
+        : (
+          <div className='h-full w-full flex items-center justify-center text-3xl font-bold text-white/70 select-none'>
+            {(name?.[0] || user?.[0] || 'U').toUpperCase()}
+          </div>
+          )}
 
       {/* Overlay */}
       <div
