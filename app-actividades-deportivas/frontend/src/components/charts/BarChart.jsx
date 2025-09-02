@@ -25,6 +25,7 @@ export default function BarChart (props) {
   const [filteredDataArray, setFilteredDataArray] = useState([])
   const [labels, setLabels] = useState([])
   const [currentDataCategory, setCurrentDataCategory] = useState('')
+  const [currentDataCategory, setCurrentDataCategory] = useState('')
 
   useEffect(() => {
     const selectedMonthLabel = monthsWithDays.find(row => row.month === props.month.toLowerCase()) // Obtiene días para el eje X
@@ -51,8 +52,11 @@ export default function BarChart (props) {
     })
 
     setCurrentDataCategory(label)
+
+    setCurrentDataCategory(label)
     setFilteredDataArray(arr)
     setLabels(labels)
+  }, [props.month, props.dataCategory])
   }, [props.month, props.dataCategory])
 
   console.log(filteredDataArray)
