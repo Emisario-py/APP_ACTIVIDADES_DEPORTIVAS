@@ -9,7 +9,7 @@ import {
   Legend
 } from 'chart.js'
 import { Bar } from 'react-chartjs-2'
-import { barChartData, monthsWithDays } from './barChartConfig.js'
+import { barChartData, monthsCode, monthsWithDays } from './barChartConfig.js'
 import { useEffect, useState } from 'react'
 
 ChartJS.register(
@@ -27,21 +27,27 @@ export default function BarChart (props) {
   const [currentDataCategory, setCurrentDataCategory] = useState('')
 
   useEffect(() => {
-    const selectedMonthLabel = monthsWithDays.find(row => row.month === props.month.toLowerCase())
+    const selectedMonthLabel = monthsWithDays.find(row => row.month === props.month.toLowerCase()) // Obtiene días para el eje X
     const labels = selectedMonthLabel ? selectedMonthLabel.days : []
-    const filteredDataByMonth = barChartData.filter(row => row.month === props.month.toLowerCase())
+    const monthObj = monthsCode.find(row => Object.keys(row)[0] === props.month) // Obtiene el mes: codigo para el mes seleccionado
+    const monthCode = monthObj ? Object.values(monthObj)[0] : null // Obtiene código del mes
+    const filteredDataByMonth = barChartData.filter(row => row.date.slice(5, 7) === monthCode) // Comparo con el string de date guardado extrayendo los dos dígitos del mes
 
+    // Objeto para nombrar el eje Y
     const categoryMap = {
       duration: { key: 'duration', label: 'Duración' },
       calories: { key: 'calories', label: 'Calorías' },
       distance: { key: 'distance', label: 'Distancia' }
     }
 
-    const { key, label } = categoryMap[props.dataCategory] || categoryMap.duration
+    const { key, label } = categoryMap[props.dataCategory] || categoryMap.duration // Depende de categoría seleccionada, sino, Duración
 
+    // Obtiene valor correspondiente al día
     const arr = labels.map(day => {
-      const found = filteredDataByMonth.find(row => row.day === day)
-      return found ? found[key] : 0
+      const found = filteredDataByMonth.filter(row => Number(row.date.slice(8, 10)) === day)
+      // Si hay más de un dato en el día, los suma. sino hay datos, es 0
+      const foundSum = found.reduce((acc, stat) => acc + stat[key], 0)
+      return foundSum
     })
 
     setCurrentDataCategory(label)

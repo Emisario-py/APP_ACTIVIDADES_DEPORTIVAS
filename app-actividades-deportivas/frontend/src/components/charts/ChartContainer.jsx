@@ -1,10 +1,7 @@
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import BarChart from './BarChart.jsx'
-
-const months = [
-  'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
-]
+import { months } from './barChartConfig.js'
 
 export default function ChartContainer () {
   const [currentMonth, setCurrentMonth] = useState('')
@@ -15,10 +12,10 @@ export default function ChartContainer () {
   useEffect(() => {
     const date = new Date()
     const currentMonth = date.toLocaleString('es-ES', { month: 'long' })
-    const capitalCurrentMotnh = currentMonth.charAt(0).toUpperCase() + currentMonth.slice(1) // Mayúscula en la primera letra para buscar en el array
+    const capitalCurrentMonth = currentMonth.charAt(0).toUpperCase() + currentMonth.slice(1) // Mayúscula en la primera letra para buscar en el array
     /* const currentYear = date.toLocaleString('es-ES', { year: 'long' }) */
-    setCurrentMonth(capitalCurrentMotnh)
-    setMonthPosition(months.indexOf(capitalCurrentMotnh))
+    setCurrentMonth(capitalCurrentMonth)
+    setMonthPosition(months.indexOf(capitalCurrentMonth))
   }, [])
 
   /* console.log(currentMonth)
