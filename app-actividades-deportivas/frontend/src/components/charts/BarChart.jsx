@@ -9,8 +9,9 @@ import {
   Legend
 } from 'chart.js'
 import { Bar } from 'react-chartjs-2'
-import { barChartData, monthsCode, monthsWithDays } from './barChartConfig.js'
-import { useEffect, useState } from 'react'
+import { monthsCode, monthsWithDays } from './barChartConfig.js'
+import { useCallback, useEffect, useState } from 'react'
+import { getRegisterRequest } from '../../api/auth.js'
 
 ChartJS.register(
   CategoryScale,
@@ -26,12 +27,23 @@ export default function BarChart (props) {
   const [labels, setLabels] = useState([])
   const [currentDataCategory, setCurrentDataCategory] = useState('')
 
-  useEffect(() => {
+  const getChartData = useCallback(async () => {
+    const getData = async () => {
+      try {
+        const res = await getRegisterRequest()
+        return res
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    const data = await getData()
+    console.log(data)
+
     const selectedMonthLabel = monthsWithDays.find(row => row.month === props.month.toLowerCase()) // Obtiene días para el eje X
     const labels = selectedMonthLabel ? selectedMonthLabel.days : []
     const monthObj = monthsCode.find(row => Object.keys(row)[0] === props.month) // Obtiene el mes: codigo para el mes seleccionado
     const monthCode = monthObj ? Object.values(monthObj)[0] : null // Obtiene código del mes
-    const filteredDataByMonth = barChartData.filter(row => row.date.slice(5, 7) === monthCode) // Comparo con el string de date guardado extrayendo los dos dígitos del mes
+    const filteredDataByMonth = data.data.filter(row => row.date.slice(5, 7) === monthCode) // Comparo con el string de date guardado extrayendo los dos dígitos del mes
 
     // Objeto para nombrar el eje Y
     const categoryMap = {
@@ -53,7 +65,11 @@ export default function BarChart (props) {
     setCurrentDataCategory(label)
     setFilteredDataArray(arr)
     setLabels(labels)
-  }, [props.month, props.dataCategory])
+  }, [props])
+
+  useEffect(() => {
+    getChartData()
+  }, [getChartData])
 
   const barChartConfig = {
     type: 'bar',
