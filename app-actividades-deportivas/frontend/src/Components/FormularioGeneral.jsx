@@ -98,7 +98,6 @@ export const FormularioGeneral = () => {
 
     try {
     // 1. Envía los datos del entrenamiento al backend.
-    // Asume que 'saveTrainingData' es una función que hace la petición.
       const res = await registerRequest(deporte, estadisticas)
 
       // 2. Muestra la respuesta del servidor en la consola.
@@ -108,7 +107,6 @@ export const FormularioGeneral = () => {
       setEntrenamientosGuardados([...entrenamientosGuardados, estadisticas])
       setMensajeExito(true)
     } catch (error) {
-    // Maneja cualquier error que ocurra durante la petición.
       console.error('Error al guardar el entrenamiento:', error)
       alert('Hubo un error al guardar el entrenamiento. Inténtalo de nuevo.')
     }
