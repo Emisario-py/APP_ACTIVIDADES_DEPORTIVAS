@@ -55,8 +55,6 @@ export default function BarChart (props) {
     setLabels(labels)
   }, [props.month, props.dataCategory])
 
-  console.log(filteredDataArray)
-
   const barChartConfig = {
     type: 'bar',
     options: {

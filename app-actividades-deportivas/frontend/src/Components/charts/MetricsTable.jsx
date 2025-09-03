@@ -1,9 +1,23 @@
 import { useEffect, useState } from 'react'
 import { barChartData, monthsShort } from './barChartConfig'
+import { Tooltip } from 'chart.js'
+
+// Array base para los estadísticos a mostrar en esta sección con el nombre del key de los datos, la palabra en español para mostrar y el ícono a usar
+const stats = [
+  { stat: 'duration', esp: 'Duración', icon: '⏱️' },
+  { stat: 'calories', esp: 'Calorías', icon: '🔥' },
+  { stat: 'rhytm', esp: 'Frecuencia Cardiaca', icon: '💓' },
+  { stat: 'series', esp: 'Series', icon: '🔁' },
+  { stat: 'repetitions', esp: 'Repeticiones', icon: '🔄️' },
+  { stat: 'distance', esp: 'Distancia', icon: '📏' },
+  { stat: 'weight', esp: 'Peso', icon: '🏋️‍♂️' },
+  { stat: 'scores', esp: 'Puntos', icon: '🏆' },
+]
 
 export default function MetricsTable () {
   const [dateRange, setDateRange] = useState('')
   const [totals, setTotals] = useState([])
+  const [filteredData, setFilteredData] = useState([])
 
   // Cargar rango de fechas que comprende la tabla de totales
   useEffect(() => {
@@ -11,10 +25,12 @@ export default function MetricsTable () {
     const startDate = new Date()
     startDate.setDate(today.getDate() - 14)
 
+    // Fecha de inicio
     const startDay = startDate.getDate()
     const startMonth = monthsShort[startDate.getMonth()]
     const startYear = startDate.getFullYear()
 
+    // Fecha final (hoy)
     const endDay = today.getDate()
     const endMonth = monthsShort[today.getMonth()]
     const endYear = today.getFullYear()
@@ -24,10 +40,7 @@ export default function MetricsTable () {
       ? setDateRange(`${startDay} ${startMonth} ${startYear} - ${endDay} ${endMonth} ${endYear}`)
       : setDateRange(`${startDay} ${startMonth} - ${endDay} ${endMonth}`)
 
-    /*     const longStartMonth = months.find(e => e[startDate.toLocaleString('es-ES', { month: 'long' })])
-    const longEndMonth = months.find(e => e[monthsShort.indexOf(endMonth)])
-    console.log(longStartMonth, longEndMonth) */
-
+    // Array de fechas a tomar en cuenta en el resumen
     const createDateRangeArray = () => {
       const arr = []
       for (let i = 0; i <= 14; i++) {
@@ -42,65 +55,108 @@ export default function MetricsTable () {
       }
       return arr
     }
-
     const dateRangeArray = createDateRangeArray()
 
-    const stats = [
-      'user', // revisar si se retira este elemento
-      'sport',
-      'duration',
-      'date',
-      'startTime', // retirar elemento
-      'calories',
-      'rhythm',
-      'series',
-      'repetitions',
-      'distance',
-      'weight',
-      'scores',
-      'note' // Retirar elemento
-    ]
-
+    // Filtramos datos por fechas a cosniderar
     const filterData = () => barChartData.filter(row => dateRangeArray.includes(row.date))
     const filteredData = filterData()
 
+    // Objeto con suma de datos obtenidos para cada deporte separado por tipo de dato
     const groupTotalsBySport = (filteredData, stats) => {
       const grouped = {}
 
       filteredData.forEach(row => {
         const sport = row.sport
+        console.log(sport)
         if (!grouped[sport]) grouped[sport] = {}
 
         stats.forEach(stat => {
-          if (typeof row[stat] === 'number') {
-            grouped[sport][stat] = (grouped[sport][stat] || 0) + row[stat]
+          if (typeof row[stat.stat] === 'number') {
+            grouped[sport][stat.esp] = (grouped[sport][stat.esp] || 0) + row[stat.stat]
           }
         })
       })
-      console.log(grouped)
       return grouped
     }
 
     setTotals(groupTotalsBySport(filteredData, stats))
+    setFilteredData(filteredData)
   }, [])
 
+  // Color para punto marcador de deporte
+  const getSportColor = (sport) => {
+    const colors = {
+      Ciclismo: 'bg-blue-500',
+      Running: 'bg-green-500',
+      Natación: 'bg-purple-500',
+      Gym: 'bg-red-500',
+      Yoga: 'bg-pink-500'
+    }
+    return colors[sport] || 'bg-orange-500'
+  }
+
+  // Selección de ícono para el tipo de estadístico
+  const getStatIcon = statName => {
+    const statObj = stats.find(s => s.esp === statName)
+    return statObj ? statObj.icon : ''
+  }
+
   return (
-    <div className='bg-gray-700 p-4 rounded-2xl shadow mt-6 h-1/2 '>
-      <div className='bg-gray-900 rounded-2xl shadow flex flex-col justify-around p-4'>
-        <div>
-          <h2>Totales</h2>
-          <p>{`${dateRange}`}</p>
+    <div className='bg-gray-700 p-4 rounded-2xl shadow mt-6 h-1/2 mb-2'>
+      <div className='bg-gray-900 rounded-2xl shadow h-full flex flex-col overflow-hidden'>
+
+        {/* Título */}
+        <div className='text-center p-4 border-b border-gray-700 flex-shrink-0'>
+          <h2 className='text-xl font-bold text-white mb-1'>📈 Resumen de Actividad</h2>
+          <p className='text-gray-400 text-sm font-medium'>{dateRange}</p>
         </div>
-        <div>
+
+        {/* Contenido */}
+        <div className='flex-1 overflow-y-auto p-4 space-y-4'>
           {Object.entries(totals).map(([sport, stats]) => (
-            <div key={sport}>
-              <h2>{sport}</h2>
-              <ul>
+            <div key={sport} className='bg-gray-800 rounded-xl p-4 border border-gray-600 hover:border-gray-500 transition-colors'>
+
+              {/* Título del deporte */}
+              <div className='flex items-center mb-3'>
+                <div className={`w-3 h-3 rounded-full ${getSportColor(sport)} mr-3`} />
+                <h3 className='text-lg font-bold text-white'>{sport}</h3>
+              </div>
+
+              {/* Estdísticos totales del deporte */}
+              <div className='grid grid-cols-1 gap-2'>
                 {Object.entries(stats).map(([stat, value]) => (
-                  <li key={stat}>{stat}: {value}</li>
+                  <div key={stat} className='flex items-center justify-between p-2 bg-gray-700 rounded-lg'>
+                    <div className='flex items-center'>
+                      <span className='text-lg mr-2'>{getStatIcon(stat)}</span>
+                      <span className='text-gray-300 font-medium'>{stat}</span>
+                    </div>
+                    <span className='text-white font-bold'>{value}</span>
+                  </div>
                 ))}
-              </ul>
-            </div>))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Resumen general (Deportes, Sesiones, Calorías totales) */}
+        <div className='p-4 border-t border-gray-700 flex-shrink-0'>
+          <div className='grid grid-cols-3 gap-4 text-center'>
+            <div className='bg-gray-800 rounded-lg p-2'>
+              <div className='text-sm text-gray-400'>Deportes</div>
+              <div className='text-lg font-bold text-white'>{Object.keys(totals).length}</div>
+            </div>
+            <div className='bg-gray-800 rounded-lg p-2'>
+              <div className='text-sm text-gray-400'>Sesiones</div>
+              <div className='text-lg font-bold text-white'>{filteredData.length}</div>
+            </div>
+            <div className='bg-gray-800 rounded-lg p-2'>
+              <div className='text-sm text-gray-400'>Total Cal.</div>
+              <div className='text-lg font-bold text-white'>{Object.entries(totals).reduce((acc, [/* sport */, stats]) => {
+                return acc + (stats['Calorías'] || 0)
+              }, 0)}
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>

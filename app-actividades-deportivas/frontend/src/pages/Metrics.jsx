@@ -4,11 +4,10 @@ import MetricsTable from '../components/charts/MetricsTable'
 export default function Metrics () {
   return (
     <>
-      <div className='h-screen'>
+      <div className='h-full'>
         <ChartContainer />
         <MetricsTable />
       </div>
-
     </>
   )
 }
