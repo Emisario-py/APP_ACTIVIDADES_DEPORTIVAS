@@ -43,7 +43,7 @@ export const TarjetaDeporte = () => {
               <h2>{deporte.name}</h2>
               <img src={deporte.img} alt={deporte.name} />
               <br />
-              <Link to={`/FormularioGeneral/${deporte.name}`}>
+              <Link to={`/form/${deporte.name}`}>
                 <button
                   className='w-full mt-4 bg-orange-500 text-white font-bold py-2 rounded-lg
                            hover:bg-orange-600 transition-colors duration-200
