@@ -1,4 +1,3 @@
-// src/components/Auth.jsx
 import { useState } from "react";
 import { login, register } from "../services/auth";
 import { registerSchema } from "../schemas/userSchema.js";
@@ -35,39 +34,40 @@ function Auth({ onLoginSuccess }) {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setMessage("");
+    e.preventDefault()
+    setMessage('')
 
     try {
       if (isLogin) {
-        // Solo login con backend
-        await login(form.email, form.password);
-        onLoginSuccess();
+        await login(form.email, form.password)
+        onLoginSuccess()
       } else {
-        // Validación Yup en registro
-        const { isValid, errors: validationErrors } = await validateForm(
-          registerSchema,
-          form
-        );
-
+        const { isValid, errors: validationErrors } = await validateForm(registerSchema, form)
         if (!isValid) {
-          setErrors(validationErrors);
-          return;
+          setErrors(validationErrors)
+          return
         }
-
-        setErrors({});
-        await register(form.username, form.email, form.password);
-        setMessage("✅ Usuario registrado. Ahora inicia sesión");
-        setIsLogin(true);
+        setErrors({})
+        await register(form.username, form.email, form.password)
+        setMessage('✅ Usuario registrado. Ahora inicia sesión')
+        setIsLogin(true)
       }
     } catch (err) {
+      console.error('Auth error:', err) // Para debugging
       if (isLogin) {
-        setMessage("❌ Usuario o contraseña incorrectos");
+        setMessage('❌ Usuario o contraseña incorrectos')
       } else {
-        setMessage(`❌ ${err.message}`);
+      // Muestra errores específicos de duplicados
+        if (err.message.includes('username') || err.message.includes('usuario')) {
+          setMessage('❌ El nombre de usuario ya está en uso')
+        } else if (err.message.includes('email') || err.message.includes('correo')) {
+          setMessage('❌ El correo electrónico ya está registrado')
+        } else {
+          setMessage(`❌ ${err.message}`)
+        }
       }
     }
-  };
+  }
 
   return (
     <div className="h-screen flex items-center justify-center bg-[#0f1b2d]">
