@@ -1,12 +1,13 @@
 // src/App.jsx
 import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Navbar from './components/Navbar'
-import Profile from './pages/Profile'
-import Metrics from './pages/Metrics'
-import { TarjetaDeporte } from './pages/TarjetaDeporte'
-import { FormularioGeneral } from './components/FormularioGeneral'
+import Navbar from './components/Navbar.jsx'
+import Profile from './pages/Profile.jsx'
+import Metrics from './pages/Metrics.jsx'
+import { TarjetaDeporte } from './pages/TarjetaDeporte.jsx'
+import { FormularioGeneral } from './components/FormularioGeneral.jsx'
 import Auth from './pages/Auth'
+import UserForm from './pages/UserForm.jsx'
 
 const Dashboard = () => {
   return (
@@ -47,11 +48,12 @@ export const App = () => {
       <Navbar />
       <main className='ml-64 min-h-screen bg-gray-800 text-gray-100 p-6'>
         <Routes>
-          <Route path='/Home' element={<TarjetaDeporte />} />
-          <Route path='/Perfil' element={<Profile />} />
+          <Route path='/home' element={<TarjetaDeporte />} />
+          <Route path='/profile' element={<Profile />} />
           {/* <Route path='/Deportes' element={<TarjetaDeporte />} /> */}
-          <Route path='/FormularioGeneral/:deporte' element={<FormularioGeneral />} />
-          <Route path='/Metricas' element={<Metrics />} />
+          <Route path='/form/:deporte' element={<FormularioGeneral />} />
+          <Route path='/metrics' element={<Metrics />} />
+          <Route path='/profile/form/user' element={<UserForm />} />
         </Routes>
       </main>
     </BrowserRouter>
