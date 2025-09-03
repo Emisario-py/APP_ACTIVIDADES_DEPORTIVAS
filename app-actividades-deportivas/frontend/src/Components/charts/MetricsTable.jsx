@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { barChartData, monthsShort } from './barChartConfig'
-import { Tooltip } from 'chart.js'
+import { monthsShort } from './barChartConfig'
+import { getRegisterRequest } from '../../api/auth'
 
 // Array base para los estadísticos a mostrar en esta sección con el nombre del key de los datos, la palabra en español para mostrar y el ícono a usar
 const stats = [
@@ -21,6 +21,10 @@ export default function MetricsTable () {
 
   // Cargar rango de fechas que comprende la tabla de totales
   useEffect(() => {
+    getTableInfo()
+  }, [])
+
+  const getTableInfo = async () => {
     const today = new Date()
     const startDate = new Date()
     startDate.setDate(today.getDate() - 14)
@@ -57,8 +61,19 @@ export default function MetricsTable () {
     }
     const dateRangeArray = createDateRangeArray()
 
+    const getData = async () => {
+      try {
+        const res = await getRegisterRequest()
+        return res
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    const data = await getData()
+    console.log(data)
+
     // Filtramos datos por fechas a cosniderar
-    const filterData = () => barChartData.filter(row => dateRangeArray.includes(row.date))
+    const filterData = () => data.data.filter(row => dateRangeArray.includes(row.date))
     const filteredData = filterData()
 
     // Objeto con suma de datos obtenidos para cada deporte separado por tipo de dato
@@ -81,16 +96,16 @@ export default function MetricsTable () {
 
     setTotals(groupTotalsBySport(filteredData, stats))
     setFilteredData(filteredData)
-  }, [])
+  }
 
   // Color para punto marcador de deporte
   const getSportColor = (sport) => {
     const colors = {
-      Ciclismo: 'bg-blue-500',
-      Running: 'bg-green-500',
-      Natación: 'bg-purple-500',
-      Gym: 'bg-red-500',
-      Yoga: 'bg-pink-500'
+      Natación: 'bg-blue-500',
+      Atletismo: 'bg-green-500',
+      Gymnasio: 'bg-purple-500',
+      Basquetbol: 'bg-red-500',
+      Futbol: 'bg-pink-500'
     }
     return colors[sport] || 'bg-orange-500'
   }
