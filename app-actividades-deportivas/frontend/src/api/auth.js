@@ -1,3 +1,5 @@
 import { api } from '../services/api'
 
-export const registerRequest = (entrenamientosGuardados) => api.post('/register', entrenamientosGuardados)
+export const registerRequest = (deporte, training) => {
+  return api.post(`/registers/FormularioGeneral/${deporte}`, training)
+}

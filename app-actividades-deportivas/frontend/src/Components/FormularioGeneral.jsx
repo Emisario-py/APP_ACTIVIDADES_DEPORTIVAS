@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import { registerRequest } from '../api/auth'
 
 export const FormularioGeneral = () => {
   const { deporte } = useParams()
@@ -86,7 +87,7 @@ export const FormularioGeneral = () => {
     }
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
 
     const requiredFields = ['user', 'sport', 'duration', 'date', 'startTime']
@@ -95,12 +96,24 @@ export const FormularioGeneral = () => {
       return
     }
 
-    setEntrenamientosGuardados([...entrenamientosGuardados, estadisticas])
-    setMensajeExito(true)
+    try {
+    // 1. Envía los datos del entrenamiento al backend.
+    // Asume que 'saveTrainingData' es una función que hace la petición.
+      const res = await registerRequest(deporte, estadisticas)
 
-    console.log('Nuevo entrenamiento guardado:', estadisticas)
-    console.log('Todos los entrenamientos guardados:', entrenamientosGuardados)
+      // 2. Muestra la respuesta del servidor en la consola.
+      console.log('Respuesta del servidor:', res)
 
+      // 3. Actualiza el estado local solo si la petición fue exitosa.
+      setEntrenamientosGuardados([...entrenamientosGuardados, estadisticas])
+      setMensajeExito(true)
+    } catch (error) {
+    // Maneja cualquier error que ocurra durante la petición.
+      console.error('Error al guardar el entrenamiento:', error)
+      alert('Hubo un error al guardar el entrenamiento. Inténtalo de nuevo.')
+    }
+
+    // 4. Limpia el formulario después de la operación (éxito o fracaso).
     setEstadisticas((prevStats) => ({
       user: '',
       sport: prevStats.sport,

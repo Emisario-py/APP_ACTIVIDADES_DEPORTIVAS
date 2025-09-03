@@ -47,9 +47,9 @@ export const App = () => {
       <Navbar />
       <main className='ml-64 min-h-screen bg-gray-800 text-gray-100 p-6'>
         <Routes>
+          {/* Rutas Privadas */}
           <Route path='/Home' element={<TarjetaDeporte />} />
           <Route path='/Perfil' element={<Profile />} />
-          {/* <Route path='/Deportes' element={<TarjetaDeporte />} /> */}
           <Route path='/FormularioGeneral/:deporte' element={<FormularioGeneral />} />
           <Route path='/Metricas' element={<Metrics />} />
         </Routes>
