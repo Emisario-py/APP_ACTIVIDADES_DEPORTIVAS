@@ -5,7 +5,7 @@ import Navbar from './components/Navbar.jsx'
 import Profile from './pages/Profile.jsx'
 import Metrics from './pages/Metrics.jsx'
 import { TarjetaDeporte } from './pages/TarjetaDeporte.jsx'
-import { FormularioGeneral } from './components/FormularioGeneral.jsx'
+import { FormularioGeneral } from './Components/FormularioGeneral.jsx'
 import Auth from './pages/Auth'
 import UserForm from './pages/UserForm.jsx'
 
@@ -51,7 +51,7 @@ export const App = () => {
           <Route path='/home' element={<TarjetaDeporte />} />
           <Route path='/profile' element={<Profile />} />
           {/* <Route path='/Deportes' element={<TarjetaDeporte />} /> */}
-          <Route path='/form/:deporte' element={<FormularioGeneral />} />
+          <Route path='/FormularioGeneral/:deporte' element={<FormularioGeneral />} />
           <Route path='/metrics' element={<Metrics />} />
           <Route path='/profile/form/user' element={<UserForm />} />
         </Routes>
