@@ -1,10 +1,10 @@
-import { Router } from 'express'
+import { Router } from 'express'  
 import Registro from '../models/register.model.js'
 
 const router = Router()
 
 // Crear registro
-router.post('/', async (req, res) => {
+router.post('/FormularioGeneral/:deporte', async (req, res) => {
   const nuevoRegistro = new Registro(req.body)
   await nuevoRegistro.save()
   res.json(nuevoRegistro)
