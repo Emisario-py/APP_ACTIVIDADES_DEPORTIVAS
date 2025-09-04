@@ -1,7 +1,6 @@
 import { Pencil } from 'lucide-react'
-import { useState } from 'react'
-import UserForm from './UserForm'
 import UserPicture from './UserPicture'
+import { Link } from 'react-router-dom'
 
 export default function UserCard ({
   name,
@@ -13,39 +12,22 @@ export default function UserCard ({
   profilePicture, // URL opcional de la foto
   onPhotoChange,
 }) {
-  const [openForm, setOpenForm] = useState(false)
-
-  if (openForm) { // Si openForm = true, mostrar form
-    return (
-      <div className='relative w-full max-w-4xl rounded-2xl p-6 bg-gray-800 text-white shadow-lg'>
-        <button
-          onClick={() => setOpenForm(false)}
-          className='absolute right-3 top-3 z-10 h-10 w-10 rounded-full flex items-center justify-center border bg-gray-700 hover:bg-orange-500 text-white border-white/10 transition'
-          aria-label='Cerrar'
-          title='Cerrar'
-        >
-          X
-        </button>
-        <UserForm />
-      </div>
-    )
-  }
-
-  // Si openForm = false, mostrar user card
   return (
     <div className='relative w-full max-w-4xl rounded-2xl
                 bg-gradient-to-r from-orange-500/50 to-yellow-600/50
                 p-6 text-white shadow-lg'
     >
       {/* Editar */}
-      <button
-        onClick={() => setOpenForm(true)}
-        className='hidden md:flex absolute right-3 top-3 z-10 h-10 w-10 rounded-full items-center justify-center border bg-gray-700/80 hover:bg-orange-500 text-white border-white/10 transition'
-        aria-label='Editar'
-        title='Editar'
-      >
-        <Pencil size={18} />
-      </button>
+
+      <Link to='/profile/form/user'>
+        <button
+          className='hidden md:flex absolute right-3 top-3 z-10 h-10 w-10 rounded-full items-center justify-center border bg-gray-700/80 hover:bg-orange-500 text-white border-white/10 transition'
+          aria-label='Editar'
+          title='Editar'
+        >
+          <Pencil size={18} />
+        </button>
+      </Link>
 
       <div className='grid grid-cols-1 md:grid-cols-3 gap-6 items-center'>
         {/* Columna izquierda: usuario + foto */}
@@ -61,7 +43,7 @@ export default function UserCard ({
             src={profilePicture}     // URL inicial
             onChange={onPhotoChange} // Pasar el File para subirlo
             size={112}               // Equivale a h-28 w-28
-            alwaysShowOverlayOnMobile={true} // Overlay visible en móvil
+            alwaysShowOverlayOnMobile // Overlay visible en móvil
           />
         </div>
 

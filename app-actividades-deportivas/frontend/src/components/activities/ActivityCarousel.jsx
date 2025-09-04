@@ -1,10 +1,12 @@
 import { useRef, useState, useEffect } from 'react'
 import ActivityCard from './ActivityCard'
+import { FormularioGeneral } from '../FormularioGeneral'
 
 export default function ActivityCarousel ({ actividades = [] }) {
   const trackRef = useRef(null)
   const [canPrev, setCanPrev] = useState(false)
   const [canNext, setCanNext] = useState(false)
+  const [editingActivity, setEditingActivity] = useState(null)
 
   // scroll
   const checkScroll = () => {
@@ -78,10 +80,36 @@ export default function ActivityCarousel ({ actividades = [] }) {
                    [scrollbar-width:none] [&::-webkit-scrollbar]:hidden'
       >
         {items.map((a) => (
-          <ActivityCard key={a.id} {...a} />
+          <ActivityCard
+            key={a.id}
+            {...a}
+            onEdit={(actividad) => setEditingActivity(actividad)}
+          />
         ))}
       </div>
       <div className='mt-2 text-xs text-center opacity-60'>Desliza para ver más</div>
+
+      {/* Form editar actividad (modal) */}
+      {editingActivity && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+            <div className="bg-gray-900 p-6 rounded-xl shadow-lg w-[90%] max-w-md max-h-[85vh] overflow-y-auto relative">
+            {/* Botón cerrar */}
+            <button
+              onClick={() => setEditingActivity(null)}
+              className='absolute right-3 top-3 z-10 h-10 w-10 rounded-full flex items-center justify-center border bg-gray-700 hover:bg-orange-500 text-white border-white/10 transition'
+              aria-label='Cerrar'
+              title='Cerrar'
+            >
+              ✖
+            </button>
+
+            <FormularioGeneral
+              initialActivity={editingActivity}
+              onClose={() => setEditingActivity(null)}
+            />
+          </div>
+        </div>
+      )}
     </div>
   )
 }

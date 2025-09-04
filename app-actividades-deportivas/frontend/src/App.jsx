@@ -1,11 +1,12 @@
 // src/App.jsx
 import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Navbar from './components/Navbar'
-import Profile from './components/Profile'
+import Navbar from './components/Navbar.jsx'
+import Profile from './pages/Profile.jsx'
 import { TarjetaDeporte } from './components/TarjetaDeporte'
-import { FormularioGeneral } from './Components/FormularioGeneral'
+import { FormularioGeneral } from './components/FormularioGeneral.jsx'
 import Auth from './pages/Auth'
+import UserForm from './pages/UserForm.jsx'
 
 const Dashboard = () => {
   return (
@@ -46,11 +47,12 @@ export const App = () => {
       <Navbar />
       <main className='ml-64 min-h-screen bg-gray-800 text-gray-100 p-6'>
         <Routes>
-          <Route path='/' element={<Dashboard />} />
-          <Route path='/perfil' element={<Profile />} />
-          <Route path='/deportes' element={<TarjetaDeporte />} />
+          <Route path='/home' element={<TarjetaDeporte />} />
+          <Route path='/profile' element={<Profile />} />
+          {/* <Route path='/Deportes' element={<TarjetaDeporte />} /> */}
           <Route path='/FormularioGeneral/:deporte' element={<FormularioGeneral />} />
-          <Route path='/metricas' element={<h1>Métricas</h1>} />
+          <Route path='/metrics' element={<Metrics />} />
+          <Route path='/profile/form/user' element={<UserForm />} />
         </Routes>
       </main>
     </BrowserRouter>

@@ -1,66 +1,45 @@
 @import "tailwindcss";
 
 body {
+  height: 100%;
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  /* Tailwind bg-gray-900 */
+  background-color: #1a1a1a; 
+  /* Tailwind text-gray-200 */
+  color: #e5e7eb; 
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* Estilos de botones, ahora se pueden manejar con clases de Tailwind */
+.btn {
+  @apply rounded-lg border border-transparent px-4 py-2 text-sm font-medium transition-colors duration-200 ease-in-out;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.btn-primary {
+  @apply bg-orange-500 text-white hover:bg-orange-600;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.btn-secondary {
+  @apply bg-gray-700 text-gray-200 hover:bg-gray-600;
 }
 
+/* Estilos para el contenedor de los deportes */
 .contenedor-deportes {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
+  @apply grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center;
 }
 
+/* Estilos para cada tarjeta de deporte */
 .contenedor-deportes section {
-  max-width: 300px; ;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px; 
+  /* Se cambió la escala para que tenga un efecto visible */
+  @apply flex flex-col items-center justify-center p-6 bg-gray-800 rounded-2xl shadow-lg transition-transform duration-200 ease-in-out hover:scale-105;
+}
+
+.contenedor-deportes section h2 {
+  @apply text-xl font-semibold mt-2 text-orange-400;
 }
 
 .contenedor-deportes section img {
-  height: 400px; 
-  width: 250px; 
-  object-fit: cover; 
+  /* Se corrigieron las clases no válidas y se usaron medidas más comunes */
+  @apply h-64 w-64 md:h-80 md:w-80 object-cover rounded-lg shadow-md;
 }

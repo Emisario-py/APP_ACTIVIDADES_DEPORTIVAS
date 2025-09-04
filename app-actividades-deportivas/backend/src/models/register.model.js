@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 const RegistroSchema = new mongoose.Schema({
   user: {
     type: String,
@@ -20,17 +20,17 @@ const RegistroSchema = new mongoose.Schema({
     required: true,
     trim: true
   },
-  startTime:{
+  startTime: {
     type: String,
     required: true,
     trim: true
   },
-  calories:{
+  calories: {
     type: Number,
     required: false,
     trim: true
   },
-  rhythm:{
+  rhythm: {
     type: Number,
     required: false,
     trim: true
@@ -65,8 +65,8 @@ const RegistroSchema = new mongoose.Schema({
     required: false,
     trim: true
   }
-},{
+}, {
   timestamps: true
 })
 
-export default mongoose.model("Registro", RegistroSchema)
+export default mongoose.model('Registro', RegistroSchema)

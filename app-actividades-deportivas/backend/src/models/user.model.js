@@ -1,55 +1,61 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 
 const userSchema = new mongoose.Schema({
-  name:{
+  name: {
     type: String,
-    required: true,
     trim: true
   },
   username: {
     type: String,
     required: true,
+    unique: true,
     trim: true,
-    unique: true
+    index: true
   },
   email: {
     type: String,
     required: true,
+    unique: true,
     trim: true,
-    unique: true
+    lowercase: true,
+    index: true
   },
   password: {
     type: String,
     required: true,
-    trim: true
+    minlength: 6
   },
   age: {
     type: Number,
-    required: true,
-    trim: true
+    min: 0
   },
   birthday: {
-    type: String,
-    required: true,
-    trim: true
+    type: Date
   },
   weight: {
     type: Number,
-    required: false,
-    trim: true
+    min: 0
   },
   height: {
     type: Number,
-    required: false,
-    trim: true
+    min: 0
   },
   favSport: {
     type: String,
-    required: false,
     trim: true
   }
-},{
+}, {
   timestamps: true
 })
 
-export default mongoose.model("User", userSchema)
+// Middleware para manejar errores de duplicado
+userSchema.post('save', function (error, doc, next) {
+  if (error.name === 'MongoServerError' && error.code === 11000) {
+    const field = Object.keys(error.keyValue)[0]
+    next(new Error(`${field} ya está registrado`))
+  } else {
+    next(error)
+  }
+})
+
+export default mongoose.model('User', userSchema)  
