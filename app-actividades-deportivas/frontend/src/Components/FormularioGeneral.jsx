@@ -2,23 +2,23 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { registerRequest } from '../api/auth'
 
-export const FormularioGeneral = () => {
+export const FormularioGeneral = ({ initialActivity, onClose }) => {
   const { deporte } = useParams()
 
   const [estadisticas, setEstadisticas] = useState({
-    user: '',
-    sport: '',
-    duration: '',
-    date: '',
-    startTime: '',
-    calories: '',
-    rhythm: '',
-    series: '',
-    repetitions: '',
-    distance: '',
-    weight: '',
-    scores: '',
-    note: '',
+    user: initialActivity?.user || '',
+    sport: initialActivity?.sport || deporte || '',
+    duration: initialActivity?.duration || '',
+    date: initialActivity?.date || '',
+    startTime: initialActivity?.startTime || '',
+    calories: initialActivity?.calories || '',
+    rhythm: initialActivity?.rhythm || '',
+    series: initialActivity?.series || '',
+    repetitions: initialActivity?.repetitions || '',
+    distance: initialActivity?.distance || '',
+    weight: initialActivity?.weight || '',
+    scores: initialActivity?.scores || '',
+    note: initialActivity?.note || '',
   })
 
   const [entrenamientosGuardados, setEntrenamientosGuardados] = useState([])
@@ -97,15 +97,25 @@ export const FormularioGeneral = () => {
     }
 
     try {
-    // 1. Envía los datos del entrenamiento al backend.
-      const res = await registerRequest(deporte, estadisticas)
+      if (actividadInicial) { // EDITAR ACTIVIDAD
+        // 1. Envía los datos del entrenamiento actualizado al backend.
+        const res = await updateRequest(actividadInicial.id, estadisticas)
 
-      // 2. Muestra la respuesta del servidor en la consola.
-      console.log('Respuesta del servidor:', res)
+        // 2. Muestra la respuesta del servidor en la consola.
+        console.log("Editando actividad:", actividadInicial.id, estadisticas)
+      } else { // CREAR ACTIVIDAD
+        // 1. Envía los datos del entrenamiento al backend.
+        const res = await registerRequest(deporte, estadisticas)
 
-      // 3. Actualiza el estado local solo si la petición fue exitosa.
-      setEntrenamientosGuardados([...entrenamientosGuardados, estadisticas])
-      setMensajeExito(true)
+        // 2. Muestra la respuesta del servidor en la consola.
+        console.log('Respuesta del servidor:', res)
+
+        // 3. Actualiza el estado local solo si la petición fue exitosa.
+        setEntrenamientosGuardados([...entrenamientosGuardados, estadisticas])
+        setMensajeExito(true)
+      }
+      
+      if (onClose) onClose()
     } catch (error) {
       console.error('Error al guardar el entrenamiento:', error)
       alert('Hubo un error al guardar el entrenamiento. Inténtalo de nuevo.')

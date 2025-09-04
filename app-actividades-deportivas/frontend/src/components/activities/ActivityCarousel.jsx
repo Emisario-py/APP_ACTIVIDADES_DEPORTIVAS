@@ -1,10 +1,12 @@
 import { useRef, useState, useEffect } from 'react'
 import ActivityCard from './ActivityCard'
+import { FormularioGeneral } from './FormularioGeneral'
 
 export default function ActivityCarousel ({ actividades = [] }) {
   const trackRef = useRef(null)
   const [canPrev, setCanPrev] = useState(false)
   const [canNext, setCanNext] = useState(false)
+  const [editingActivity, setEditingActivity] = useState(null)
 
   // scroll
   const checkScroll = () => {
@@ -78,10 +80,22 @@ export default function ActivityCarousel ({ actividades = [] }) {
                    [scrollbar-width:none] [&::-webkit-scrollbar]:hidden'
       >
         {items.map((a) => (
-          <ActivityCard key={a.id} {...a} />
+          <ActivityCard
+            key={a.id}
+            {...a}
+            onEdit={(actividad) => setEditingActivity(actividad)}
+          />
         ))}
       </div>
       <div className='mt-2 text-xs text-center opacity-60'>Desliza para ver más</div>
+
+      {/* Form editar actividad */}
+      {actividadEditando && (
+        <FormularioGeneral
+          actividadInicial={actividadEditando}
+          onClose={() => setActividadEditando(null)}
+        />
+      )}
     </div>
   )
 }
