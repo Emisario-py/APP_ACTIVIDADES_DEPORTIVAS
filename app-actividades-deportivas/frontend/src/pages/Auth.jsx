@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { login, register } from "../services/auth";
+import { useNavigate } from 'react-router-dom'
 import { registerSchema } from "../schemas/userSchema.js";
 import { validateForm } from "../utils/validation.js";
 
 function Auth({ onLoginSuccess }) {
+  const navigate = useNavigate()
   const [isLogin, setIsLogin] = useState(true);
 
   const [form, setForm] = useState({
@@ -41,6 +43,7 @@ function Auth({ onLoginSuccess }) {
       if (isLogin) {
         await login(form.email, form.password)
         onLoginSuccess()
+        navigate('/home')
       } else {
         const { isValid, errors: validationErrors } = await validateForm(registerSchema, form)
         if (!isValid) {
