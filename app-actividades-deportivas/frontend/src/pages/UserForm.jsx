@@ -27,16 +27,6 @@ export default function UserForm () {
 
     <div className='relative w-full max-w-4xl rounded-2xl p-6 bg-gray-800 text-white shadow-lg'>
 
-      <Link to='/profile'>
-        <button
-          className='absolute right-3 top-3 z-10 h-10 w-10 rounded-full flex items-center justify-center border bg-gray-700 hover:bg-orange-500 text-white border-white/10 transition'
-          aria-label='Cerrar'
-          title='Cerrar'
-        >
-          X
-        </button>
-      </Link>
-
       <div
         className='bg-gray-700 p-6 rounded-2xl shadow mt-6'
       >
