@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Profile from './components/Profile'
 import { TarjetaDeporte } from './components/TarjetaDeporte'
-import { FormularioGeneral } from './components/FormularioGeneral'
+import { FormularioGeneral } from './Components/FormularioGeneral'
 import Auth from './pages/Auth'
 
 const Dashboard = () => {
