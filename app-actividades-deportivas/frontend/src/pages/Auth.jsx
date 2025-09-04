@@ -37,6 +37,8 @@ function Auth ({ onLoginSuccess }) {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setMessage('')
+    e.preventDefault()
+    setMessage('')
 
     try {
       if (isLogin) {
@@ -44,13 +46,10 @@ function Auth ({ onLoginSuccess }) {
         await login(form.email, form.password)
         onLoginSuccess()
       } else {
-        // Validación Yup en registro
-        const { isValid, errors: validationErrors } = await validateForm(
-          registerSchema,
-          form
-        )
-
+        const { isValid, errors: validationErrors } = await validateForm(registerSchema, form)
         if (!isValid) {
+          setErrors(validationErrors)
+          return
           setErrors(validationErrors)
           return
         }
@@ -61,10 +60,19 @@ function Auth ({ onLoginSuccess }) {
         setIsLogin(true)
       }
     } catch (err) {
+      console.error('Auth error:', err) // Para debugging
       if (isLogin) {
         setMessage('❌ Usuario o contraseña incorrectos')
+        setMessage('❌ Usuario o contraseña incorrectos')
       } else {
-        setMessage(`❌ ${err.message}`)
+      // Muestra errores específicos de duplicados
+        if (err.message.includes('username') || err.message.includes('usuario')) {
+          setMessage('❌ El nombre de usuario ya está en uso')
+        } else if (err.message.includes('email') || err.message.includes('correo')) {
+          setMessage('❌ El correo electrónico ya está registrado')
+        } else {
+          setMessage(`❌ ${err.message}`)
+        }
       }
     }
   }
