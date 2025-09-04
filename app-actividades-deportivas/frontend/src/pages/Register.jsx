@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { registerSchema } from '../schemas/userSchema'
-import { registerRequest } from '../api/auth'
 import { register } from '../services/auth'
 import { validateForm } from '../utils/validation'
 
@@ -64,94 +63,88 @@ export const Register = () => {
   }
 
   return (
-    <div className='ml-64 min-h-screen bg-gray-800 text-gray-100 p-6'>
-      <div className='h-screen flex items-center justify-center bg-[#0f1b2d]'>
-        <form
-          onSubmit={handleSubmit}
-          className='bg-gradient-to-r from-[#8b4513] to-[#a0522d] p-8 rounded-2xl shadow-xl w-96 text-white'
-          autoComplete='off'
-        >
-          <h2 className='text-2xl font-bold mb-6 text-center'>
-            Crear cuenta
-          </h2>
+    <div className='h-screen flex items-center justify-center bg-[#0f1b2d]'>
+      <form
+        onSubmit={handleSubmit}
+        className='bg-gradient-to-r from-[#8b4513] to-[#a0522d] p-8 rounded-2xl shadow-xl w-96 text-white'
+        autoComplete='off'
+      >
+        <h2 className='text-2xl font-bold mb-6 text-center'>
+          Crear cuenta
+        </h2>
 
-          {message && (
-            <p className='mb-4 text-center text-sm text-white'>{message}</p>
-          )}
+        {message && (
+          <p className='mb-4 text-center text-sm text-white'>{message}</p>
+        )}
 
-          <>
-            {/* USERNAME */}
-            <input
-              type='text'
-              name='username'
-              placeholder='Usuario'
-              value={form.username}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              className='bg-[#1c2a3d] border border-gray-600 p-3 w-full rounded-lg mb-1 text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500'
-            />
-            {errors.username && (
-              <p className='text-xs text-white mb-2'>{errors.username}</p>
-            )}
-          </>
+        {/* USERNAME */}
+        <input
+          type='text'
+          name='username'
+          placeholder='Usuario'
+          value={form.username}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          className='bg-[#1c2a3d] border border-gray-600 p-3 w-full rounded-lg mb-1 text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500'
+        />
+        {errors.username && (
+          <p className='text-xs text-white mb-2'>{errors.username}</p>
+        )}
 
-          {/* EMAIL */}
-          <input
-            type='email'
-            name='email'
-            placeholder='Correo electrónico'
-            value={form.email}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className='bg-[#1c2a3d] border border-gray-600 p-3 w-full rounded-lg mb-1 text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500'
-          />
-          {errors.email && (
-            <p className='text-xs text-white mb-2'>{errors.email}</p>
-          )}
+        {/* EMAIL */}
+        <input
+          type='email'
+          name='email'
+          placeholder='Correo electrónico'
+          value={form.email}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          className='bg-[#1c2a3d] border border-gray-600 p-3 w-full rounded-lg mb-1 text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500'
+        />
+        {errors.email && (
+          <p className='text-xs text-white mb-2'>{errors.email}</p>
+        )}
 
-          {/* PASSWORD */}
-          <input
-            type='password'
-            name='password'
-            placeholder='Contraseña'
-            value={form.password}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className='bg-[#1c2a3d] border border-gray-600 p-3 w-full rounded-lg mb-1 text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500'
-          />
-          {errors.password && (
-            <p className='text-xs text-white mb-2'>{errors.password}</p>
-          )}
+        {/* PASSWORD */}
+        <input
+          type='password'
+          name='password'
+          placeholder='Contraseña'
+          value={form.password}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          className='bg-[#1c2a3d] border border-gray-600 p-3 w-full rounded-lg mb-1 text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500'
+        />
+        {errors.password && (
+          <p className='text-xs text-white mb-2'>{errors.password}</p>
+        )}
 
-          <>
-            {/* CONFIRM PASSWORD */}
-            <input
-              type='password'
-              name='confirmPassword'
-              placeholder='Confirmar contraseña'
-              value={form.confirmPassword}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              className='bg-[#1c2a3d] border border-gray-600 p-3 w-full rounded-lg mb-1 text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500'
-            />
-            {errors.confirmPassword && (
-              <p className='text-xs text-white mb-2'>
-                {errors.confirmPassword}
-              </p>
-            )}
-          </>
+        {/* CONFIRM PASSWORD */}
+        <input
+          type='password'
+          name='confirmPassword'
+          placeholder='Confirmar contraseña'
+          value={form.confirmPassword}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          className='bg-[#1c2a3d] border border-gray-600 p-3 w-full rounded-lg mb-1 text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500'
+        />
+        {errors.confirmPassword && (
+          <p className='text-xs text-white mb-2'>
+            {errors.confirmPassword}
+          </p>
+        )}
 
-          <button className='bg-orange-600 hover:bg-orange-700 transition-colors text-white font-semibold p-3 rounded-lg w-full mt-4 shadow-md'>
-            'Crear cuenta'
-          </button>
+        <button className='bg-orange-600 hover:bg-orange-700 transition-colors text-white font-semibold p-3 rounded-lg w-full mt-4 shadow-md'>
+          Crear cuenta
+        </button>
 
-          <Link to='/login'>
-            <p className='mt-4 text-sm text-gray-300 cursor-pointer text-center hover:text-orange-400'>
-              ¿Ya tienes cuenta? Inicia sesión aquí
-            </p>
-          </Link>
-        </form>
-      </div>
+        <Link to='/login'>
+          <p className='mt-4 text-sm text-gray-300 cursor-pointer text-center hover:text-orange-400'>
+            ¿Ya tienes cuenta? Inicia sesión aquí
+          </p>
+        </Link>
+      </form>
     </div>
   )
 }

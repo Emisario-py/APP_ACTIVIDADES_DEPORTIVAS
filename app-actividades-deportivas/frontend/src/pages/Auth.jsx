@@ -1,10 +1,9 @@
 // src/components/Auth.jsx
 import { useState } from 'react'
-import { login, register } from '../services/auth'
+import { login } from '../services/auth'
 import { Link, useNavigate } from 'react-router-dom'
-import { loginSchema, registerSchema } from '../schemas/userSchema.js'
+import { loginSchema } from '../schemas/userSchema.js'
 import { validateForm } from '../utils/validation.js'
-import { loginRequest } from '../api/auth.js'
 import { useAuth } from '../context/AuthContext.jsx'
 
 function Auth () {
