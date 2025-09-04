@@ -3,22 +3,37 @@ import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 
 export const register = async (req, res) => {
-  const { name, username, email, password, age, birthday, weight, height, favSport } = req.body
+  const { username, email, password, name, age, birthday, weight, height, favSport } = req.body
 
   try {
+    // Verificar si el usuario ya existe
+    const existingUser = await User.findOne({
+      $or: [{ email }, { username }]
+    })
+
+    if (existingUser) {
+      if (existingUser.email === email) {
+        return res.status(400).json({ message: 'El correo electrónico ya está registrado' })
+      }
+      if (existingUser.username === username) {
+        return res.status(400).json({ message: 'El nombre de usuario ya está en uso' })
+      }
+    }
+
     const passwordHash = await bcrypt.hash(password, 10)
 
     const newUser = new User({
-      name,
       username,
       email,
       password: passwordHash,
-      age,
-      birthday,
-      weight,
-      height,
-      favSport
+      name: name || '',
+      age: age || null,
+      birthday: birthday || null,
+      weight: weight || null,
+      height: height || null,
+      favSport: favSport || ''
     })
+
     const userSaved = await newUser.save()
 
     jwt.sign({
@@ -29,30 +44,44 @@ export const register = async (req, res) => {
       expiresIn: '1d'
     },
     (err, token) => {
-      if (err) console.log(err)
+      if (err) {
+        console.log(err)
+        return res.status(500).json({ message: 'Error generating token' })
+      }
       res.cookie('token', token)
-
       res.json({
         id: userSaved._id,
-        name: userSaved.name,
         username: userSaved.username,
         email: userSaved.email,
         createdAt: userSaved.createdAt,
         updatedAt: userSaved.updatedAt,
       })
-    }
-    )
+    })
   } catch (error) {
-    res.status(500).json({ message: error.message })
+    console.error('Register error:', error)
+
+    if (error.message.includes('ya está registrado')) {
+      return res.status(400).json({ message: error.message })
+    }
+
+    res.status(500).json({ message: 'Error interno del servidor' })
   }
 }
+
 export const login = async (req, res) => {
   const { email, password } = req.body
+
   try {
     const userFound = await User.findOne({ email })
-    if (!userFound) return res.status(400).json({ message: 'Usuario no encontrado' })
+    if (!userFound) {
+      return res.status(400).json({ message: 'Usuario no encontrado' })
+    }
+
     const isMatch = await bcrypt.compare(password, userFound.password)
-    if (!isMatch) return res.status(400).json({ message: 'Contraseña incorrecta' })
+    if (!isMatch) {
+      return res.status(400).json({ message: 'Contraseña incorrecta' })
+    }
+
     jwt.sign({
       id: userFound._id
     },
@@ -61,7 +90,10 @@ export const login = async (req, res) => {
       expiresIn: '1d'
     },
     (err, token) => {
-      if (err) console.log(err)
+      if (err) {
+        console.log(err)
+        return res.status(500).json({ message: 'Error generating token' })
+      }
       res.cookie('token', token)
       res.json({
         id: userFound._id,
@@ -70,8 +102,7 @@ export const login = async (req, res) => {
         createdAt: userFound.createdAt,
         updatedAt: userFound.updatedAt,
       })
-    }
-    )
+    })
   } catch (error) {
     res.status(500).json({ message: error.message })
   }
