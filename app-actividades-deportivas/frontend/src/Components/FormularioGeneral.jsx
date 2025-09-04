@@ -1,9 +1,18 @@
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { registerRequest } from '../api/auth'
 
 export const FormularioGeneral = ({ initialActivity, onClose }) => {
   const { deporte } = useParams()
+  const navigate = useNavigate()
+
+  const handleCancel = () => {
+    if (onClose) {
+      onClose()         // Cerrar modal (Perfil)
+    } else {
+      navigate('/home') // Redirigir (Home)
+    }
+  }
 
   const [estadisticas, setEstadisticas] = useState({
     user: initialActivity?.user || '',
@@ -331,6 +340,14 @@ export const FormularioGeneral = ({ initialActivity, onClose }) => {
             className='w-full mt-6 bg-orange-500 text-white font-bold py-2 rounded-lg hover:bg-orange-600 transition-colors duration-200'
           >
             Guardar Datos
+          </button>
+
+          <button
+            type="button"
+            onClick={handleCancel}
+            className="w-full mt-2 bg-gray-500 text-white font-bold py-2 rounded-lg hover:bg-red-500 transition-colors duration-200"
+          >
+            Cancelar
           </button>
         </form>
         {mensajeExito && (
