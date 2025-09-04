@@ -3,7 +3,6 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { getMaxBirthday, UserFormSchema } from '../schemas/userFormSchema.js'
 import { Pencil } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { userInfoRequest } from '../api/auth.js'
 
 export default function UserForm () {
   const {
@@ -17,9 +16,6 @@ export default function UserForm () {
   const onSubmit = async (data) => {
     if (isValid) {
       console.log(data)
-      const id = ''
-      const res = await userInfoRequest(id)
-      console.log(res)
     }
   }
 

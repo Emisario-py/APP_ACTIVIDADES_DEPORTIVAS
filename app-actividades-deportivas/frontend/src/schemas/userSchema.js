@@ -37,3 +37,24 @@ export const registerSchema = yup.object().shape({
     .required('Debes confirmar la contraseña')
     .oneOf([yup.ref('password'), null], 'Las contraseñas no coinciden'),
 })
+
+export const loginSchema = yup.object().shape({
+  email: yup
+    .string()
+    .required('El email es requerido')
+    .email('Ingresa un email válido')
+    .trim()
+    .lowercase(),
+
+  password: yup
+    .string()
+    .required('La contraseña es requerida')
+    .min(12, 'La contraseña debe tener al menos 12 caracteres')
+    .matches(/[a-z]/, 'Debe contener al menos una letra minúscula')
+    .matches(/[A-Z]/, 'Debe contener al menos una letra mayúscula')
+    .matches(/[0-9]/, 'Debe contener al menos un número')
+    .matches(
+      /[!@#$%^&*]/,
+      'Debe contener al menos un carácter especial (!@#$%^&*)'
+    ),
+})

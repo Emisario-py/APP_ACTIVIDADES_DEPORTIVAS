@@ -1,6 +1,6 @@
 // src/App.jsx
 import { useState } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar.jsx'
 import Profile from './pages/Profile.jsx'
 import Metrics from './pages/Metrics.jsx'
@@ -8,54 +8,79 @@ import { TarjetaDeporte } from './pages/TarjetaDeporte.jsx'
 import { FormularioGeneral } from './Components/FormularioGeneral.jsx'
 import Auth from './pages/Auth'
 import UserForm from './pages/UserForm.jsx'
+import { useAuth } from './context/AuthContext.jsx'
+import { PrivateRoute } from './PrivateRoute.jsx'
+import { Register } from './pages/Register.jsx'
+import { AuthProvider } from './context/AuthProvider.jsx'
 
-const Dashboard = () => {
+const AppContent = () => {
+  useAuth()
+  const location = useLocation()
+  const hideNavbarRoutes = ['/login', '/']
+
+  // Si la ruta es /login o no reconocida, no muestra la Navbar
+  const showNavbar = !hideNavbarRoutes.includes(location.pathname)
   return (
-    <div className='w-full h-full'>
-      <h1 className='text-3xl font-bold text-orange-500 mb-6'>
-        Bienvenido a la App Deportiva
-      </h1>
-      <p className='text-gray-300'>
-        Explora las secciones en la barra lateral para ver tu perfil, métricas y registrar actividades.
-      </p>
-    </div>
-  )
-}
+    <>
+      {showNavbar && <Navbar />}
+      <main className={`${showNavbar ? 'ml-64' : 'min-h-screen bg-gray-800 text-gray-100 p-6'}`}>
 
-export const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
-
-  // Función para manejar el login exitoso
-  const handleLoginSuccess = () => {
-    setIsAuthenticated(true)
-  }
-
-  // Si el usuario NO está autenticado, solo mostramos la página de login
-  if (!isAuthenticated) {
-    return (
-      <BrowserRouter>
         <Routes>
           {/* El componente Auth recibe la función para cambiar el estado */}
-          <Route path='*' element={<Auth onLoginSuccess={handleLoginSuccess} />} />
-        </Routes>
-      </BrowserRouter>
-    )
-  }
+          <Route path='/login' element={<Auth />} />
+          <Route path='*' element={<Auth />} />
+          <Route path='/register' element={<Register />} />
 
-  // Si el usuario SÍ está autenticado, mostramos la aplicación principal
-  return (
-    <BrowserRouter>
-      <Navbar />
-      <main className='ml-64 min-h-screen bg-gray-800 text-gray-100 p-6'>
-        <Routes>
-          <Route path='/home' element={<TarjetaDeporte />} />
-          <Route path='/profile' element={<Profile />} />
-          {/* <Route path='/Deportes' element={<TarjetaDeporte />} /> */}
-          <Route path='/FormularioGeneral/:deporte' element={<FormularioGeneral />} />
-          <Route path='/metrics' element={<Metrics />} />
-          <Route path='/profile/form/user' element={<UserForm />} />
+          <Route
+            path='/home'
+            element={
+              <PrivateRoute>
+                <TarjetaDeporte />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path='/profile'
+            element={
+              <PrivateRoute>
+                <Profile />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path='/metrics'
+            element={
+              <PrivateRoute>
+                <Metrics />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path='/profile/form/user'
+            element={
+              <PrivateRoute>
+                <UserForm />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path='/FormularioGeneral/:deporte'
+            element={
+              <PrivateRoute>
+                <FormularioGeneral />
+              </PrivateRoute>
+            }
+          />
         </Routes>
       </main>
-    </BrowserRouter>
+    </>
   )
 }
+
+export const App = () => (
+  <AuthProvider>
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
+  </AuthProvider>
+)

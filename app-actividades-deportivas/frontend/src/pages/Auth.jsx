@@ -1,19 +1,20 @@
 // src/components/Auth.jsx
 import { useState } from 'react'
 import { login, register } from '../services/auth'
-import { useNavigate } from 'react-router-dom'
-import { registerSchema } from '../schemas/userSchema.js'
+import { Link, useNavigate } from 'react-router-dom'
+import { loginSchema, registerSchema } from '../schemas/userSchema.js'
 import { validateForm } from '../utils/validation.js'
+import { loginRequest } from '../api/auth.js'
+import { useAuth } from '../context/AuthContext.jsx'
 
-function Auth ({ onLoginSuccess }) {
+function Auth () {
+  const { setUser } = useAuth()
+
   const navigate = useNavigate()
-  const [isLogin, setIsLogin] = useState(true)
 
   const [form, setForm] = useState({
-    username: '',
     email: '',
     password: '',
-    confirmPassword: '',
   })
 
   const [message, setMessage] = useState('')
@@ -25,11 +26,10 @@ function Auth ({ onLoginSuccess }) {
   }
 
   const handleBlur = async (e) => {
-    if (isLogin) return // en login no validamos con Yup
     const { name } = e.target
 
     try {
-      await registerSchema.validateAt(name, form)
+      await loginSchema.validateAt(name, form)
       setErrors((prev) => ({ ...prev, [name]: null }))
     } catch (err) {
       setErrors((prev) => ({ ...prev, [name]: err.message }))
@@ -42,39 +42,24 @@ function Auth ({ onLoginSuccess }) {
     e.preventDefault()
     setMessage('')
 
-    try {
-      if (isLogin) {
-        // Solo login con backend
-        await login(form.email, form.password)
-        onLoginSuccess()
-        navigate('/home')
-      } else {
-        const { isValid, errors: validationErrors } = await validateForm(registerSchema, form)
-        if (!isValid) {
-          setErrors(validationErrors)
-          return
-        }
+    const { isValid, errors: validationErrors } = await validateForm(loginSchema, form)
+    if (!isValid) {
+      setErrors(validationErrors)
+      return
+    }
+    setErrors({})
 
-        setErrors({})
-        await register(form.username, form.email, form.password)
-        setMessage('✅ Usuario registrado. Ahora inicia sesión')
-        setIsLogin(true)
-      }
+    try {
+      // Solo login con backend
+      const res = await login(form.email, form.password)
+      setUser(res.data)
+      console.log(res)
+      navigate('/home')
+      console.log(res)
     } catch (err) {
       console.error('Auth error:', err) // Para debugging
-      if (isLogin) {
-        setMessage('❌ Usuario o contraseña incorrectos')
-        setMessage('❌ Usuario o contraseña incorrectos')
-      } else {
-      // Muestra errores específicos de duplicados
-        if (err.message.includes('username') || err.message.includes('usuario')) {
-          setMessage('❌ El nombre de usuario ya está en uso')
-        } else if (err.message.includes('email') || err.message.includes('correo')) {
-          setMessage('❌ El correo electrónico ya está registrado')
-        } else {
-          setMessage(`❌ ${err.message}`)
-        }
-      }
+      setMessage('❌ Usuario o contraseña incorrectos')
+      setMessage('❌ Usuario o contraseña incorrectos')
     }
   }
 
@@ -86,29 +71,11 @@ function Auth ({ onLoginSuccess }) {
         autoComplete='off'
       >
         <h2 className='text-2xl font-bold mb-6 text-center'>
-          {isLogin ? 'Iniciar sesión' : 'Crear cuenta'}
+          Iniciar sesión
         </h2>
 
         {message && (
           <p className='mb-4 text-center text-sm text-white'>{message}</p>
-        )}
-
-        {!isLogin && (
-          <>
-            {/* USERNAME */}
-            <input
-              type='text'
-              name='username'
-              placeholder='Usuario'
-              value={form.username}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              className='bg-[#1c2a3d] border border-gray-600 p-3 w-full rounded-lg mb-1 text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500'
-            />
-            {errors.username && (
-              <p className='text-xs text-white mb-2'>{errors.username}</p>
-            )}
-          </>
         )}
 
         {/* EMAIL */}
@@ -139,38 +106,16 @@ function Auth ({ onLoginSuccess }) {
           <p className='text-xs text-white mb-2'>{errors.password}</p>
         )}
 
-        {!isLogin && (
-          <>
-            {/* CONFIRM PASSWORD */}
-            <input
-              type='password'
-              name='confirmPassword'
-              placeholder='Confirmar contraseña'
-              value={form.confirmPassword}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              className='bg-[#1c2a3d] border border-gray-600 p-3 w-full rounded-lg mb-1 text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500'
-            />
-            {errors.confirmPassword && (
-              <p className='text-xs text-white mb-2'>
-                {errors.confirmPassword}
-              </p>
-            )}
-          </>
-        )}
-
         <button className='bg-orange-600 hover:bg-orange-700 transition-colors text-white font-semibold p-3 rounded-lg w-full mt-4 shadow-md'>
-          {isLogin ? 'Iniciar sesión' : 'Crear cuenta'}
+          Iniciar sesión
         </button>
 
-        <p
-          onClick={() => setIsLogin((prev) => !prev)}
-          className='mt-4 text-sm text-gray-300 cursor-pointer text-center hover:text-orange-400'
-        >
-          {isLogin
-            ? 'o, crear cuenta'
-            : '¿Ya tienes cuenta? Inicia sesión aquí'}
-        </p>
+        <Link to='/register'>
+          <p className='mt-4 text-sm text-gray-300 cursor-pointer text-center hover:text-orange-400'>
+            o, crear cuenta
+          </p>
+        </Link>
+
       </form>
     </div>
   )
