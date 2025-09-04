@@ -111,7 +111,7 @@ export const FormularioGeneral = ({ initialActivity, onClose }) => {
         const res = await updateRequest(actividadInicial.id, estadisticas)
 
         // 2. Muestra la respuesta del servidor en la consola.
-        console.log("Editando actividad:", actividadInicial.id, estadisticas)
+        console.log('Editando actividad:', actividadInicial.id, estadisticas)
       } else { // CREAR ACTIVIDAD
         // 1. Envía los datos del entrenamiento al backend.
         const res = await registerRequest(deporte, estadisticas)
@@ -123,7 +123,7 @@ export const FormularioGeneral = ({ initialActivity, onClose }) => {
         setEntrenamientosGuardados([...entrenamientosGuardados, estadisticas])
         setMensajeExito(true)
       }
-      
+
       if (onClose) onClose()
     } catch (error) {
       console.error('Error al guardar el entrenamiento:', error)
@@ -343,9 +343,9 @@ export const FormularioGeneral = ({ initialActivity, onClose }) => {
           </button>
 
           <button
-            type="button"
+            type='button'
             onClick={handleCancel}
-            className="w-full mt-2 bg-gray-500 text-white font-bold py-2 rounded-lg hover:bg-red-500 transition-colors duration-200"
+            className='w-full mt-2 bg-gray-500 text-white font-bold py-2 rounded-lg hover:bg-red-500 transition-colors duration-200'
           >
             Cancelar
           </button>
