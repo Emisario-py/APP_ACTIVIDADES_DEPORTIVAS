@@ -1,4 +1,4 @@
-import { Router } from 'express'  
+import { Router } from 'express'
 import Registro from '../models/register.model.js'
 
 const router = Router()

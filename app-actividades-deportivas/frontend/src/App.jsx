@@ -1,5 +1,4 @@
-// src/App.jsx
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar.jsx'
 import Profile from './pages/Profile.jsx'
 import Metrics from './pages/Metrics.jsx'
@@ -17,15 +16,14 @@ const AppContent = () => {
   const location = useLocation()
   const hideNavbarRoutes = ['/login', '/', '/register']
 
-  // Si la ruta es /login o no reconocida, no muestra la Navbar
   const showNavbar = !hideNavbarRoutes.includes(location.pathname)
   return (
     <>
       {showNavbar && <Navbar />}
       <main className={`${showNavbar ? 'ml-64' : 'min-h-screen bg-gray-800 text-gray-100 p-6'}`}>
-
         <Routes>
-          {/* El componente Auth recibe la función para cambiar el estado */}
+          {/* Redirección al login */}
+          <Route path='/' element={<Navigate to='/login' replace />} />
           <Route path='/login' element={<Auth />} />
           <Route path='/register' element={<Register />} />
           <Route path='/logout' element={<Auth />} />

@@ -1,34 +1,29 @@
-/* import { useEffect, useState } from 'react'
-import { api } from './services/api'
-import { Navigate } from 'react-router-dom'
-
-export const PrivateRoute = ({ children }) => {
-  const [auth, setAuth] = useState(false)
-
-  useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        await api.get('/profile')
-        setAuth(true)
-      } catch (error) {
-        console.log(error)
-        setAuth(false)
-      }
-    }
-    checkAuth()
-  }, [])
-
-  return auth ? children : <Navigate to='/home' />
-} */
-
+// src/PrivateRoute.jsx
 import { Navigate } from 'react-router-dom'
 import { useAuth } from './context/AuthContext'
 
 export const PrivateRoute = ({ children }) => {
-  const { user, loading } = useAuth()
-  console.log('PrivateRoute user:', user) // NO LLEGA EL USER!!!
+  const { user, loading, isAuthenticated } = useAuth()
 
-  if (loading) return <p>Cargando...</p>
+  console.log('PrivateRoute - User:', user)
+  console.log('PrivateRoute - Loading:', loading)
+  console.log('PrivateRoute - IsAuthenticated:', isAuthenticated)
 
-  return user ? children : <Navigate to='/login' />
+  // Mostrar loading mientras se verifica la autenticación
+  if (loading) {
+    return (
+      <div className='flex items-center justify-center min-h-screen bg-gray-800'>
+        <div className='text-white text-lg'>Cargando...</div>
+      </div>
+    )
+  }
+
+  // Si no hay usuario autenticado, redirigir al login
+  if (!isAuthenticated) {
+    console.log('PrivateRoute - Redirecting to login')
+    return <Navigate to='/login' replace />
+  }
+
+  // Si todo está bien, mostrar el componente hijo
+  return children
 }

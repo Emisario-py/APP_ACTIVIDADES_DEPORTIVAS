@@ -1,4 +1,5 @@
 // Define la URL base de tu API. Esto permite cambiarla fácilmente en un solo lugar.
+import { api } from './api'
 const API_URL = 'http://localhost:3000/api'
 
 export const register = async (username, email, password) => {
@@ -39,4 +40,12 @@ export const logout = async () => {
     method: 'POST',
     credentials: 'include', // Esencial para enviar la cookie de sesión al servidor y que la invalide.
   })
+}
+
+export const userInfoRequest = async () => {
+  return api.get('/profile')
+}
+
+export const logoutRequest = async () => {
+  return api.post('/logout')
 }
