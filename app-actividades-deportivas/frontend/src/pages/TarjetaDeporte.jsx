@@ -43,42 +43,47 @@ export const TarjetaDeporte = () => {
         <p className='text-slate-400'>Registra tus actividades eligiendo un deporte</p>
       </div>
 
-      <div className='contenedor-deportes grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'>
-        {deportes.map((deporte) => (
-          <section
-            key={deporte.id}
-            className='rounded-2xl shadow-lg p-4 flex flex-col items-center
+      <div className='bg-orange-500/20 p-4 rounded-2xl shadow mt-6 h-1/2 mb-2'>
+        <div className='bg-gray-900 p-6 rounded-xl shadow-sm'>
+          <div className='contenedor-deportes grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'>
+            {deportes.map((deporte) => (
+              <section
+                key={deporte.id}
+                className='rounded-2xl shadow-lg p-4 flex flex-col items-center
                        hover:scale-105 transition-transform'
-          >
-            {/* Nombre */}
-            <h2 className='text-lg mb-3'>
-              {deporte.name}
-            </h2>
+              >
+                {/* Nombre */}
+                <h2 className='text-lg mb-3'>
+                  {deporte.name}
+                </h2>
 
-            {/* Imagen */}
-            <img
-              src={deporte.img}
-              alt={deporte.name}
-              className='rounded-lg object-cover h-40 w-full shadow-md'
-            />
+                {/* Imagen */}
+                <img
+                  src={deporte.img}
+                  alt={deporte.name}
+                  className='rounded-lg object-cover h-40 w-full shadow-md'
+                />
 
-            {/* Botón */}
-            {/* Botón */}
-            <div className="flex justify-center w-full mt-4">
-              <Link to={`/FormularioGeneral/${deporte.name}`}>
-                <button
-                  className="flex items-center justify-center gap-2 px-6 py-2 
+                {/* Botón */}
+                {/* Botón */}
+                <div className="flex justify-center w-full mt-4">
+                  <Link to={`/FormularioGeneral/${deporte.name}`}>
+                    <button
+                      className="flex items-center justify-center gap-2 px-6 py-2 
                  bg-white/30 border border-white/50 text-white font-bold rounded-lg 
                  hover:bg-orange-500 hover:border-orange-500 transition-colors duration-200"
-                >
-                  Seleccionar
-                  <MousePointerClick className="w-5 h-5" />
-                </button>
-              </Link>
-            </div>
+                    >
+                      Seleccionar
+                      <MousePointerClick className="w-5 h-5" />
+                    </button>
+                  </Link>
+                </div>
 
-          </section>
-        ))}
+              </section>
+            ))}
+          </div>
+        </div>
+
       </div>
     </div>
   )

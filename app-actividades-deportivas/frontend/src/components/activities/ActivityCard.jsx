@@ -1,4 +1,4 @@
-import { Pencil, Trash2, Flame, Ruler, Layers, Repeat, Heart, Trophy, Clock } from 'lucide-react'
+import { Pencil, Trash2, Clock, Flame, Heart, Layers, Repeat, Ruler, Dumbbell, Trophy } from 'lucide-react'
 
 // Funciones dinámicas para unidades
 const getDistanceUnit = (deporte) => {
@@ -15,10 +15,11 @@ const getScoreUnit = (deporte) => {
 
 const OPTIONAL_METRICS = (deporte) => ({
   calories: { label: 'Calorías', icon: <Flame size={14} className="text-orange-400" />, unit: 'kcal' },
-  distance: { label: 'Distancia', icon: <Ruler size={14} className="text-green-600" />, unit: getDistanceUnit(deporte) },
+  rhythm: { label: 'Ritmo', icon: <Heart size={14} className="text-red-400" />, unit: 'bpm' },
   series: { label: 'Series', icon: <Layers size={14} className="text-purple-400" />, unit: 'series' },
   repetitions: { label: 'Repeticiones', icon: <Repeat size={14} className="text-blue-400" />, unit: 'reps' },
-  rhythm: { label: 'Ritmo', icon: <Heart size={14} className="text-red-400" />, unit: 'bpm' },
+  distance: { label: 'Distancia', icon: <Ruler size={14} className="text-green-600" />, unit: getDistanceUnit(deporte) },
+  weight: { label: 'Peso', icon: <Dumbbell size={14} className="text-pink-400" />, unit: 'kg' },
   score: { label: 'Puntuación', icon: <Trophy size={14} className="text-yellow-400" />, unit: getScoreUnit(deporte) }
 })
 
@@ -46,7 +47,7 @@ export default function ActivityCard({
     .filter(Boolean)
 
   return (
-    <div className='relative shrink-0 snap-center w-[min(28rem,85vw)] rounded-2xl bg-orange-500/20 p-5 text-gray-100'>
+    <div className='relative shrink-0 snap-center w-[min(28rem,85vw)] rounded-2xl bg-gradient-to-r from-orange-400/30 to-orange-500/30 p-5 text-gray-100'>
       {/* Buttons */}
       <div className='absolute right-3 top-3 z-10 flex gap-2'>
         {/* Editar */}

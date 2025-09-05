@@ -1,8 +1,7 @@
 import { useRef, useState, useEffect } from 'react'
 import ActivityCard from './ActivityCard'
 import { FormularioGeneral } from '../FormularioGeneral'
-import { ChevronLeft, ChevronRight, X } from "lucide-react"
-
+import { ChevronLeft, ChevronRight, X, ArrowLeft, ArrowRight } from "lucide-react"
 export default function ActivityCarousel ({ actividades = [] }) {
   const trackRef = useRef(null)
   const [canPrev, setCanPrev] = useState(false)
@@ -56,7 +55,7 @@ export default function ActivityCarousel ({ actividades = [] }) {
           }`}
         aria-label='Anterior'
       >
-        <ChevronLeft className="w-5 h-5" />
+        <ArrowLeft className="w-5 h-5" />
       </button>
 
       {/* Botón derecho */}
@@ -71,7 +70,7 @@ export default function ActivityCarousel ({ actividades = [] }) {
           }`}
         aria-label='Siguiente'
       >
-        <ChevronRight className="w-5 h-5" />
+        <ArrowRight className="w-5 h-5" />
       </button>
 
       {/* Contenedor del carrusel */}

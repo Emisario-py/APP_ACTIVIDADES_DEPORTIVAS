@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { registerSchema } from '../schemas/userSchema.js'
 import { validateForm } from '../utils/validation.js'
 
-function Auth ({ onLoginSuccess }) {
+function Auth({ onLoginSuccess }) {
   const navigate = useNavigate()
   const [isLogin, setIsLogin] = useState(true)
 
@@ -66,7 +66,7 @@ function Auth ({ onLoginSuccess }) {
         setMessage('❌ Usuario o contraseña incorrectos')
         setMessage('❌ Usuario o contraseña incorrectos')
       } else {
-      // Muestra errores específicos de duplicados
+        // Muestra errores específicos de duplicados
         if (err.message.includes('username') || err.message.includes('usuario')) {
           setMessage('❌ El nombre de usuario ya está en uso')
         } else if (err.message.includes('email') || err.message.includes('correo')) {
@@ -79,100 +79,112 @@ function Auth ({ onLoginSuccess }) {
   }
 
   return (
-    <div className='h-screen flex items-center justify-center bg-[#0f1b2d]'>
+    <div className='h-screen flex items-center justify-center bg-[#0F1B2D]'>
       <form
         onSubmit={handleSubmit}
-        className='bg-gradient-to-r from-[#8b4513] to-[#a0522d] p-8 rounded-2xl shadow-xl w-96 text-white'
+        className='bg-gradient-to-r from-orange-400/30 to-orange-500/30 p-8 rounded-2xl shadow-xl w-96 text-white'
         autoComplete='off'
       >
-        <h2 className='text-2xl font-bold mb-6 text-center'>
+        <h2 className='text-3xl font-semibold text-orange-500 mb-6 flex justify-center items-center'>
           {isLogin ? 'Iniciar sesión' : 'Crear cuenta'}
         </h2>
 
-        {message && (
-          <p className='mb-4 text-center text-sm text-white'>{message}</p>
-        )}
+        <fieldset className='border border-gray-600 rounded-xl p-6'>
+          <legend className='text-xl font-semibold text-gray-200 px-2'>
+            Ingresa tus datos
+          </legend>
 
-        {!isLogin && (
-          <>
-            {/* USERNAME */}
-            <input
-              type='text'
-              name='username'
-              placeholder='Usuario'
-              value={form.username}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              className='bg-[#1c2a3d] border border-gray-600 p-3 w-full rounded-lg mb-1 text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500'
-            />
-            {errors.username && (
-              <p className='text-xs text-white mb-2'>{errors.username}</p>
-            )}
-          </>
-        )}
+          {message && (
+            <p className='mb-4 text-center text-sm text-white'>{message}</p>
+          )}
 
-        {/* EMAIL */}
-        <input
-          type='email'
-          name='email'
-          placeholder='Correo electrónico'
-          value={form.email}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          className='bg-[#1c2a3d] border border-gray-600 p-3 w-full rounded-lg mb-1 text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500'
-        />
-        {errors.email && (
-          <p className='text-xs text-white mb-2'>{errors.email}</p>
-        )}
+          {!isLogin && (
+            <>
+              {/* USERNAME */}
+              <input
+                type='text'
+                name='username'
+                placeholder='Usuario'
+                value={form.username}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={`w-full px-4 py-2 mb-1 rounded-lg bg-gray-900/70 text-gray-100 border border-gray-600 
+                          focus:outline-none focus:ring-2 focus:ring-orange-500`}
+              />
+              {errors.username && (
+                <p className='text-xs text-white mb-2'>{errors.username}</p>
+              )}
+            </>
+          )}
 
-        {/* PASSWORD */}
-        <input
-          type='password'
-          name='password'
-          placeholder='Contraseña'
-          value={form.password}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          className='bg-[#1c2a3d] border border-gray-600 p-3 w-full rounded-lg mb-1 text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500'
-        />
-        {errors.password && (
-          <p className='text-xs text-white mb-2'>{errors.password}</p>
-        )}
+          {/* EMAIL */}
+          <input
+            type='email'
+            name='email'
+            placeholder='Correo electrónico'
+            value={form.email}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            className={`w-full px-4 py-2 mb-1 rounded-lg bg-gray-900/70 text-gray-100 border border-gray-600 
+                          focus:outline-none focus:ring-2 focus:ring-orange-500`}
+          />
+          {errors.email && (
+            <p className='text-xs text-white mb-2'>{errors.email}</p>
+          )}
 
-        {!isLogin && (
-          <>
-            {/* CONFIRM PASSWORD */}
-            <input
-              type='password'
-              name='confirmPassword'
-              placeholder='Confirmar contraseña'
-              value={form.confirmPassword}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              className='bg-[#1c2a3d] border border-gray-600 p-3 w-full rounded-lg mb-1 text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500'
-            />
-            {errors.confirmPassword && (
-              <p className='text-xs text-white mb-2'>
-                {errors.confirmPassword}
-              </p>
-            )}
-          </>
-        )}
+          {/* PASSWORD */}
+          <input
+            type='password'
+            name='password'
+            placeholder='Contraseña'
+            value={form.password}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            className={`w-full px-4 py-2 mb-1 rounded-lg bg-gray-900/70 text-gray-100 border border-gray-600 
+                          focus:outline-none focus:ring-2 focus:ring-orange-500`}
+          />
+          {errors.password && (
+            <p className='text-xs text-white mb-2'>{errors.password}</p>
+          )}
 
-        <button className='bg-orange-600 hover:bg-orange-700 transition-colors text-white font-semibold p-3 rounded-lg w-full mt-4 shadow-md'>
+          {!isLogin && (
+            <>
+              {/* CONFIRM PASSWORD */}
+              <input
+                type='password'
+                name='confirmPassword'
+                placeholder='Confirmar contraseña'
+                value={form.confirmPassword}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={`w-full px-4 py-2 mb-1 rounded-lg bg-gray-900/70 text-gray-100 border border-gray-600 
+                          focus:outline-none focus:ring-2 focus:ring-orange-500`}
+              />
+              {errors.confirmPassword && (
+                <p className='text-xs text-white mb-2'>
+                  {errors.confirmPassword}
+                </p>
+              )}
+            </>
+          )}
+        </fieldset>
+
+      <div className="flex justify-center mt-4">
+        <button className="px-6 py-3 bg-white/30 border text-white font-bold rounded-lg hover:bg-orange-500 hover:border-orange-500 transition-colors duration-200 border-white/50">
           {isLogin ? 'Iniciar sesión' : 'Crear cuenta'}
         </button>
+      </div>
 
-        <p
-          onClick={() => setIsLogin((prev) => !prev)}
-          className='mt-4 text-sm text-gray-300 cursor-pointer text-center hover:text-orange-400'
-        >
-          {isLogin
-            ? 'o, crear cuenta'
-            : '¿Ya tienes cuenta? Inicia sesión aquí'}
-        </p>
-      </form>
-    </div>
+      <p
+        onClick={() => setIsLogin((prev) => !prev)}
+        className='mt-4 text-sm text-gray-300 cursor-pointer text-center hover:text-orange-400'
+      >
+        {isLogin
+          ? 'o, crear cuenta'
+          : '¿Ya tienes cuenta? Inicia sesión aquí'}
+      </p>
+    </form>
+    </div >
   )
 }
 

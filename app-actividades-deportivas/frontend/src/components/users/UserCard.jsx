@@ -14,7 +14,7 @@ export default function UserCard({
 }) {
   return (
     <div className='relative w-full rounded-2xl
-                bg-gradient-to-r from-orange-500/40 to-yellow-600/40
+                bg-gradient-to-r from-orange-500/60 via-amber-500/60 to-orange-500/60
                 p-6 text-white shadow-lg'
     >
       {/* Editar */}
@@ -52,7 +52,7 @@ export default function UserCard({
           <h2 className='text-lg font-semibold mb-3'>Datos Personales</h2>
 
           {/* Name */}
-          {email && <p className='mb-2 text-orange-500'>{name}</p>}
+          {email && <p className='mb-2 font-semibold text-orange-500'>{name}</p>}
 
           {/* Email */}
           {email && <p className='mb-2'>{email}</p>}
@@ -60,9 +60,9 @@ export default function UserCard({
           {/* Fila: edad · peso · altura */}
           <div className='flex flex-wrap items-center gap-x-4 text-sm text-gray-200'>
             {age && <span>{age} años</span>}
-            {userWeight && <span className='mx-2'>·</span>}
+            {userWeight && <span>·</span>}
             {userWeight && <span>{userWeight} kg</span>}
-            {userHeight && <span className='mx-2'>·</span>}
+            {userHeight && <span>·</span>}
             {userHeight && <span>{userHeight} m</span>}
           </div>
         </div>

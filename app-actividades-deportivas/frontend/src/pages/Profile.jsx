@@ -1,7 +1,7 @@
 import ActivityCarousel from '../components/activities/ActivityCarousel'
 import UserCard from '../components/users/UserCard'
 
-export default function Profile () {
+export default function Profile() {
   const userMock = {
     name: 'Alexa Coss',
     user: 'coss99',
@@ -24,7 +24,7 @@ export default function Profile () {
         <h1 className='text-3xl font-bold text-slate-50 mb-2'>
           {userMock.name}
         </h1>
-        <p className='text-slate-400'>Gestiona tu perfil y revisa tus actividades</p>
+        <p className='text-slate-400'>Gestiona tu perfil y consulta tus actividades</p>
       </div>
 
       {/* Datos de usuario */}
@@ -33,9 +33,11 @@ export default function Profile () {
       </div>
 
       {/* Actividades */}
-      <div className='bg-slate-800 border border-slate-700 p-6 rounded-xl shadow-sm'>
-        <h2 className='text-xl font-semibold text-slate-50 mb-4'>Actividades realizadas</h2>
-        <ActivityCarousel actividades={activitiesMock} />
+      <div className='bg-orange-500/20 p-4 rounded-2xl shadow mt-6 h-1/2 mb-2'>
+        <div className='bg-gray-900 p-6 rounded-xl shadow-sm'>
+          <h2 className='text-xl font-semibold text-slate-50 mb-4'>Actividades realizadas</h2>
+          <ActivityCarousel actividades={activitiesMock} />
+        </div>
       </div>
     </div>
   )

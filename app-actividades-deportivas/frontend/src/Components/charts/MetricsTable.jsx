@@ -1,21 +1,21 @@
 import { useEffect, useState } from 'react'
 import { monthsShort } from './barChartConfig'
 import { getRegisterRequest } from '../../api/auth'
-import { Pencil, Trash2, Flame, Ruler, Repeat, Dumbbell, Heart, Clock } from 'lucide-react'
+import { TrendingUp, Clock, Flame, Heart, Layers, Repeat, Ruler, Dumbbell, Trophy } from 'lucide-react'
 
 // Array base para los estadísticos a mostrar en esta sección con el nombre del key de los datos, la palabra en español para mostrar y el ícono a usar
 const stats = [
-  { stat: 'duration', esp: 'Duración', icon: '⏱️' },
-  { stat: 'calories', esp: 'Calorías', icon: '🔥' },
-  { stat: 'rhytm', esp: 'Frecuencia Cardiaca', icon: '💓' },
-  { stat: 'series', esp: 'Series', icon: '🔁' },
-  { stat: 'repetitions', esp: 'Repeticiones', icon: '🔄️' },
-  { stat: 'distance', esp: 'Distancia', icon: '📏' },
-  { stat: 'weight', esp: 'Peso', icon: '🏋️‍♂️' },
-  { stat: 'scores', esp: 'Puntos', icon: '🏆' },
+  { stat: 'duration', esp: 'Duración', icon: <Clock size={14} className="text-gray-300" /> },
+  { stat: 'calories', esp: 'Calorías', icon: <Flame size={14} className="text-orange-400" /> },
+  { stat: 'rhytm', esp: 'Frecuencia Cardiaca', icon: <Heart size={14} className="text-red-400" /> },
+  { stat: 'series', esp: 'Series', icon: <Layers size={14} className="text-purple-400" /> },
+  { stat: 'repetitions', esp: 'Repeticiones', icon: <Repeat size={14} className="text-blue-400" /> },
+  { stat: 'distance', esp: 'Distancia', icon: <Ruler size={14} className="text-green-600" /> },
+  { stat: 'weight', esp: 'Peso', icon: <Dumbbell size={14} className="text-pink-400" /> },
+  { stat: 'scores', esp: 'Puntos', icon: <Trophy size={14} className="text-yellow-400" /> },
 ]
 
-export default function MetricsTable () {
+export default function MetricsTable() {
   const [dateRange, setDateRange] = useState('')
   const [totals, setTotals] = useState([])
   const [filteredData, setFilteredData] = useState([])
@@ -122,8 +122,11 @@ export default function MetricsTable () {
       <div className='bg-gray-900 rounded-2xl shadow h-full flex flex-col overflow-hidden'>
 
         {/* Título */}
-        <div className='text-center p-4 border-b border-orange-500 flex-shrink-0'>
-          <h2 className='text-xl font-bold text-white mb-1'>📈 Resumen de Actividad</h2>
+        <div className='text-center p-4 border-b border-orange-500/20 flex-shrink-0'>
+          <h2 className='text-2xl font-extrabold text-orange-400 mb-1 flex justify-center items-center gap-2'>
+            Resumen de Actividad
+            <TrendingUp size={22} className="text-yellow-400" />
+          </h2>
           <p className='text-gray-400 text-sm font-medium'>{dateRange}</p>
         </div>
 
@@ -141,7 +144,7 @@ export default function MetricsTable () {
               {/* Estdísticos totales del deporte */}
               <div className='grid grid-cols-1 gap-2'>
                 {Object.entries(stats).map(([stat, value]) => (
-                  <div key={stat} className='flex items-center justify-between p-2 bg-orange-500/20 rounded-lg'>
+                  <div key={stat} className='flex items-center justify-between p-2 bg-gradient-to-r from-orange-400/30 to-orange-500/30 rounded-lg'>
                     <div className='flex items-center'>
                       <span className='text-lg mr-2'>{getStatIcon(stat)}</span>
                       <span className='text-gray-300 font-medium'>{stat}</span>
@@ -155,7 +158,7 @@ export default function MetricsTable () {
         </div>
 
         {/* Resumen general (Deportes, Sesiones, Calorías totales) */}
-        <div className='p-4 border-t border-orange-500 flex-shrink-0'>
+        <div className='p-4 border-t border-orange-500/30 flex-shrink-0'>
           <div className='grid grid-cols-3 gap-4 text-center'>
             <div className='bg-gray-800 rounded-lg p-2'>
               <div className='text-sm text-orange-400'>Deportes</div>

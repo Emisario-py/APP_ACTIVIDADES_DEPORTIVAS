@@ -25,9 +25,9 @@ export default function UserForm() {
 
   return (
     <div className='flex justify-center w-full min-h-full py-12'>
-      <div className='bg-orange-500/20 p-8 rounded-2xl shadow-2xl w-full max-w-lg'>
+      <div className='bg-gradient-to-r from-orange-400/30 to-orange-500/30 p-8 rounded-2xl shadow-2xl w-full max-w-lg'>
         <h2 className='text-3xl font-semibold text-orange-500 mb-6 flex justify-center items-center'>
-          Editar Perfil <Pencil size={18} className="ml-4" />
+          Editar perfil <Pencil size={18} className="ml-4" />
         </h2>
 
         <form onSubmit={handleSubmit(onSubmit)}>
