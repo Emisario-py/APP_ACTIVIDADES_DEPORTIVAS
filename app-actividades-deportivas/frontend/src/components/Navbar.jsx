@@ -1,5 +1,5 @@
 // src/components/Navbar.jsx
-import { Home, User, BarChart3, LogIn, LogOut } from 'lucide-react'
+import { Home, User, BarChart3, LogOut, Dumbbell } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 export default function Navbar () {
@@ -12,6 +12,9 @@ export default function Navbar () {
         <nav className='flex flex-col gap-2 mt-4'>
           <Link to='/home' className='flex items-center px-6 py-3 hover:bg-orange-100 dark:hover:bg-gray-800 rounded-lg'>
             <Home className='w-5 h-5 mr-3' /> Home
+          </Link>
+          <Link to='/deportes' className='flex items-center px-6 py-3 hover:bg-orange-100 dark:hover:bg-gray-800 rounded-lg'>
+            <Dumbbell className='w-5 h-5 mr-3' /> Deportes
           </Link>
           <Link to='/profile' className='flex items-center px-6 py-3 hover:bg-orange-100 dark:hover:bg-gray-800 rounded-lg'>
             <User className='w-5 h-5 mr-3' /> Perfil
