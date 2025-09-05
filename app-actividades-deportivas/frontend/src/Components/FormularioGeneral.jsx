@@ -106,31 +106,17 @@ export const FormularioGeneral = ({ initialActivity, onClose }) => {
     }
 
     try {
-      if (actividadInicial) { // EDITAR ACTIVIDAD
-        // 1. Envía los datos del entrenamiento actualizado al backend.
-        const res = await updateRequest(actividadInicial.id, estadisticas)
+      const res = await registerRequest(deporte, estadisticas)
 
-        // 2. Muestra la respuesta del servidor en la consola.
-        console.log('Editando actividad:', actividadInicial.id, estadisticas)
-      } else { // CREAR ACTIVIDAD
-        // 1. Envía los datos del entrenamiento al backend.
-        const res = await registerRequest(deporte, estadisticas)
+      console.log('Respuesta del servidor:', res)
 
-        // 2. Muestra la respuesta del servidor en la consola.
-        console.log('Respuesta del servidor:', res)
-
-        // 3. Actualiza el estado local solo si la petición fue exitosa.
-        setEntrenamientosGuardados([...entrenamientosGuardados, estadisticas])
-        setMensajeExito(true)
-      }
-
-      if (onClose) onClose()
+      setEntrenamientosGuardados([...entrenamientosGuardados, estadisticas])
+      setMensajeExito(true)
     } catch (error) {
       console.error('Error al guardar el entrenamiento:', error)
       alert('Hubo un error al guardar el entrenamiento. Inténtalo de nuevo.')
     }
 
-    // 4. Limpia el formulario después de la operación (éxito o fracaso).
     setEstadisticas((prevStats) => ({
       user: '',
       sport: prevStats.sport,

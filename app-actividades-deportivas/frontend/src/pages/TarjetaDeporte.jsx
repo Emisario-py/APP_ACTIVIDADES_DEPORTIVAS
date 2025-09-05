@@ -3,6 +3,9 @@ import userImg1 from '../assets/p2.jpg'
 import userImg2 from '../assets/p3.jpg'
 import userImg3 from '../assets/p4.jpg'
 import userImg4 from '../assets/p5.jpg'
+import userImg5 from '../assets/p6.jpg'
+import userImg6 from '../assets/p7.jpg'
+import userImg7 from '../assets/p8.jpg'
 import { Link } from 'react-router-dom'
 
 export const TarjetaDeporte = () => {
@@ -31,6 +34,21 @@ export const TarjetaDeporte = () => {
       id: 5,
       name: 'Natación',
       img: userImg4
+    },
+    {
+      id: 6,
+      name: 'voleybol',
+      img: userImg5
+    },
+    {
+      id: 7,
+      name: 'Esgrima',
+      img: userImg6
+    },
+    {
+      id: 8,
+      name: 'Cazador',
+      img: userImg7
     }
   ]
   return (

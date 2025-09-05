@@ -11,7 +11,7 @@ const Logout = () => {
     // Llama a la función de cierre de sesión al cargar el componente
     logout()
     // Redirige al usuario al componente de autenticación (Auth)
-    navigate('/')
+    navigate('/login')
   }, [logout, navigate])
 
   return (

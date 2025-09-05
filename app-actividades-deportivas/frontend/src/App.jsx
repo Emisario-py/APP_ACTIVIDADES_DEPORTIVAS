@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
-import Navbar from './components/Navbar.jsx'
+import Navbar from './Components/Navbar.jsx'
 import Profile from './pages/Profile.jsx'
 import Metrics from './pages/Metrics.jsx'
 import { TarjetaDeporte } from './pages/TarjetaDeporte.jsx'
@@ -11,6 +11,7 @@ import { PrivateRoute } from './PrivateRoute.jsx'
 import { Register } from './pages/Register.jsx'
 import { AuthProvider } from './context/AuthProvider.jsx'
 import Logout from './pages/Logout.jsx'
+import { Home } from './pages/Home.jsx'
 
 const AppContent = () => {
   useAuth()
@@ -35,6 +36,14 @@ const AppContent = () => {
 
           <Route
             path='/home'
+            element={
+              <PrivateRoute>
+                <Home />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path='/deportes'
             element={
               <PrivateRoute>
                 <TarjetaDeporte />
