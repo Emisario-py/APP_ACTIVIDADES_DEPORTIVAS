@@ -3,30 +3,35 @@ import Navbar from './components/Navbar.jsx'
 import Profile from './pages/Profile.jsx'
 import Metrics from './pages/Metrics.jsx'
 import { TarjetaDeporte } from './pages/TarjetaDeporte.jsx'
-import { FormularioGeneral } from './Components/FormularioGeneral.jsx'
+import { FormularioGeneral } from './components/FormularioGeneral.jsx'
 import Auth from './pages/Auth'
 import UserForm from './pages/UserForm.jsx'
 import { useAuth } from './context/AuthContext.jsx'
 import { PrivateRoute } from './PrivateRoute.jsx'
 import { Register } from './pages/Register.jsx'
 import { AuthProvider } from './context/AuthProvider.jsx'
+import Logout from './pages/Logout.jsx'
 
 const AppContent = () => {
   useAuth()
   const location = useLocation()
-  const hideNavbarRoutes = ['/login', '/', '/register']
+
+  // Agrega '/logout' a la lista de rutas sin Navbar
+  const hideNavbarRoutes = ['/login', '/', '/register', '/logout']
 
   const showNavbar = !hideNavbarRoutes.includes(location.pathname)
+
   return (
     <>
       {showNavbar && <Navbar />}
       <main className={`${showNavbar ? 'ml-64' : 'min-h-screen bg-gray-800 text-gray-100 p-6'}`}>
         <Routes>
-          {/* Redirección al login */}
-          <Route path='/' element={<Navigate to='/login' replace />} />
+          {/* El componente Auth recibe la función para cambiar el estado */}
           <Route path='/login' element={<Auth />} />
           <Route path='/register' element={<Register />} />
-          <Route path='/logout' element={<Auth />} />
+
+          {/* El componente Logout ahora tiene su propia ruta */}
+          <Route path='/logout' element={<Logout />} />
 
           <Route
             path='/home'

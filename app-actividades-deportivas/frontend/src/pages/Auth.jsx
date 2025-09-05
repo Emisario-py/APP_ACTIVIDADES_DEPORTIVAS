@@ -1,4 +1,8 @@
 // src/pages/Auth.jsx
+<<<<<<< HEAD
+=======
+
+>>>>>>> 13c0769927f000ac600e820e894512c85f9faed3
 import { useState } from 'react'
 import { login } from '../services/auth'
 import { Link, useNavigate } from 'react-router-dom'
@@ -7,7 +11,11 @@ import { validateForm } from '../utils/validation.js'
 import { useAuth } from '../context/AuthContext.jsx'
 
 function Auth () {
+<<<<<<< HEAD
   const { setUser, user } = useAuth()
+=======
+  const { setUser } = useAuth() // Obtén setUser del contexto para actualizar el estado global
+>>>>>>> 13c0769927f000ac600e820e894512c85f9faed3
   const navigate = useNavigate()
   const [message, setMessage] = useState('')
   const [errors, setErrors] = useState({})
@@ -31,7 +39,6 @@ function Auth () {
 
   const handleBlur = async (e) => {
     const { name } = e.target
-
     try {
       await loginSchema.validateAt(name, form)
       setErrors((prev) => ({ ...prev, [name]: null }))
@@ -43,8 +50,11 @@ function Auth () {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setMessage('')
+<<<<<<< HEAD
     setIsLoading(true)
 
+=======
+>>>>>>> 13c0769927f000ac600e820e894512c85f9faed3
     const { isValid, errors: validationErrors } = await validateForm(loginSchema, form)
     if (!isValid) {
       setErrors(validationErrors)
@@ -54,6 +64,7 @@ function Auth () {
     setErrors({})
 
     try {
+<<<<<<< HEAD
       // Hacer login
       const res = await login(form.email, form.password)
       console.log('Login response:', res)
@@ -63,6 +74,11 @@ function Auth () {
 
       // Redirigir a home
       navigate('/home', { replace: true })
+=======
+      const res = await login(form.email, form.password)
+      setUser(res.data) // Usa setUser del contexto
+      navigate('/home')
+>>>>>>> 13c0769927f000ac600e820e894512c85f9faed3
     } catch (err) {
       console.error('Auth error:', err)
       setMessage('❌ Usuario o contraseña incorrectos')
