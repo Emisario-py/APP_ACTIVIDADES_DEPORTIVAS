@@ -23,7 +23,7 @@ const Dashboard = () => {
 }
 
 export const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [isAuthenticated, setIsAuthenticated] = useState(true)
 
   // Función para manejar el login exitoso
   const handleLoginSuccess = () => {
@@ -46,7 +46,7 @@ export const App = () => {
   return (
     <BrowserRouter>
       <Navbar />
-      <main className='ml-64 min-h-screen bg-gray-800 text-gray-100 p-6'>
+      <main className='ml-64 min-h-screen bg-[#0F1B2D] text-gray-100 p-6'>
         <Routes>
           <Route path='/home' element={<TarjetaDeporte />} />
           <Route path='/profile' element={<Profile />} />

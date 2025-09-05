@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { monthsShort } from './barChartConfig'
 import { getRegisterRequest } from '../../api/auth'
+import { Pencil, Trash2, Flame, Ruler, Repeat, Dumbbell, Heart, Clock } from 'lucide-react'
 
 // Array base para los estadísticos a mostrar en esta sección con el nombre del key de los datos, la palabra en español para mostrar y el ícono a usar
 const stats = [
@@ -117,11 +118,11 @@ export default function MetricsTable () {
   }
 
   return (
-    <div className='bg-gray-700 p-4 rounded-2xl shadow mt-6 h-1/2 mb-2'>
+    <div className='bg-orange-500/20 p-4 rounded-2xl shadow mt-6 h-1/2 mb-2'>
       <div className='bg-gray-900 rounded-2xl shadow h-full flex flex-col overflow-hidden'>
 
         {/* Título */}
-        <div className='text-center p-4 border-b border-gray-700 flex-shrink-0'>
+        <div className='text-center p-4 border-b border-orange-500 flex-shrink-0'>
           <h2 className='text-xl font-bold text-white mb-1'>📈 Resumen de Actividad</h2>
           <p className='text-gray-400 text-sm font-medium'>{dateRange}</p>
         </div>
@@ -129,7 +130,7 @@ export default function MetricsTable () {
         {/* Contenido */}
         <div className='flex-1 overflow-y-auto p-4 space-y-4'>
           {Object.entries(totals).map(([sport, stats]) => (
-            <div key={sport} className='bg-gray-800 rounded-xl p-4 border border-gray-600 hover:border-gray-500 transition-colors'>
+            <div key={sport} className='bg-gray-500/20 rounded-xl p-4 hover:border-gray-500 transition-colors'>
 
               {/* Título del deporte */}
               <div className='flex items-center mb-3'>
@@ -140,7 +141,7 @@ export default function MetricsTable () {
               {/* Estdísticos totales del deporte */}
               <div className='grid grid-cols-1 gap-2'>
                 {Object.entries(stats).map(([stat, value]) => (
-                  <div key={stat} className='flex items-center justify-between p-2 bg-gray-700 rounded-lg'>
+                  <div key={stat} className='flex items-center justify-between p-2 bg-orange-500/20 rounded-lg'>
                     <div className='flex items-center'>
                       <span className='text-lg mr-2'>{getStatIcon(stat)}</span>
                       <span className='text-gray-300 font-medium'>{stat}</span>
@@ -154,18 +155,18 @@ export default function MetricsTable () {
         </div>
 
         {/* Resumen general (Deportes, Sesiones, Calorías totales) */}
-        <div className='p-4 border-t border-gray-700 flex-shrink-0'>
+        <div className='p-4 border-t border-orange-500 flex-shrink-0'>
           <div className='grid grid-cols-3 gap-4 text-center'>
             <div className='bg-gray-800 rounded-lg p-2'>
-              <div className='text-sm text-gray-400'>Deportes</div>
+              <div className='text-sm text-orange-400'>Deportes</div>
               <div className='text-lg font-bold text-white'>{Object.keys(totals).length}</div>
             </div>
             <div className='bg-gray-800 rounded-lg p-2'>
-              <div className='text-sm text-gray-400'>Sesiones</div>
+              <div className='text-sm text-orange-400'>Sesiones</div>
               <div className='text-lg font-bold text-white'>{filteredData.length}</div>
             </div>
             <div className='bg-gray-800 rounded-lg p-2'>
-              <div className='text-sm text-gray-400'>Total Cal.</div>
+              <div className='text-sm text-orange-400'>Total Cal.</div>
               <div className='text-lg font-bold text-white'>{Object.entries(totals).reduce((acc, [/* sport */, stats]) => {
                 return acc + (stats['Calorías'] || 0)
               }, 0)}

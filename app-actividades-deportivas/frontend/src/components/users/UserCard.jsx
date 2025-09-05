@@ -2,7 +2,7 @@ import { Pencil } from 'lucide-react'
 import UserPicture from './UserPicture'
 import { Link } from 'react-router-dom'
 
-export default function UserCard ({
+export default function UserCard({
   name,
   user,
   age,
@@ -13,15 +13,15 @@ export default function UserCard ({
   onPhotoChange,
 }) {
   return (
-    <div className='relative w-full max-w-4xl rounded-2xl
-                bg-gradient-to-r from-orange-500/50 to-yellow-600/50
+    <div className='relative w-full rounded-2xl
+                bg-gradient-to-r from-orange-500/40 to-yellow-600/40
                 p-6 text-white shadow-lg'
     >
       {/* Editar */}
 
       <Link to='/profile/form/user'>
         <button
-          className='hidden md:flex absolute right-3 top-3 z-10 h-10 w-10 rounded-full items-center justify-center border bg-gray-700/80 hover:bg-orange-500 text-white border-white/10 transition'
+          className='hidden md:flex absolute right-3 top-3 z-10 h-10 w-10 rounded-full items-center justify-center border hover:bg-orange-500 text-white border-white/10 transition transition duration-200 ease-in-out'
           aria-label='Editar'
           title='Editar'
         >
@@ -33,7 +33,7 @@ export default function UserCard ({
         {/* Columna izquierda: usuario + foto */}
         <div className='md:col-span-1 flex flex-col items-center gap-3'>
           {user && (
-            <h3 className='text-xl font-semibold tracking-wide'>@{user}</h3>
+            <h3 className='text-xl font-semibold tracking-wide text-white'>@{user}</h3>
           )}
 
           {/* Foto / avatar */}
@@ -50,37 +50,20 @@ export default function UserCard ({
         {/* Columna derecha: datos personales */}
         <div className='md:col-span-2'>
           <h2 className='text-lg font-semibold mb-3'>Datos Personales</h2>
-          <div className='space-y-1 leading-7'>
-            {name && (
-              <p>
-                <span className='font-bold'>Nombre: </span>
-                {name}
-              </p>
-            )}
-            {email && (
-              <p>
-                <span className='font-bold'>Correo: </span>
-                {email}
-              </p>
-            )}
-            {age && (
-              <p>
-                <span className='font-bold'>Edad: </span>
-                {age} años
-              </p>
-            )}
-            {userWeight && (
-              <p>
-                <span className='font-bold'>Peso: </span>
-                {userWeight} kg
-              </p>
-            )}
-            {userHeight && (
-              <p>
-                <span className='font-bold'>Altura: </span>
-                {userHeight} m
-              </p>
-            )}
+
+          {/* Name */}
+          {email && <p className='mb-2 text-orange-500'>{name}</p>}
+
+          {/* Email */}
+          {email && <p className='mb-2'>{email}</p>}
+
+          {/* Fila: edad · peso · altura */}
+          <div className='flex flex-wrap items-center gap-x-4 text-sm text-gray-200'>
+            {age && <span>{age} años</span>}
+            {userWeight && <span className='mx-2'>·</span>}
+            {userWeight && <span>{userWeight} kg</span>}
+            {userHeight && <span className='mx-2'>·</span>}
+            {userHeight && <span>{userHeight} m</span>}
           </div>
         </div>
       </div>
