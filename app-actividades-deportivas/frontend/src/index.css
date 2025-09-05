@@ -41,5 +41,5 @@ body {
 
 .contenedor-deportes section img {
   /* Se corrigieron las clases no válidas y se usaron medidas más comunes */
-  @apply h-64 w-64 md:h-80 md:w-80 object-cover rounded-lg shadow-md;
+  @apply h-64 w-64 md:h-180 md:w-80 object-cover rounded-lg shadow-md;
 }
