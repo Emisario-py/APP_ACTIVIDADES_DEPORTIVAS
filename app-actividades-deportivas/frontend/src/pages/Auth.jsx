@@ -1,4 +1,5 @@
-// src/components/Auth.jsx
+// src/pages/Auth.jsx
+
 import { useState } from 'react'
 import { login } from '../services/auth'
 import { Link, useNavigate } from 'react-router-dom'
@@ -7,8 +8,7 @@ import { validateForm } from '../utils/validation.js'
 import { useAuth } from '../context/AuthContext.jsx'
 
 function Auth () {
-  const { setUser } = useAuth()
-
+  const { setUser } = useAuth() // Obtén setUser del contexto para actualizar el estado global
   const navigate = useNavigate()
 
   const [form, setForm] = useState({
@@ -26,7 +26,6 @@ function Auth () {
 
   const handleBlur = async (e) => {
     const { name } = e.target
-
     try {
       await loginSchema.validateAt(name, form)
       setErrors((prev) => ({ ...prev, [name]: null }))
@@ -38,9 +37,6 @@ function Auth () {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setMessage('')
-    e.preventDefault()
-    setMessage('')
-
     const { isValid, errors: validationErrors } = await validateForm(loginSchema, form)
     if (!isValid) {
       setErrors(validationErrors)
@@ -49,15 +45,11 @@ function Auth () {
     setErrors({})
 
     try {
-      // Solo login con backend
       const res = await login(form.email, form.password)
-      setUser(res.data)
-      console.log(res)
+      setUser(res.data) // Usa setUser del contexto
       navigate('/home')
-      console.log(res)
     } catch (err) {
-      console.error('Auth error:', err) // Para debugging
-      setMessage('❌ Usuario o contraseña incorrectos')
+      console.error('Auth error:', err)
       setMessage('❌ Usuario o contraseña incorrectos')
     }
   }
@@ -114,7 +106,6 @@ function Auth () {
             o, crear cuenta
           </p>
         </Link>
-
       </form>
     </div>
   )
