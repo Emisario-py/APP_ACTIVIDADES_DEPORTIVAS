@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { registerRequest } from '../api/auth'
+import { useAuth } from '../context/AuthContext'
 
 export const FormularioGeneral = ({ initialActivity, onClose }) => {
   const { deporte } = useParams()
+  const { user } = useAuth()
   const navigate = useNavigate()
 
   const handleCancel = () => {
@@ -15,7 +17,7 @@ export const FormularioGeneral = ({ initialActivity, onClose }) => {
   }
 
   const [estadisticas, setEstadisticas] = useState({
-    user: initialActivity?.user || '',
+    user: initialActivity?.user || user.username || '',
     sport: initialActivity?.sport || deporte || '',
     duration: initialActivity?.duration || '',
     date: initialActivity?.date || '',
@@ -28,6 +30,7 @@ export const FormularioGeneral = ({ initialActivity, onClose }) => {
     weight: initialActivity?.weight || '',
     scores: initialActivity?.scores || '',
     note: initialActivity?.note || '',
+    userID: initialActivity?.userID || user.id || ''
   })
 
   const [entrenamientosGuardados, setEntrenamientosGuardados] = useState([])
@@ -35,7 +38,7 @@ export const FormularioGeneral = ({ initialActivity, onClose }) => {
 
   useEffect(() => {
     const baseState = {
-      user: '',
+      user: user.username || '',
       sport: deporte || '',
       duration: '',
       date: '',
@@ -48,6 +51,7 @@ export const FormularioGeneral = ({ initialActivity, onClose }) => {
       weight: '',
       scores: '',
       note: '',
+      userID: user.id || '',
     }
 
     switch (deporte) {
@@ -118,7 +122,7 @@ export const FormularioGeneral = ({ initialActivity, onClose }) => {
     }
 
     setEstadisticas((prevStats) => ({
-      user: '',
+      user: prevStats.user,
       sport: prevStats.sport,
       duration: '',
       date: '',
@@ -131,6 +135,7 @@ export const FormularioGeneral = ({ initialActivity, onClose }) => {
       weight: '',
       scores: '',
       note: '',
+      userID: prevStats.userID
     }))
   }
 

@@ -9,3 +9,4 @@ export const updateInfoRequest = (updatedInfo) => api.put('/profile', updatedInf
 export const loginRequest = (user) => api.post('/login', user)
 export const userRegisterRequest = (user) => api.post('/register', user)
 export const logoutRequest = () => api.post('/logout')
+export const getMyRegisterRequest = () => api.get('/registers/me')
