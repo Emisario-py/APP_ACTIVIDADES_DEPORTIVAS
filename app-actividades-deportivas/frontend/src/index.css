@@ -10,6 +10,60 @@ body {
   /* Tailwind text-gray-200 */
   color: #e5e7eb; 
 }
+.hero-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+.hero-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 4rem;
+  background-color: #111f3e; /* Color de fondo sugerido, ajustable */
+}
+
+.hero-text-content {
+  color: #fff;
+  max-width: 600px;
+}
+
+.hero-title {
+  font-size: 4rem;
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: 0.1rem;
+}
+
+.hero-description {
+  margin-top: 2rem;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.image-small-container {
+  margin-top: 3rem;
+  width: 100%;
+}
+
+.image-small {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.hero-right {
+  flex: 1;
+  display: flex;
+}
+
+.image-large {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
 /* Estilos de botones, ahora se pueden manejar con clases de Tailwind */
 .btn {
