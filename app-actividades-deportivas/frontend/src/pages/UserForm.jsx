@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { getMaxBirthday, UserFormSchema } from '../schemas/userFormSchema.js'
+import { getMaxBirthday, UserFormSchema } from '../schemas/UserFormSchema.js'
 import { Pencil } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
