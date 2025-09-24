@@ -1,5 +1,5 @@
-import ChartContainer from '../components/charts/ChartContainer'
-import MetricsTable from '../components/charts/MetricsTable'
+import ChartContainer from '../Components/charts/ChartContainer'
+import MetricsTable from '../Components/charts/MetricsTable'
 
 export default function Metrics () {
   return (

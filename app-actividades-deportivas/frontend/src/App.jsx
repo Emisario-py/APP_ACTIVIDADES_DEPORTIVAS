@@ -3,7 +3,7 @@ import Navbar from './Components/Navbar.jsx'
 import Profile from './pages/Profile.jsx'
 import Metrics from './pages/Metrics.jsx'
 import { TarjetaDeporte } from './pages/TarjetaDeporte.jsx'
-import { FormularioGeneral } from './components/FormularioGeneral.jsx'
+import { FormularioGeneral } from './Components/FormularioGeneral.jsx'
 import Auth from './pages/Auth'
 import UserForm from './pages/UserForm.jsx'
 import { useAuth } from './context/AuthContext.jsx'
@@ -16,9 +16,7 @@ import { Home } from './pages/Home.jsx'
 const AppContent = () => {
   useAuth()
   const location = useLocation()
-
-  // Agrega '/logout' a la lista de rutas sin Navbar
-  const hideNavbarRoutes = ['/login', '/', '/register', '/logout']
+  const hideNavbarRoutes = ['/login', '/', '/register']
 
   const showNavbar = !hideNavbarRoutes.includes(location.pathname)
 
@@ -28,6 +26,7 @@ const AppContent = () => {
       <main className={`${showNavbar ? 'ml-64' : 'min-h-screen bg-gray-800 text-gray-100 p-6'}`}>
         <Routes>
           {/* El componente Auth recibe la función para cambiar el estado */}
+          <Route path='/' element={<Navigate to='/login' replace />} />
           <Route path='/login' element={<Auth />} />
           <Route path='/register' element={<Register />} />
 

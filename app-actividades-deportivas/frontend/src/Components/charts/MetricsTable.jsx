@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { monthsShort } from './barChartConfig'
-import { getRegisterRequest } from '../../api/auth'
+import { getMyRegisterRequest, getRegisterRequest } from '../../api/auth'
 
 // Array base para los estadísticos a mostrar en esta sección con el nombre del key de los datos, la palabra en español para mostrar y el ícono a usar
 const stats = [
@@ -63,7 +63,7 @@ export default function MetricsTable () {
 
     const getData = async () => {
       try {
-        const res = await getRegisterRequest()
+        const res = await getMyRegisterRequest()
         return res
       } catch (error) {
         console.log(error)

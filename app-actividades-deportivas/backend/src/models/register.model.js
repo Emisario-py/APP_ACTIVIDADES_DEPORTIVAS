@@ -64,9 +64,14 @@ const RegistroSchema = new mongoose.Schema({
     type: String,
     required: false,
     trim: true
+  },
+  userID: {
+    type: String,
+    required: true,
+    trim: true
   }
 }, {
-  timestamps: true
+  timestamps: true,
 })
 
 export default mongoose.model('Registro', RegistroSchema)
