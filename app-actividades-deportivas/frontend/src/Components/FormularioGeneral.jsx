@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { registerRequest } from '../api/auth'
+import { Pencil, ClipboardList } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 
 export const FormularioGeneral = ({ initialActivity, onClose }) => {
@@ -114,8 +115,11 @@ export const FormularioGeneral = ({ initialActivity, onClose }) => {
 
       console.log('Respuesta del servidor:', res)
 
-      setEntrenamientosGuardados([...entrenamientosGuardados, estadisticas])
-      setMensajeExito(true)
+        // 3. Actualiza el estado local solo si la petición fue exitosa.
+        setEntrenamientosGuardados([...entrenamientosGuardados, estadisticas])
+        setMensajeExito(true)
+
+      if (onClose) onClose()
     } catch (error) {
       console.error('Error al guardar el entrenamiento:', error)
       alert('Hubo un error al guardar el entrenamiento. Inténtalo de nuevo.')
@@ -152,16 +156,20 @@ export const FormularioGeneral = ({ initialActivity, onClose }) => {
   }
 
   const getDistanceLabel = () => {
-    if (deporte === 'Natación') return 'Distancia (mts)'
+    if (deporte === 'Natación') return 'Distancia (m)'
     if (deporte === 'Atletismo') return 'Distancia (km)'
     return 'Distancia'
   }
 
   return (
     <div className='flex justify-center w-full min-h-full py-12'>
-      <div className='bg-gray-700 p-8 rounded-2xl shadow-2xl w-full max-w-lg'>
-        <h2 className='text-3xl font-bold text-orange-500 mb-6'>
-          Bienvenido
+      <div className='bg-gradient-to-r from-orange-400/30 to-orange-500/30 p-8 rounded-2xl shadow-2xl w-full max-w-lg'>
+        <h2 className='text-3xl font-semibold text-orange-500 mb-6 flex justify-center items-center'>
+          {initialActivity ? 'Editar actividad' : 'Registrar actividad'}
+          {initialActivity
+            ? <Pencil size={18} className="ml-3" />
+            : <ClipboardList size={18} className="ml-3" />
+          }
         </h2>
         <form onSubmit={handleSubmit}>
           <fieldset className='border border-gray-600 rounded-xl p-6'>
@@ -179,7 +187,7 @@ export const FormularioGeneral = ({ initialActivity, onClose }) => {
                   name='user'
                   value={estadisticas.user}
                   onChange={handleInputChange}
-                  className='w-full px-4 py-2 rounded-lg bg-gray-800 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500'
+                  className='w-full px-4 py-2 rounded-lg bg-gray-900/70 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500'
                   required
                 />
               </div>
@@ -192,7 +200,7 @@ export const FormularioGeneral = ({ initialActivity, onClose }) => {
                   name='sport'
                   value={estadisticas.sport}
                   onChange={handleInputChange}
-                  className='w-full px-4 py-2 rounded-lg bg-gray-800 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500'
+                  className='w-full px-4 py-2 rounded-lg bg-gray-900/70 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500'
                   readOnly
                 />
               </div>
@@ -205,7 +213,7 @@ export const FormularioGeneral = ({ initialActivity, onClose }) => {
                   name='duration'
                   value={estadisticas.duration}
                   onChange={handleInputChange}
-                  className='w-full px-4 py-2 rounded-lg bg-gray-800 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500'
+                  className='w-full px-4 py-2 rounded-lg bg-gray-900/70 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500'
                   required
                 />
               </div>
@@ -218,7 +226,7 @@ export const FormularioGeneral = ({ initialActivity, onClose }) => {
                   name='date'
                   value={estadisticas.date}
                   onChange={handleInputChange}
-                  className='w-full px-4 py-2 rounded-lg bg-gray-800 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500'
+                  className='w-full px-4 py-2 rounded-lg bg-gray-900/70 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500'
                   required
                 />
               </div>
@@ -231,7 +239,7 @@ export const FormularioGeneral = ({ initialActivity, onClose }) => {
                   name='startTime'
                   value={estadisticas.startTime}
                   onChange={handleInputChange}
-                  className='w-full px-4 py-2 rounded-lg bg-gray-800 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500'
+                  className='w-full px-4 py-2 rounded-lg bg-gray-900/70 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500'
                   required
                 />
               </div>
@@ -244,7 +252,7 @@ export const FormularioGeneral = ({ initialActivity, onClose }) => {
                   name='calories'
                   value={estadisticas.calories}
                   onChange={handleInputChange}
-                  className='w-full px-4 py-2 rounded-lg bg-gray-800 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500'
+                  className='w-full px-4 py-2 rounded-lg bg-gray-900/70 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500'
                 />
               </div>
 
@@ -256,7 +264,7 @@ export const FormularioGeneral = ({ initialActivity, onClose }) => {
                   name='rhythm'
                   value={estadisticas.rhythm}
                   onChange={handleInputChange}
-                  className='w-full px-4 py-2 rounded-lg bg-gray-800 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500'
+                  className='w-full px-4 py-2 rounded-lg bg-gray-900/70 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500'
                 />
               </div>
             </div>
@@ -271,7 +279,7 @@ export const FormularioGeneral = ({ initialActivity, onClose }) => {
                     name='series'
                     value={estadisticas.series}
                     onChange={handleInputChange}
-                    className='w-full px-4 py-2 rounded-lg bg-gray-800 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500'
+                    className='w-full px-4 py-2 rounded-lg bg-gray-900/70 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500'
                   />
                 </div>
               )}
@@ -283,7 +291,7 @@ export const FormularioGeneral = ({ initialActivity, onClose }) => {
                     name='repetitions'
                     value={estadisticas.repetitions}
                     onChange={handleInputChange}
-                    className='w-full px-4 py-2 rounded-lg bg-gray-800 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500'
+                    className='w-full px-4 py-2 rounded-lg bg-gray-900/70 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500'
                   />
                 </div>
               )}
@@ -295,7 +303,7 @@ export const FormularioGeneral = ({ initialActivity, onClose }) => {
                     name='distance'
                     value={estadisticas.distance}
                     onChange={handleInputChange}
-                    className='w-full px-4 py-2 rounded-lg bg-gray-800 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500'
+                    className='w-full px-4 py-2 rounded-lg bg-gray-900/70 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500'
                   />
                 </div>
               )}
@@ -307,7 +315,7 @@ export const FormularioGeneral = ({ initialActivity, onClose }) => {
                     name='scores'
                     value={estadisticas.scores}
                     onChange={handleInputChange}
-                    className='w-full px-4 py-2 rounded-lg bg-gray-800 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500'
+                    className='w-full px-4 py-2 rounded-lg bg-gray-900/70 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500'
                   />
                 </div>
               )}
@@ -321,25 +329,28 @@ export const FormularioGeneral = ({ initialActivity, onClose }) => {
                 value={estadisticas.note}
                 onChange={handleInputChange}
                 rows='3'
-                className='w-full px-4 py-2 rounded-lg bg-gray-800 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500'
+                className='w-full px-4 py-2 rounded-lg bg-gray-900/70 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500'
               />
             </div>
           </fieldset>
 
-          <button
-            type='submit'
-            className='w-full mt-6 bg-orange-500 text-white font-bold py-2 rounded-lg hover:bg-orange-600 transition-colors duration-200'
-          >
-            Guardar Datos
-          </button>
+          <div className='flex justify-around mt-8'>
+            <button
+              type='submit'
+              className='px-6 py-3 bg-white/30 border text-white font-bold py-2 rounded-lg hover:bg-orange-500 hover:border-orange-500 transition-colors duration-200 border-white/50'
+            >
+              Guardar
+            </button>
 
-          <button
-            type='button'
-            onClick={handleCancel}
-            className='w-full mt-2 bg-gray-500 text-white font-bold py-2 rounded-lg hover:bg-red-500 transition-colors duration-200'
-          >
-            Cancelar
-          </button>
+            <button
+              type='button'
+              onClick={handleCancel}
+              className="px-6 py-3 bg-red-500/30 border text-white font-bold py-2 rounded-lg hover:bg-red-500 transition-colors duration-200 border-red-500/40"
+            >
+              Cancelar
+            </button>
+          </div>
+
         </form>
         {mensajeExito && (
           <p className='mt-4 text-green-400 text-center font-bold'>

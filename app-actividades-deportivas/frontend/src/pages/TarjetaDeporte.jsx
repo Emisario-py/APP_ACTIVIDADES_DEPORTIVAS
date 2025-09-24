@@ -7,6 +7,7 @@ import userImg5 from '../assets/p6.jpg'
 import userImg6 from '../assets/p7.jpg'
 import userImg7 from '../assets/p8.jpg'
 import { Link } from 'react-router-dom'
+import { MousePointerClick } from 'lucide-react'
 
 export const TarjetaDeporte = () => {
   const deportes = [
@@ -53,30 +54,56 @@ export const TarjetaDeporte = () => {
   ]
   return (
     <div className='Card'>
-      <h2>Selecciona tu deporte</h2>
-      <div className='contenedor-deportes'>
-        {deportes.map((deporte) => {
-          return (
-            <Link
-              to={`/FormularioGeneral/${deporte.name}`}
-              key={deporte.id}
-            >
-              <section>
-                <h2>{deporte.name}</h2>
-                <img src={deporte.img} alt={deporte.name} />
-                <br />
+      <div className='mb-8'>
+        <h1 className='text-3xl font-bold text-slate-50 mb-2'>
+          ¿Qué hiciste hoy?
+        </h1>
+        <p className='text-slate-400'>Registra tus actividades eligiendo un deporte</p>
+      </div>
 
-                <button
-                  className='w-full mt-4 bg-orange-500 text-white font-bold py-2 rounded-lg
-                           hover:bg-orange-600 transition-colors duration-200
-                           shadow-md hover:shadow-lg'
+      <div className='bg-orange-500/20 p-4 rounded-2xl shadow mt-6 h-1/2 mb-2'>
+        <div className='bg-gray-900 p-6 rounded-xl shadow-sm'>
+          <div className='contenedor-deportes grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'>
+            {deportes.map((deporte) => (
+              <Link 
+                to={`/FormularioGeneral/${deporte.name}`}
+                key={deporte.id}>
+                <section
+                  className='rounded-2xl shadow-lg p-4 flex flex-col items-center
+                        hover:scale-105 transition-transform'
                 >
-                  Seleccionar
-                </button>
-              </section>
-            </Link>
-          )
-        })}
+                  {/* Nombre */}
+                  <h2 className='text-lg mb-3'>
+                    {deporte.name}
+                  </h2>
+
+                  {/* Imagen */}
+                  <img
+                    src={deporte.img}
+                    alt={deporte.name}
+                    className='rounded-lg object-cover h-40 w-full shadow-md'
+                  />
+
+                  {/* Botón */}
+                  <div className="flex justify-center w-full mt-4">
+                    
+                    <button
+                        className="flex items-center justify-center gap-2 px-6 py-2 
+                  bg-white/30 border border-white/50 text-white font-bold rounded-lg 
+                  hover:bg-orange-500 hover:border-orange-500 transition-colors duration-200"
+                    >
+                        Seleccionar
+                        <MousePointerClick className="w-5 h-5" />
+                    </button>
+                    
+                  </div>
+                  
+                </section>
+              </Link>
+            ))}
+          </div>
+        </div>
+
       </div>
     </div>
   )
