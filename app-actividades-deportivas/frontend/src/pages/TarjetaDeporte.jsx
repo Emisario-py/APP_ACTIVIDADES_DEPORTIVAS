@@ -1,4 +1,4 @@
-import userImg from '../assets/p1.jpg'
+import userImg from '../assets/P1.jpg'
 import userImg1 from '../assets/p2.jpg'
 import userImg2 from '../assets/p3.jpg'
 import userImg3 from '../assets/p4.jpg'
