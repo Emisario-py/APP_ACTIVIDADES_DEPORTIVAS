@@ -1,5 +1,5 @@
-import ActivityCarousel from '../ComponentsTemp/activities/ActivityCarousel'
-import UserCard from '../ComponentsTemp/users/UserCard'
+import ActivityCarousel from '../Components/activities/ActivityCarousel'
+import UserCard from '../Components/users/UserCard'
 
 export default function Profile () {
   const userMock = {
