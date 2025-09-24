@@ -1,6 +1,6 @@
 import axios from 'axios'
 
 export const api = axios.create({
-  baseURL: 'http://localhost:3000/api',
+  baseURL: 'https://app-actividades-deportivas-vp5p-j5h3zf1n9.vercel.app/api',
   withCredentials: true
 })
