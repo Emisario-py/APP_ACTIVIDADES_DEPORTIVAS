@@ -2,7 +2,7 @@ import { useRef, useState, useEffect } from 'react'
 import ActivityCard from './ActivityCard'
 import { FormularioGeneral } from '../FormularioGeneral'
 
-export default function ActivityCarousel ({ actividades = [] }) {
+export default function ActivityCarousel ({ actividades }) {
   const trackRef = useRef(null)
   const [canPrev, setCanPrev] = useState(false)
   const [canNext, setCanNext] = useState(false)
@@ -38,7 +38,7 @@ export default function ActivityCarousel ({ actividades = [] }) {
   }, [actividades])
 
   const items = [...actividades].sort(
-    (a, b) => new Date(b.fechaISO) - new Date(a.fechaISO)
+    (a, b) => new Date(b.date) - new Date(a.date)
   )
 
   return (

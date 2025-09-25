@@ -11,15 +11,15 @@ const OPTIONAL_METRICS = {
 export default function ActivityCard ({
   id,
   sport,
-  durationMin,
-  dateISO,
-  time,
+  startTime,
+  date,
+  duration,
   note,
   onEdit,
   onDelete,
   ...optionals
 }) {
-  const date = new Date(dateISO).toLocaleDateString()
+  /* const date = new Date(dateISO).toLocaleDateString() */
 
   const chips = Object.entries(OPTIONAL_METRICS)
     .map(([key, def]) => {
@@ -38,9 +38,9 @@ export default function ActivityCard ({
           onClick={() => onEdit?.({ /* Pasar todos los datos */
             id,
             sport,
-            duration: durationMin,
-            date: dateISO,
-            startTime: time,
+            duration,
+            date,
+            startTime,
             note,
             ...optionals, /* Datos opcionales */
           })}
@@ -68,7 +68,7 @@ export default function ActivityCard ({
 
       {/* Datos base */}
       <div className='mt-1 text-sm opacity-80'>
-        {durationMin} min • {date} {time ? `• ${time}` : ''}
+        {duration} min • {date} {startTime ? `• ${startTime}` : ''}
       </div>
 
       {/* Chips opcionales */}
