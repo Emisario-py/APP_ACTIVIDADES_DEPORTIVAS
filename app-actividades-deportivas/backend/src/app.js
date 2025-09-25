@@ -14,6 +14,7 @@ const app = express()
 app.use(express.json())
 app.use(cors({
   origin: 'https://app-actividades-deportivas-vp5p.vercel.app/',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }))
 app.use(cookieParser())
