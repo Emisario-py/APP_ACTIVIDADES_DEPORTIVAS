@@ -37,18 +37,26 @@ export default function Profile () {
   ]
  */
   return (
-    <div className='w-full h-full flex flex-col items-center'>
-      <h1 className='text-3xl font-bold text-orange-500 mb-6 w-6/8'>
-        {userMock.name}
-      </h1>
+    <div className='w-full h-full px-6 py-8'>
+      {/* Header */}
+      <div className='mb-8'>
+        <h1 className='text-3xl font-bold text-slate-50 mb-2'>
+          {userMock.name}
+        </h1>
+        <p className='text-slate-400'>Gestiona tu perfil y consulta tus actividades</p>
+      </div>
+
       {/* Datos de usuario */}
-      <div className='flex justify-center'>
+      <div className='flex justify-center mb-8'>
         <UserCard {...userMock} />
       </div>
+
       {/* Actividades */}
-      <div className='bg-gray-700 p-6 rounded-2xl shadow mt-6 w-6/8'>
-        <h2 className='text-xl font-semibold mb-4'>Actividades realizadas</h2>
-        <ActivityCarousel actividades={cardsData} />
+      <div className='bg-orange-500/20 p-4 rounded-2xl shadow mt-6 h-1/2 mb-2'>
+        <div className='bg-gray-900 p-6 rounded-xl shadow-sm'>
+          <h2 className='text-xl font-semibold text-slate-50 mb-4'>Actividades realizadas</h2>
+          <ActivityCarousel actividades={cardsData} />
+        </div>
       </div>
     </div>
   )

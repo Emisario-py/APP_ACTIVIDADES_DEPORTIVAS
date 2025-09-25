@@ -86,11 +86,11 @@ body {
 /* Estilos para cada tarjeta de deporte */
 .contenedor-deportes section {
   /* Se cambió la escala para que tenga un efecto visible */
-  @apply flex flex-col items-center justify-center p-6 bg-gray-800 rounded-2xl shadow-lg transition-transform duration-200 ease-in-out hover:scale-105;
+  @apply flex flex-col items-center justify-center p-6 bg-gradient-to-r from-orange-400/30 to-orange-500/30 font-semibold text-orange-500 rounded-2xl shadow-lg transition-transform duration-200 ease-in-out hover:scale-105;
 }
 
 .contenedor-deportes section h2 {
-  @apply text-xl font-semibold mt-2 text-orange-400;
+  @apply text-xl font-semibold mt-2;
 }
 
 .contenedor-deportes section img {
