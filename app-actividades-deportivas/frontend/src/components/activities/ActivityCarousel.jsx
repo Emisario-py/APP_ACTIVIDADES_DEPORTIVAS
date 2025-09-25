@@ -91,8 +91,8 @@ export default function ActivityCarousel ({ actividades = [] }) {
 
       {/* Form editar actividad (modal) */}
       {editingActivity && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-            <div className="bg-gray-900 p-6 rounded-xl shadow-lg w-[90%] max-w-md max-h-[85vh] overflow-y-auto relative">
+        <div className='fixed inset-0 bg-black/50 flex items-center justify-center z-50'>
+          <div className='bg-gray-900 p-6 rounded-xl shadow-lg w-[90%] max-w-md max-h-[85vh] overflow-y-auto relative'>
             {/* Botón cerrar */}
             <button
               onClick={() => setEditingActivity(null)}

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { monthsShort } from './barChartConfig'
-import { getMyRegisterRequest, getRegisterRequest } from '../../api/auth'
+import { getMyRegisterRequest } from '../../api/auth'
 
 // Array base para los estadísticos a mostrar en esta sección con el nombre del key de los datos, la palabra en español para mostrar y el ícono a usar
 const stats = [

@@ -1,7 +1,6 @@
 import { Router } from 'express'
 import Registro from '../models/register.model.js'
 import { authRequired } from '../middlewares/validateToken.js'
-import { registerValidator } from '../validators/auth.validator.js'
 
 const router = Router()
 
