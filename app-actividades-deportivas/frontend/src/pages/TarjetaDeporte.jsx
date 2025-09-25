@@ -61,7 +61,7 @@ export const TarjetaDeporte = () => {
         <p className='text-slate-400'>Registra tus actividades eligiendo un deporte</p>
       </div>
 
-      <div className='bg-orange-500/20 p-4 rounded-2xl shadow mt-6 h-1/2 mb-2'>
+      <div className='bg-gradient-to-r from-orange-500/60 via-amber-500/60 to-orange-500/60 p-4 rounded-2xl shadow mt-6 h-1/2 mb-2'>
         <div className='bg-gray-900 p-6 rounded-xl shadow-sm'>
           <div className='contenedor-deportes grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'>
             {deportes.map((deporte) => (

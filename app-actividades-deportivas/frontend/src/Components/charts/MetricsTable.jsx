@@ -119,7 +119,7 @@ export default function MetricsTable () {
   }
 
   return (
-    <div className='bg-orange-500/20 p-4 rounded-2xl shadow mt-6 h-1/2 mb-2'>
+    <div className='bg-gradient-to-r from-orange-500/60 via-amber-500/60 to-orange-500/60 p-4 rounded-2xl shadow mt-6 h-1/2 mb-2'>
       <div className='bg-gray-900 rounded-2xl shadow h-full flex flex-col overflow-hidden'>
 
         {/* Título */}

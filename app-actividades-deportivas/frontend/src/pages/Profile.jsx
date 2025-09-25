@@ -52,10 +52,15 @@ export default function Profile () {
       </div>
 
       {/* Actividades */}
-      <div className='bg-orange-500/20 p-4 rounded-2xl shadow mt-6 h-1/2 mb-2'>
+      <div className='bg-gradient-to-r from-orange-500/60 via-amber-500/60 to-orange-500/60 p-4 rounded-2xl shadow mt-6 h-1/2 mb-2'>
         <div className='bg-gray-900 p-6 rounded-xl shadow-sm'>
-          <h2 className='text-xl font-semibold text-slate-50 mb-4'>Actividades realizadas</h2>
-          <ActivityCarousel actividades={cardsData} />
+          {/* Título */}
+          <div className='text-center px-4 pb-4 border-b border-orange-500/20 flex-shrink-0 mb-6'>
+            <h2 className='text-2xl font-extrabold text-orange-400 mb-1 flex justify-center items-center gap-2'>
+              Resumen de Actividad
+            </h2>
+          </div>
+          <ActivityCarousel actividades={activitiesMock} />
         </div>
       </div>
     </div>

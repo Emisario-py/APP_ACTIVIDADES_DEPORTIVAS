@@ -39,7 +39,7 @@ export default function ChartContainer () {
   }
 
   return (
-    <div className='bg-orange-500/20 p-4 rounded-2xl shadow mt-2 flex flex-col justify-around h-1/2'>
+    <div className='bg-gradient-to-r from-orange-500/60 via-amber-500/60 to-orange-500/60 p-4 rounded-2xl shadow mt-2 flex flex-col justify-around h-1/2'>
       <div className='bg-gray-900 rounded-2xl flex shadow p-4'>
         <button
           className='w-1/5 flex justify-center'
