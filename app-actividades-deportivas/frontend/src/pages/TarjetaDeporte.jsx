@@ -23,7 +23,7 @@ export const TarjetaDeporte = () => {
     },
     {
       id: 3,
-      name: 'Gymnasio',
+      name: 'Gimnasio',
       img: userImg2
     },
     {
@@ -38,7 +38,7 @@ export const TarjetaDeporte = () => {
     },
     {
       id: 6,
-      name: 'voleybol',
+      name: 'Voleibol',
       img: userImg5
     },
     {
@@ -65,9 +65,10 @@ export const TarjetaDeporte = () => {
         <div className='bg-gray-900 p-6 rounded-xl shadow-sm'>
           <div className='contenedor-deportes grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'>
             {deportes.map((deporte) => (
-              <Link 
+              <Link
                 to={`/FormularioGeneral/${deporte.name}`}
-                key={deporte.id}>
+                key={deporte.id}
+              >
                 <section
                   className='rounded-2xl shadow-lg p-4 flex flex-col items-center
                         hover:scale-105 transition-transform'
@@ -85,19 +86,19 @@ export const TarjetaDeporte = () => {
                   />
 
                   {/* Botón */}
-                  <div className="flex justify-center w-full mt-4">
-                    
+                  <div className='flex justify-center w-full mt-4'>
+
                     <button
-                        className="flex items-center justify-center gap-2 px-6 py-2 
-                  bg-white/30 border border-white/50 text-white font-bold rounded-lg 
-                  hover:bg-orange-500 hover:border-orange-500 transition-colors duration-200"
+                      className='flex items-center justify-center gap-2 px-6 py-2
+                  bg-white/30 border border-white/50 text-white font-bold rounded-lg
+                  hover:bg-orange-500 hover:border-orange-500 transition-colors duration-200'
                     >
-                        Seleccionar
-                        <MousePointerClick className="w-5 h-5" />
+                      Seleccionar
+                      <MousePointerClick className='w-5 h-5' />
                     </button>
-                    
+
                   </div>
-                  
+
                 </section>
               </Link>
             ))}

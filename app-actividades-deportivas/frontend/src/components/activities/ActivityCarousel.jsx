@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from 'react'
 import ActivityCard from './ActivityCard'
 import { FormularioGeneral } from '../FormularioGeneral'
+import { ArrowLeft, ArrowRight, X } from 'lucide-react'
 
 export default function ActivityCarousel ({ actividades }) {
   const trackRef = useRef(null)

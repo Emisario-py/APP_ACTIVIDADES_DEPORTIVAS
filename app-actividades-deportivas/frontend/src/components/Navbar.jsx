@@ -23,7 +23,9 @@ export default function Navbar () {
                 : 'text-gray-300 hover:bg-gray-700 hover:text-white'
               }`}
           >
-            <Home className='w-5 h-5 mr-3' /> Home
+            <div className='flex justify-center my-4'>
+              <Home className='w-5 h-5 mr-3' /> Home
+            </div>
           </Link>
           <Link
             to='/deportes'
@@ -33,7 +35,9 @@ export default function Navbar () {
                 : 'text-gray-300 hover:bg-gray-700 hover:text-white'
               }`}
           >
-            <Dumbbell className='w-5 h-5 mr-3' /> Deportes
+            <div className='flex justify-center my-4'>
+              <Dumbbell className='w-5 h-5 mr-3' /> Deportes
+            </div>
           </Link>
           <Link
             to='/profile'
@@ -43,7 +47,9 @@ export default function Navbar () {
                 : 'text-gray-300 hover:bg-gray-700 hover:text-white'
               }`}
           >
-            <User className='w-5 h-5 mr-3' /> Perfil
+            <div className='flex justify-center my-4'>
+              <User className='w-5 h-5 mr-3' /> Perfil
+            </div>
           </Link>
           <Link
             to='/metrics'
@@ -53,7 +59,9 @@ export default function Navbar () {
                 : 'text-gray-300 hover:bg-gray-700 hover:text-white'
               }`}
           >
-            <BarChart3 className='w-5 h-5 mr-3' /> Metricas
+            <div className='flex justify-center my-4'>
+              <BarChart3 className='w-5 h-5 mr-3' /> Metricas
+            </div>
           </Link>
           {/* El enlace ahora apunta a la ruta de logout */}
           <Link
@@ -64,7 +72,9 @@ export default function Navbar () {
                 : 'text-gray-300 hover:bg-gray-700 hover:text-white'
               }`}
           >
-            <LogOut className='w-5 h-5 mr-3' /> Cerrar Sesión
+            <div className='flex justify-center my-4'>
+              <LogOut className='w-5 h-5 mr-3' /> Cerrar Sesión
+            </div>
           </Link>
         </nav>
       </div>
