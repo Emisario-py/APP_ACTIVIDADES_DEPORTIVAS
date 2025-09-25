@@ -115,9 +115,9 @@ export const FormularioGeneral = ({ initialActivity, onClose }) => {
 
       console.log('Respuesta del servidor:', res)
 
-        // 3. Actualiza el estado local solo si la petición fue exitosa.
-        setEntrenamientosGuardados([...entrenamientosGuardados, estadisticas])
-        setMensajeExito(true)
+      // 3. Actualiza el estado local solo si la petición fue exitosa.
+      setEntrenamientosGuardados([...entrenamientosGuardados, estadisticas])
+      setMensajeExito(true)
 
       if (onClose) onClose()
     } catch (error) {
@@ -164,13 +164,37 @@ export const FormularioGeneral = ({ initialActivity, onClose }) => {
   return (
     <div className='flex justify-center w-full min-h-full py-12'>
       <div className='bg-gradient-to-r from-orange-400/30 to-orange-500/30 p-8 rounded-2xl shadow-2xl w-full max-w-lg'>
-        <h2 className='text-3xl font-semibold text-orange-500 mb-6 flex justify-center items-center'>
-          {initialActivity ? 'Editar actividad' : 'Registrar actividad'}
-          {initialActivity
-            ? <Pencil size={18} className="ml-3" />
-            : <ClipboardList size={18} className="ml-3" />
-          }
+        <h2 className="text-3xl font-semibold mb-6 flex justify-center items-center">
+          <span className="bg-gradient-to-r from-orange-500/90 via-amber-500/90 to-orange-500/90 bg-clip-text text-transparent">
+            {initialActivity ? 'Editar actividad' : 'Registrar actividad'}
+          </span>
+
+          {initialActivity ? (
+            <Pencil
+              size={18}
+              className="ml-3"
+              style={{ stroke: "url(#gradient)" }}
+            />
+          ) : (
+            <ClipboardList
+              size={18}
+              className="ml-3"
+              style={{ stroke: "url(#gradient)" }}
+            />
+          )}
+
+          {/* Definición del degradado */}
+          <svg width="0" height="0">
+            <defs>
+              <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#f97316" stopOpacity="0.9" />
+                <stop offset="50%" stopColor="#f59e0b" stopOpacity="0.9" />
+                <stop offset="100%" stopColor="#f97316" stopOpacity="0.9" />
+              </linearGradient>
+            </defs>
+          </svg>
         </h2>
+
         <form onSubmit={handleSubmit}>
           <fieldset className='border border-gray-600 rounded-xl p-6'>
             <legend className='text-xl font-semibold text-gray-200 px-2'>

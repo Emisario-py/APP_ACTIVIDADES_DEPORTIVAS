@@ -3,7 +3,7 @@ import ActivityCarousel from '../components/activities/ActivityCarousel'
 import UserCard from '../components/users/UserCard'
 import { getMyRegisterRequest } from '../api/auth'
 
-export default function Profile () {
+export default function Profile() {
   const [cardsData, setCardsData] = useState([])
 
   useEffect(() => {
@@ -52,15 +52,14 @@ export default function Profile () {
       </div>
 
       {/* Actividades */}
-      <div className='bg-gradient-to-r from-orange-500/60 via-amber-500/60 to-orange-500/60 p-4 rounded-2xl shadow mt-6 h-1/2 mb-2'>
-        <div className='bg-gray-900 p-6 rounded-xl shadow-sm'>
-          {/* Título */}
-          <div className='text-center px-4 pb-4 border-b border-orange-500/20 flex-shrink-0 mb-6'>
-            <h2 className='text-2xl font-extrabold text-orange-400 mb-1 flex justify-center items-center gap-2'>
-              Resumen de Actividad
+      <div className='bg-gradient-to-r from-orange-500/60 via-amber-500/60 to-orange-500/60 p-2 rounded-2xl shadow mt-6 h-1/2 mb-2'>
+        <div className='bg-slate-950 p-6 rounded-xl shadow-sm'>
+          <div className='text-center pb-2 mb-2 border-b border-orange-500/30 flex-shrink-0'>
+            <h2 className='text-2xl font-extrabold bg-gradient-to-r from-orange-500/90 via-amber-500/90 to-orange-500/90 bg-clip-text text-transparent mb-1 flex justify-center items-center gap-2'>
+              Actividades realizadas
             </h2>
           </div>
-          <ActivityCarousel actividades={activitiesMock} />
+          <ActivityCarousel actividades={cardsData} />
         </div>
       </div>
     </div>

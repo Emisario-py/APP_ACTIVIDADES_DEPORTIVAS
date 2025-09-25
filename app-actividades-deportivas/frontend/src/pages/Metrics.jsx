@@ -4,7 +4,7 @@ import MetricsTable from '../components/charts/MetricsTable'
 export default function Metrics() {
   return (
     <>
-      <div className='h-full'>
+      <div className='w-full h-full px-6 py-8'>
         <div className='mb-8'>
           <h1 className='text-3xl font-bold text-slate-50 mb-2'>
             ¿Cómo va tu progreso?

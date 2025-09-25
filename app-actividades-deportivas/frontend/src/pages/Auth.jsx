@@ -77,7 +77,7 @@ function Auth () {
         className='bg-gradient-to-r from-orange-400/30 to-orange-500/30 p-8 rounded-2xl shadow-xl w-96 text-white'
         autoComplete='off'
       >
-        <h2 className='text-3xl font-semibold text-orange-500 mb-6 flex justify-center items-center'>
+        <h2 className='text-3xl font-semibold bg-gradient-to-r from-orange-500/90 via-amber-500/90 to-orange-500/90 bg-clip-text text-transparent mb-6 flex justify-center items-center'>
           Iniciar sesión
         </h2>
 

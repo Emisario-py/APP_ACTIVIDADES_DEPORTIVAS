@@ -54,57 +54,64 @@ export const TarjetaDeporte = () => {
   ]
   return (
     <div className='Card'>
-      <div className='mb-8'>
-        <h1 className='text-3xl font-bold text-slate-50 mb-2'>
-          ¿Qué hiciste hoy?
-        </h1>
-        <p className='text-slate-400'>Registra tus actividades eligiendo un deporte</p>
-      </div>
-
-      <div className='bg-gradient-to-r from-orange-500/60 via-amber-500/60 to-orange-500/60 p-4 rounded-2xl shadow mt-6 h-1/2 mb-2'>
-        <div className='bg-gray-900 p-6 rounded-xl shadow-sm'>
-          <div className='contenedor-deportes grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'>
-            {deportes.map((deporte) => (
-              <Link
-                to={`/FormularioGeneral/${deporte.name}`}
-                key={deporte.id}
-              >
-                <section
-                  className='rounded-2xl shadow-lg p-4 flex flex-col items-center
-                        hover:scale-105 transition-transform'
-                >
-                  {/* Nombre */}
-                  <h2 className='text-lg mb-3'>
-                    {deporte.name}
-                  </h2>
-
-                  {/* Imagen */}
-                  <img
-                    src={deporte.img}
-                    alt={deporte.name}
-                    className='rounded-lg object-cover h-40 w-full shadow-md'
-                  />
-
-                  {/* Botón */}
-                  <div className='flex justify-center w-full mt-4'>
-
-                    <button
-                      className='flex items-center justify-center gap-2 px-6 py-2
-                  bg-white/30 border border-white/50 text-white font-bold rounded-lg
-                  hover:bg-orange-500 hover:border-orange-500 transition-colors duration-200'
-                    >
-                      Seleccionar
-                      <MousePointerClick className='w-5 h-5' />
-                    </button>
-
-                  </div>
-
-                </section>
-              </Link>
-            ))}
-          </div>
+      <div className='w-full h-full px-6 py-8'>
+        <div className='mb-8'>
+          <h1 className='text-3xl font-bold text-slate-50 mb-2'>
+            ¿Qué hiciste hoy?
+          </h1>
+          <p className='text-slate-400'>Registra tus actividades eligiendo un deporte</p>
         </div>
 
+        <div className='bg-gradient-to-r from-orange-500/60 via-amber-500/60 to-orange-500/60 p-2 rounded-2xl shadow mt-6 h-1/2 mb-2'>
+          <div className='bg-slate-950 p-6 rounded-xl shadow-sm'>
+            <div className='text-center pb-2 mb-5 border-b border-orange-500/30 flex-shrink-0'>
+              <h2 className='text-2xl font-extrabold bg-gradient-to-r from-orange-500/90 via-amber-500/90 to-orange-500/90 bg-clip-text text-transparent mb-1 flex justify-center items-center gap-2'>
+                Deportes
+              </h2>
+            </div>
+            <div className='contenedor-deportes grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'>
+              {deportes.map((deporte) => (
+                <Link
+                  to={`/FormularioGeneral/${deporte.name}`}
+                  key={deporte.id}
+                >
+                  <section
+                    className='rounded-2xl shadow-lg p-4 flex flex-col items-center
+                        hover:scale-105 transition-transform'
+                  >
+                    {/* Nombre */}
+                    <h2 className='text-lg mb-3 bg-gradient-to-r from-orange-500 via-amber-500 to-orange-500 bg-clip-text text-transparent font-semibold'>
+                      {deporte.name}
+                    </h2>
+
+                    {/* Imagen */}
+                    <img
+                      src={deporte.img}
+                      alt={deporte.name}
+                      className='rounded-lg object-cover h-40 w-full shadow-md'
+                    />
+
+                    {/* Botón */}
+                    <div className='flex justify-center w-full mt-4'>
+
+                      <button
+                        className='flex items-center justify-center gap-2 px-6 py-2
+                  bg-white/30 border border-white/50 text-white font-bold rounded-lg
+                  hover:bg-orange-500 hover:border-orange-500 transition-colors duration-200'
+                      >
+                        Seleccionar
+                        <MousePointerClick className='w-5 h-5' />
+                      </button>
+
+                    </div>
+
+                  </section>
+                </Link>
+              ))}
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   )

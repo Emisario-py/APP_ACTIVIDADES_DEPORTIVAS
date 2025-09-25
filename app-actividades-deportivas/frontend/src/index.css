@@ -6,7 +6,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
   /* Tailwind bg-gray-900 */
-  background-color: #1a1a1a; 
+  background-color: #111F3E;
   /* Tailwind text-gray-200 */
   color: #e5e7eb; 
 }

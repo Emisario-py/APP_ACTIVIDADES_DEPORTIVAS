@@ -39,8 +39,8 @@ export default function ChartContainer () {
   }
 
   return (
-    <div className='bg-gradient-to-r from-orange-500/60 via-amber-500/60 to-orange-500/60 p-4 rounded-2xl shadow mt-2 flex flex-col justify-around h-1/2'>
-      <div className='bg-gray-900 rounded-2xl flex shadow p-4'>
+    <div className='bg-gradient-to-r from-orange-500/60 via-amber-500/60 to-orange-500/60 p-2 rounded-2xl shadow mt-2 flex flex-col justify-around h-1/2'>
+      <div className='bg-slate-950 rounded-2xl flex shadow p-4'>
         <button
           className='w-1/5 flex justify-center'
           onClick={() => handleChangeMonth('left')}
@@ -56,7 +56,7 @@ export default function ChartContainer () {
         > <ArrowRight />
         </button>
       </div>
-      <div className='bg-gray-900 rounded-2xl shadow flex flex-col mt-4 h-full'>
+      <div className='bg-slate-950 rounded-2xl shadow flex flex-col mt-4 h-full'>
         <div className='pt-2 flex justify-around'>
           <button
             onClick={() => handleChangeDataCategory('duration')}

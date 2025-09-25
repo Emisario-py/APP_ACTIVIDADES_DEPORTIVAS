@@ -1,6 +1,6 @@
 import {
   Chart as
-  ChartJS,
+    ChartJS,
   CategoryScale,
   LinearScale,
   BarElement,
@@ -22,7 +22,7 @@ ChartJS.register(
   Legend
 )
 
-export default function BarChart (props) {
+export default function BarChart(props) {
   const [filteredDataArray, setFilteredDataArray] = useState([])
   const [labels, setLabels] = useState([])
   const [currentDataCategory, setCurrentDataCategory] = useState('')
@@ -79,16 +79,35 @@ export default function BarChart (props) {
           beginAtZero: true,
           title: {
             display: true,
-            text: currentDataCategory
+            text: currentDataCategory,
+            color: '#f1f5f9', // título eje Y
+            font: { size: 14, weight: 'bold' }
+          },
+          ticks: {
+            color: '#f1f5f9', // números eje Y
+          },
+          grid: {
+            color: '#1e293b',   // rayas eje Y
+            borderColor: '#334155' // línea del borde
           }
         },
         x: {
           title: {
             display: true,
-            text: 'Días'
+            text: 'Días',
+            color: '#f1f5f9', // título eje X
+            font: { size: 14, weight: 'bold' }
+          },
+          ticks: {
+            color: '#f1f5f9', // números eje X
+          },
+          grid: {
+            color: '#1e293b',   // rayas eje X
+            borderColor: '#334155' // línea del borde
           }
         }
-      },
+      }
+      ,
       responsive: true,
       maintainAspectRatio: false,
       aspectRatio: 1.5,

@@ -16,7 +16,7 @@ const stats = [
   { stat: 'scores', esp: 'Puntos', icon: <Trophy size={14} className='text-yellow-400' /> },
 ]
 
-export default function MetricsTable () {
+export default function MetricsTable() {
   const [dateRange, setDateRange] = useState('')
   const [totals, setTotals] = useState([])
   const [filteredData, setFilteredData] = useState([])
@@ -119,22 +119,33 @@ export default function MetricsTable () {
   }
 
   return (
-    <div className='bg-gradient-to-r from-orange-500/60 via-amber-500/60 to-orange-500/60 p-4 rounded-2xl shadow mt-6 h-1/2 mb-2'>
-      <div className='bg-gray-900 rounded-2xl shadow h-full flex flex-col overflow-hidden'>
+    <div className='bg-gradient-to-r from-orange-500/60 via-amber-500/60 to-orange-500/60 p-2 rounded-2xl shadow mt-6 h-1/2 mb-2'>
+      <div className='bg-slate-950 rounded-2xl shadow h-full flex flex-col overflow-hidden'>
 
         {/* Título */}
-        <div className='text-center p-4 border-b border-orange-500/20 flex-shrink-0'>
-          <h2 className='text-2xl font-extrabold text-orange-400 mb-1 flex justify-center items-center gap-2'>
+        <div className='text-center p-4 border-b border-orange-500/30 flex-shrink-0'>
+          <h2 className='text-2xl font-extrabold bg-gradient-to-r from-orange-500 via-amber-500 to-orange-500 bg-clip-text text-transparent mb-1 flex justify-center items-center gap-2'>
             Resumen de Actividad
             <TrendingUp size={22} className='text-yellow-400' />
           </h2>
-          <p className='text-gray-400 text-sm font-medium'>{dateRange}</p>
+          <p className='text-slate-200 text-sm font-medium'>{dateRange}</p>
+
+          {/* Definición del degradado (igual que en navbar) */}
+          <svg width="0" height="0">
+            <defs>
+              <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#f97316" stopOpacity="1" />
+                <stop offset="50%" stopColor="#f59e0b" stopOpacity="1" />
+                <stop offset="100%" stopColor="#f97316" stopOpacity="1" />
+              </linearGradient>
+            </defs>
+          </svg>
         </div>
 
         {/* Contenido */}
         <div className='flex-1 overflow-y-auto p-4 space-y-4'>
           {Object.entries(totals).map(([sport, stats]) => (
-            <div key={sport} className='bg-gray-500/20 rounded-xl p-4 hover:border-gray-500 transition-colors'>
+            <div key={sport} className='bg-slate-500/20 rounded-xl p-4 hover:border-gray-500 transition-colors'>
 
               {/* Título del deporte */}
               <div className='flex items-center mb-3'>
@@ -161,15 +172,15 @@ export default function MetricsTable () {
         {/* Resumen general (Deportes, Sesiones, Calorías totales) */}
         <div className='p-4 border-t border-orange-500/30 flex-shrink-0'>
           <div className='grid grid-cols-3 gap-4 text-center'>
-            <div className='bg-gray-800 rounded-lg p-2'>
+            <div className='bg-slate-900 rounded-lg p-2'>
               <div className='text-sm text-orange-400'>Deportes</div>
               <div className='text-lg font-bold text-white'>{Object.keys(totals).length}</div>
             </div>
-            <div className='bg-gray-800 rounded-lg p-2'>
+            <div className='bg-slate-900 rounded-lg p-2'>
               <div className='text-sm text-orange-400'>Sesiones</div>
               <div className='text-lg font-bold text-white'>{filteredData.length}</div>
             </div>
-            <div className='bg-gray-800 rounded-lg p-2'>
+            <div className='bg-slate-900 rounded-lg p-2'>
               <div className='text-sm text-orange-400'>Total Cal.</div>
               <div className='text-lg font-bold text-white'>{Object.entries(totals).reduce((acc, [/* sport */, stats]) => {
                 return acc + (stats['Calorías'] || 0)
