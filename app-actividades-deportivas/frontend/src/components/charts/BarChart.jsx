@@ -11,7 +11,7 @@ import {
 import { Bar } from 'react-chartjs-2'
 import { monthsCode, monthsWithDays } from './barChartConfig.js'
 import { useCallback, useEffect, useState } from 'react'
-import { getMyRegisterRequest, getRegisterRequest } from '../../api/auth.js'
+import { getMyRegisterRequest } from '../../api/auth.js'
 
 ChartJS.register(
   CategoryScale,
